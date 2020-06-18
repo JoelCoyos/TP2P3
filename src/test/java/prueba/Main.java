@@ -19,7 +19,6 @@ public class Main {
 
 		cargarEntrenadores();
 		cargarHechizos();
-		probarClones();
 
 		try {
 			Torneo.getInstance().realizarTorneo(); // invocar el metodo varias veces para ver el impacto de las categorias en los hechizos

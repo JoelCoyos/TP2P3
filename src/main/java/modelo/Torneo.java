@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 
 import excepciones.EntrenadorRepetidoException;
 import excepciones.FaltanEntrenadoresException;
@@ -24,6 +25,7 @@ public class Torneo {
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	private static Torneo instance = null;
+	private Semaphore semaphore = new Semaphore(2);
 
 	public static Torneo getInstance() {
 
@@ -61,6 +63,25 @@ public class Torneo {
 		} else
 			throw new FaltanEntrenadoresException("Faltan entrenadores para poder iniciar el torneo",
 					numeroEntrenadores, 8);
+	}
+	
+	public synchronized void agregarArena(Batalla batalla)
+	{
+		try {
+			semaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		batalla.enfrentar();
+		
+	}
+	
+	
+	public synchronized void liberarArena(Batalla batalla)
+	{
+		semaphore.release();
+		//añadir enfrentamiento
 	}
 
 	/**
@@ -208,7 +229,7 @@ public class Torneo {
 	 * Pre: Entrenadores y pokemones no nulos<br>
 	 */
 	private Entrenador enfrentar(Entrenador entrenador1, Pokemon poke1, Hechizo hechizo1, Entrenador entrenador2,
-			Pokemon poke2, Hechizo hechizo2) {
+		Pokemon poke2, Hechizo hechizo2) {
 		Random r = new Random();
 		double puntaje1, puntaje2;
 		Entrenador ganador;

@@ -94,7 +94,7 @@ public class Entrenador implements Cloneable, Clasificable {
 		Pokemon pokeClonado;
 		Iterator<Pokemon> iterator = this.pokemones.iterator();
 		clonEntrenador = (Entrenador) super.clone();
-		clonEntrenador.pokemones = new ArrayList<Pokemon>();
+		clonEntrenador.pokemones = (ArrayList<Pokemon>)pokemones.clone();
 		while (iterator.hasNext()) {
 			pokeClonado = (Pokemon) iterator.next().clone();
 			clonEntrenador.pokemones.add(pokeClonado);
