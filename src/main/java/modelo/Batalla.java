@@ -6,33 +6,33 @@ import excepciones.FaltanHechizosException;
 
 public class Batalla extends Thread {
 	
-	private Entrenador entrenador1,entrenador2;
+	private Entrenador entrenador1,entrenador2,ganador;
 	private Pokemon poke1,poke2;
 	private Hechizo hechizo1,hechizo2;
-	private int puntaje1,puntaje2;
-	private Arena arena;
+	private int arena;
 	private Torneo torneo;
+	private IState estado;
 	
-	
-	
-	
-	public Batalla(Entrenador entrenador1, Entrenador entrenador2, Pokemon pokemon1, Pokemon pokemon2, Hechizo hechizo1,
-			Hechizo hechizo2, int puntaje1, int puntaje2,Torneo torneo) {
-		this.entrenador1 = entrenador1;
-		this.entrenador2 = entrenador2;
-		this.poke1 = pokemon1;
-		this.poke2 = pokemon2;
-		this.hechizo1 = hechizo1;
-		this.hechizo2 = hechizo2;
-		this.puntaje1 = puntaje1;
-		this.puntaje2 = puntaje2;
-		this.torneo = torneo;
+	public int getArena() {
+		return arena;
 	}
 
-	public  Entrenador enfrentar() {
+	
+	
+	public Batalla(Entrenador entrenador1, Entrenador entrenador2,Torneo torneo) {
+		this.entrenador1 = entrenador1;
+		this.entrenador2 = entrenador2;
+		this.torneo = torneo;
+	
+	}
+
+	public Entrenador getGanador() {
+		return ganador;
+	}
+
+	public void enfrentar() {
 			Random r = new Random();
 			double puntaje1, puntaje2;
-			Entrenador ganador;
 
 			int primero = r.nextInt(2);
 
@@ -93,9 +93,16 @@ public class Batalla extends Thread {
 				System.out.println("\n" + entrenador2.getNombre() + " gano el enfrentamiento. Toma control del pokemon "
 						+ poke1.getNombre() + " de " + entrenador1.getNombre());
 			}
-
-			return ganador;
 		}
+	
+	@Override
+	public void run() {
+		while(true)
+		{
+			this.estado.realizarRonda(this);
+		}
+		
+	}
 	
 	public Entrenador getEntrenador1() {
 		return entrenador1;
@@ -121,26 +128,58 @@ public class Batalla extends Thread {
 		return hechizo2;
 	}
 
-	public int getPuntaje1() {
-		return puntaje1;
-	}
-
-	public int getPuntaje2() {
-		return puntaje2;
-	}
 
 	private double puntaje(Pokemon pokemon) {
 		return pokemon.getEscudo() + pokemon.getVitalidad() + pokemon.getFuerza() * 0.5;
 	}
 	
-	@Override
-	public void run() {
-		
-		torneo.agregarArena(this);
-		Util.espera(2500); //duracion de la batalla
-		
-		
-		
+	public Torneo getTorneo() {
+		return torneo;
 	}
+
+	public IState getEstado() {
+		return estado;
+	}
+
+	public void setEstado(IState estado) {
+		this.estado = estado;
+	}
+
+	public void setEntrenador1(Entrenador entrenador1) {
+		this.entrenador1 = entrenador1;
+	}
+
+	public void setEntrenador2(Entrenador entrenador2) {
+		this.entrenador2 = entrenador2;
+	}
+
+	public void setGanador(Entrenador ganador) {
+		this.ganador = ganador;
+	}
+
+	public void setPoke1(Pokemon poke1) {
+		this.poke1 = poke1;
+	}
+
+	public void setPoke2(Pokemon poke2) {
+		this.poke2 = poke2;
+	}
+
+	public void setHechizo1(Hechizo hechizo1) {
+		this.hechizo1 = hechizo1;
+	}
+
+	public void setHechizo2(Hechizo hechizo2) {
+		this.hechizo2 = hechizo2;
+	}
+
+	public void setArena(int arena) {
+		this.arena = arena;
+	}
+
+	public void setTorneo(Torneo torneo) {
+		this.torneo = torneo;
+	}
+	
 
 }

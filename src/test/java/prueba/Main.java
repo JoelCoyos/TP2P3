@@ -17,7 +17,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		cargarEntrenadores();
+		/*cargarEntrenadores();
 		cargarHechizos();
 
 		try {
@@ -182,7 +182,7 @@ public class Main {
 		} catch (EntrenadorRepetidoException e) {
 			System.out.println(e.getMessage());
 			System.out.println("El entrenador " + e.getEntrenador().getNombre() + " ya esta inscripto en el torneo.");
-		}
+		}*/
 
 	}
 

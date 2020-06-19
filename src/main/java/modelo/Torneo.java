@@ -18,28 +18,49 @@ import excepciones.RequisitosPokemonesException;
  *Clase que maneja el torneo pokemon<br>
  *Este esta compuesto de 8 {@link Entrenador}. El ganador del torneo se decidira en 3 rondas, en un sistema de eliminacion doble<br>
  */
-public class Torneo {
+public class Torneo implements ITorneo {
 
 	private int numeroEntrenadores = 0;
-	private Entrenador[] entrenadores = new Entrenador[8];
-	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
-	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
-	private static Torneo instance = null;
-	private Semaphore semaphore = new Semaphore(2);
+	private Entrenador[] entrenadores;
+	private ArrayList<Entrenador> restantes = new ArrayList<Entrenador>();
+	public ArrayList<Entrenador> getRestantes() {
+		return restantes;
+	}
 
-	public static Torneo getInstance() {
+
+	public void setRestantes(ArrayList<Entrenador> restantes) {
+		this.restantes = restantes;
+	}
+
+
+	private ArrayList<Enfrentamiento> enfrentamientos;
+	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
+	IEtapas etapa;
+	//private static Torneo instance = null;
+	
+	
+	
+	private Batalla[] arenas = new Batalla[2]; //Cantidad de arenas
+
+	public Torneo() {
+		arenas[0] =null;
+		arenas[1] =null;
+	}
+
+
+	/*public static Torneo getInstance() {
 
 		if (Torneo.instance == null)
 			Torneo.instance = new Torneo();
 		return instance;
-	}
+	}*/
 
 	/**
 	 * Ejecuta el torneo en tres rondas: Cuartos, semis y final<br>
 	 * @throws FaltanEntrenadoresException Cuando el numero de Entrenadores que participan en el torneo es menor a 8<br>
 	 * @throws RequisitosPokemonesException Cuando se detecta que algun {@link Entrenador} no tiene por lo menos un Pokemon<br>
 	 */
-	public void realizarTorneo() throws FaltanEntrenadoresException, RequisitosPokemonesException {
+	/*public void realizarTorneo() throws FaltanEntrenadoresException, RequisitosPokemonesException {
 		Entrenador noCumpleRequisitos;
 		Entrenador[] semifinalistas;
 		Entrenador[] finalistas;
@@ -63,26 +84,13 @@ public class Torneo {
 		} else
 			throw new FaltanEntrenadoresException("Faltan entrenadores para poder iniciar el torneo",
 					numeroEntrenadores, 8);
-	}
+	}*/
 	
-	public synchronized void agregarArena(Batalla batalla)
+	public void realizarRonda(Entrenador[] entrenadores)
 	{
-		try {
-			semaphore.acquire();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		batalla.enfrentar();
-		
+		this.etapa.realizarRonda(entrenadores);
 	}
 	
-	
-	public synchronized void liberarArena(Batalla batalla)
-	{
-		semaphore.release();
-		//añadir enfrentamiento
-	}
 
 	/**
 	 * Restaura a todos los Pokemon de todos los entrenadores<br>
@@ -110,6 +118,11 @@ public class Torneo {
 		ganador = enfrentar(finalistas[0], poke1, hechizo1, finalistas[1], poke2, hechizo2);
 		return ganador;
 	}
+	
+	public void addGanador(Entrenador entrenador)
+	{
+		restantes.add(entrenador);
+	}
 
 	/**
 	 * Ejecuta los cuartos y la semi. El ganador de cada partido sera el que tenga el mayor puntaje<br>
@@ -117,7 +130,7 @@ public class Torneo {
 	 * @return Array de entrenadores victoriosos<br>
 	 * Pre: El array de entrenadores tiene entrenadores no nulos<br>
 	 */
-	private Entrenador[] ejecutarRonda(Entrenador[] entrenadoresParticipantes) {
+	/*private Entrenador[] ejecutarRonda(Entrenador[] entrenadoresParticipantes) {
 		int i, participantes = entrenadoresParticipantes.length;
 		Pokemon poke1, poke2;
 		Hechizo hechizo1, hechizo2;
@@ -130,11 +143,52 @@ public class Torneo {
 			hechizo1 = seleccionarHechizo(entrenadoresParticipantes[i]);
 			hechizo2 = seleccionarHechizo(entrenadoresParticipantes[i + 1]);
 			System.out.println("\nCOMIENZA EL ENFRENTAMIENTO\n");
-			entrenadoresGanadores[i / 2] = enfrentar(entrenadoresParticipantes[i], poke1, hechizo1,
-					entrenadoresParticipantes[i + 1], poke2, hechizo2);
+			Batalla batalla = new Batalla(entrenadoresParticipantes[i], entrenadoresParticipantes[i+1], poke1, poke2, hechizo1, hechizo2,this);
+			batalla.start();
 		}
 		return entrenadoresGanadores;
+	}*/
+	
+	public synchronized void agregarBatalla(Batalla batalla)
+	{
+		while(arenaDisponible(arenas) == -1)
+		{
+			try {
+				System.out.println("ESPERANDO");
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		int numero = arenaDisponible(arenas);
+		System.out.println("Empezo la arena " + numero);
+		batalla.setArena(numero);
+		arenas[numero] = batalla;
+		
 	}
+	
+	public synchronized void liberarArena(Batalla batalla)
+	{
+		arenas[batalla.getArena()]=null;
+		System.out.println("Se libero la arena "+batalla.getArena());
+		addGanador(batalla.getGanador());
+		notifyAll();
+	}
+	
+	
+	private int arenaDisponible(Batalla[] arenas) //Si no hay arenas disponibles regresa -1, sino regresa cual arena esta disponible
+	{
+		for(int i =0;i<arenas.length;i++)
+		{
+			if(arenas[i]==null)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 
 	/**
 	 * Por comandos elejimos que Pokemon del entrenador por batallar<br>
@@ -412,4 +466,65 @@ public class Torneo {
 		for (int i = 0; i < entrenadores.length; i++)
 			entrenadores[i].setCantidadHechizos(entrenadores[i].getCategoria());
 	}
+
+	@Override
+	public ArrayList<Pokemon> getPokemon(Entrenador entrenador) {
+		return entrenador.getPokemones();
+	}
+
+	@Override
+	public Entrenador[] getEntrenadores() {
+		return entrenadores;
+	}
+
+
+	public int getNumeroEntrenadores() {
+		return numeroEntrenadores;
+	}
+
+
+	public void setNumeroEntrenadores(int numeroEntrenadores) {
+		this.numeroEntrenadores = numeroEntrenadores;
+	}
+
+
+
+	public ArrayList<Enfrentamiento> getEnfrentamientos() {
+		return enfrentamientos;
+	}
+
+
+	public void setEnfrentamientos(ArrayList<Enfrentamiento> enfrentamientos) {
+		this.enfrentamientos = enfrentamientos;
+	}
+
+
+	public ArrayList<Hechizo> getHechizos() {
+		return hechizos;
+	}
+
+
+	public void setHechizos(ArrayList<Hechizo> hechizos) {
+		this.hechizos = hechizos;
+	}
+
+
+	public IEtapas getEtapa() {
+		return etapa;
+	}
+
+
+	public void setEtapa(IEtapas etapa) {
+		this.etapa = etapa;
+	}
+
+
+	public void setEntrenadores(Entrenador[] entrenadores) {
+		this.entrenadores = entrenadores;
+	}
+
+
+	
+	
+
 }

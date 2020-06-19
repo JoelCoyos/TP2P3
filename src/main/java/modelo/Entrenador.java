@@ -160,4 +160,9 @@ public class Entrenador implements Cloneable, Clasificable {
 		while (it.hasNext())
 			it.next().recuperarse();
 	}
+	
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
 }

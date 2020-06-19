@@ -1,17 +1,16 @@
 package vista;
 
+import java.awt.event.ActionListener;
+
+import modelo.Entrenador;
+
 public interface IVista {
 	
-	public void agregarEntrenador();
-	public void agregarPokemon();
-	public void quitarEntrenador();
-	public void quitarPokemon();
-	public void seleccionarHechizo();
 	
 	public void generarEntrenadores();
-	public void generarPokemones();
+	public void generarPokemones(Entrenador entrenador);
+	public Entrenador[] getEntrenadores();
 	
-	public void empezarTorneo();
-	public void terminarTorneo();
+	public void setActionListener(ActionListener actionListener);
 
 }
