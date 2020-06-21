@@ -530,6 +530,8 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.btnNewButtonAgregar.addMouseListener(this);
 		this.btnNewButtonAgregar.addKeyListener(this);
 		this.panel_38.add(this.btnNewButtonAgregar);
+		
+		this.setVisible(true);
 	}
 
 	@Override
@@ -609,7 +611,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 			} catch (EntrenadorRepetidoException e) {
 				JOptionPane.showMessageDialog(this,"Ya existe un entrenador con ese nombre");
 			}
-			if (Torneo.getInstance().getNumeroEntrenadores()==8)
+			if (this.listaModelEntrenador.getSize()==8)
 				this.btnNewButtonTorneo.setEnabled(true);
 		}
 		this.reseteaCampos();

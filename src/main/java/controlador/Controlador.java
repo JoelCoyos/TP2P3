@@ -39,8 +39,8 @@ public class Controlador implements ActionListener, Observer {
 			}
 			else
 				if (comando == "Empezar") { //COMIENZAN LAS BATALLAS (SOLO PARA CUARTOS DE FINAL, FALTAN DEMAS ETAPAS)
-					torneo.setEtapa(new CuartosFinal(torneo));
-					torneo.realizarRonda(torneo.getEntrenadores());
+					torneo.setEtapa(new CuartosFinal());
+					torneo.realizarRonda();
 				}
 	}
 

@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import controlador.Controlador;
 import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
-import modelo.ITorneo;
 import modelo.Pokemon;
 import modelo.PokemonFactory;
 import modelo.Torneo;

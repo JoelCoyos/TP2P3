@@ -4,33 +4,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class CuartosFinal implements IEtapas {
-	
-	private Torneo torneo;
-	private Entrenador[] ganadores = new Entrenador[4];
-	
-	public CuartosFinal(Torneo torneo) {
-		this.torneo = torneo;
+
+	public CuartosFinal() {
 	}
 
 	@Override
-	public void realizarRonda(Entrenador[] entrenadores) {
+	public void realizarRonda() {
+
+		ArrayList<Entrenador> participantes = Torneo.getInstance().getEntrenadores();
+		Torneo.getInstance().setParticipantesActuales(new ArrayList<Entrenador>());
 		
-		int i;
-		
-		for(i =0;i<8;i+=2)
-		{
-			Batalla batalla = new Batalla(entrenadores[i], entrenadores[i+1], torneo);
-			batalla.setEstado(new Preliminar());
+		Torneo.getInstance().getArenas().add(new Arena());
+		Torneo.getInstance().getArenas().add(new Arena());
+
+		System.out.println("COMIENZAN LOS CUARTOS DE FINAL\n");
+
+
+		for (int i = 0; i < 4; i++) {
+			Arena arena = Torneo.getInstance().getArenas().poll();
+			Batalla batalla = new Batalla(arena, participantes.remove(0), participantes.remove(0));
+			Torneo.getInstance().getArenas().add(arena);
 			batalla.start();
 		}
-		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
+		Torneo.getInstance().setEtapa(new Semifinal());
+	
 	}
 
 }

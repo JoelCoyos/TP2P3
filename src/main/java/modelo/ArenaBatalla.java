@@ -18,7 +18,7 @@ public class ArenaBatalla implements iStateArena {
 		Random r = new Random();
 		int primero = r.nextInt(2);
 
-		System.out.println("SE DA INICIO A LA BATALLA");
+		System.out.println("SE DA INICIO A LA BATALLA\n");
 
 		if (arena.getHechizo1() != null)
 			try {
@@ -48,7 +48,7 @@ public class ArenaBatalla implements iStateArena {
 			
 		}
 		
-		System.out.println("FINALIZA LA BATALLA");
+		System.out.println("FINALIZA LA BATALLA\n");
 		arena.setEstado(new ArenaFinalizacion(arena));
 	
 	}

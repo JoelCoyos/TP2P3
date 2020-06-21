@@ -155,7 +155,7 @@ public class Entrenador implements Cloneable, Clasificable {
 	/**
 	 * Restaura las estadisticas de todos los Pokemon del entrenador
 	 */
-	protected void restaurarPokemones() {
+	public void restaurarPokemones() {
 		Iterator<Pokemon> it = pokemones.iterator();
 		while (it.hasNext())
 			it.next().recuperarse();
