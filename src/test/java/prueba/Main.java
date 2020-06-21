@@ -1,5 +1,6 @@
 package prueba;
 
+import backup.Torneo;
 import excepciones.EntrenadorRepetidoException;
 import excepciones.FaltanEntrenadoresException;
 import excepciones.MaximaCapacidadEntrenadoresException;
@@ -10,7 +11,6 @@ import modelo.Niebla;
 import modelo.Pokemon;
 import modelo.PokemonFactory;
 import modelo.Tormenta;
-import modelo.Torneo;
 import modelo.Viento;
 
 public class Main {

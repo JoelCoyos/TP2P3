@@ -1,9 +1,7 @@
-package modelo;
+package backup;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
@@ -15,55 +13,43 @@ import excepciones.HechizoNoEncontradoException;
 import excepciones.MaximaCapacidadEntrenadoresException;
 import excepciones.PokemonNoEncontradoException;
 import excepciones.RequisitosPokemonesException;
+import modelo.Enfrentamiento;
+import modelo.Entrenador;
+import modelo.Hechizo;
+import modelo.Pokemon;
 
 /**
  * Clase que maneja el torneo pokemon<br>
  * Este esta compuesto de 8 {@link Entrenador}. El ganador del torneo se
  * decidira en 3 rondas, en un sistema de eliminacion doble<br>
  */
-public class Torneo2 {
+public class Torneo implements ITorneo {
 
 	private int numeroEntrenadores = 0;
-	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
-	private ArrayList<Entrenador> ganadores;
-	private ArrayList<Enfrentamiento> enfrentamientos;
+	private Entrenador[] entrenadores;
+	private ArrayList<Entrenador> restantes = new ArrayList<Entrenador>();
+	private static Torneo instance = null;
+	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
-	private Queue<Arena> arenas = new LinkedList<Arena>(); // arena
-	private IEtapas2 etapa = new CuartosFinal2();
-	// private ArrayList<Entrenador> restantes = new ArrayList<Entrenador>();
-
-	private static Torneo2 instance = null;
-
-	private Torneo2() {
-
-	}
-
-	public ArrayList<Entrenador> getEntrenadores(){
-		return entrenadores;
-	}
+	IEtapas etapa;
 	
-	public static Torneo2 getInstance() {
+	private Torneo() {
 
-		if (Torneo2.instance == null)
-			Torneo2.instance = new Torneo2();
+	}
+
+	public static Torneo getInstance() {
+
+		if (Torneo.instance == null)
+			Torneo.instance = new Torneo();
 		return instance;
 	}
-
-	/*
-	 * public ArrayList<Entrenador> getRestantes() { return restantes; }
-	 * 
-	 * public void setRestantes(ArrayList<Entrenador> restantes) { this.restantes =
-	 * restantes; }
-	 */
-
-	public ArrayList<Entrenador> getGanadores() {
-		return ganadores;
+	
+	public ArrayList<Entrenador> getRestantes() {
+		return restantes;
 	}
 
-	
-	
-	public Queue<Arena> getArenas() {
-		return arenas;
+	public void setRestantes(ArrayList<Entrenador> restantes) {
+		this.restantes = restantes;
 	}
 
 	/**
@@ -75,7 +61,6 @@ public class Torneo2 {
 	 *                                      {@link Entrenador} no tiene por lo menos
 	 *                                      un Pokemon<br>
 	 */
-
 	/*
 	 * public void realizarTorneo() throws FaltanEntrenadoresException,
 	 * RequisitosPokemonesException { Entrenador noCumpleRequisitos; Entrenador[]
@@ -98,16 +83,16 @@ public class Torneo2 {
 	 * , numeroEntrenadores, 8); }
 	 */
 
-	public void realizarRonda() {
-		this.etapa.realizarRonda(); // VER DE CAMBIAR POR GANADORES
+	public void realizarRonda(Entrenador[] entrenadores) {
+		this.etapa.realizarRonda(entrenadores);
 	}
 
 	/**
 	 * Restaura a todos los Pokemon de todos los entrenadores<br>
 	 */
-	protected void restaurarPokemones() {
-		for (int i = 0; i < entrenadores.size(); i++)
-			entrenadores.get(i).restaurarPokemones();
+	private void restaurarPokemones() {
+		for (int i = 0; i < entrenadores.length; i++)
+			entrenadores[i].restaurarPokemones();
 	}
 
 	/**
@@ -117,7 +102,6 @@ public class Torneo2 {
 	 * @return Entrenador ganador<br>
 	 *         Pre: El array de finalistas tiene dos entrenadores no nulos<br>
 	 */
-
 	private Entrenador ejecutarFinal(Entrenador[] finalistas) {
 		Pokemon poke1, poke2;
 		Hechizo hechizo1, hechizo2;
@@ -132,7 +116,7 @@ public class Torneo2 {
 	}
 
 	public void addGanador(Entrenador entrenador) {
-		ganadores.add(entrenador);
+		restantes.add(entrenador);
 	}
 
 	/**
@@ -160,24 +144,40 @@ public class Torneo2 {
 	 * entrenadoresGanadores; }
 	 */
 
-	/*
-	 * public synchronized void agregarBatalla(Batalla batalla) { while
-	 * (arenaDisponible(arenas1) == -1) { try { System.out.println("ESPERANDO");
-	 * wait(); } catch (InterruptedException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } } int numero = arenaDisponible(arenas1);
-	 * System.out.println("Empezo la arena " + numero); batalla.setArena(numero);
-	 * arenas1[numero] = batalla;
-	 * 
-	 * }
-	 * 
-	 * public synchronized void liberarArena(Batalla batalla) {
-	 * arenas1[batalla.getArena()] = null; System.out.println("Se libero la arena "
-	 * + batalla.getArena()); addGanador(batalla.getGanador()); notifyAll(); }
-	 * 
-	 * private int arenaDisponible(Batalla[] arenas) // Si no hay arenas disponibles
-	 * regresa -1, sino regresa cual arena // esta disponible { for (int i = 0; i <
-	 * arenas.length; i++) { if (arenas[i] == null) { return i; } } return -1; }
-	 */
+	public synchronized void agregarBatalla(Batalla batalla) {
+		while (arenaDisponible(arenas) == -1) {
+			try {
+				System.out.println("ESPERANDO");
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		int numero = arenaDisponible(arenas);
+		System.out.println("Empezo la arena " + numero);
+		batalla.setArena(numero);
+		arenas[numero] = batalla;
+
+	}
+
+	public synchronized void liberarArena(Batalla batalla) {
+		arenas[batalla.getArena()] = null;
+		System.out.println("Se libero la arena " + batalla.getArena());
+		addGanador(batalla.getGanador());
+		notifyAll();
+	}
+
+	private int arenaDisponible(Batalla[] arenas) // Si no hay arenas disponibles regresa -1, sino regresa cual arena
+													// esta disponible
+	{
+		for (int i = 0; i < arenas.length; i++) {
+			if (arenas[i] == null) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	/**
 	 * Por comandos elejimos que Pokemon del entrenador por batallar<br>
@@ -351,7 +351,7 @@ public class Torneo2 {
 		return ganador;
 	}
 
-	protected void aniadirEnfrentamiento(Entrenador entrenadorGan, Pokemon pokeGan, Hechizo hecGanador,
+	public void aniadirEnfrentamiento(Entrenador entrenadorGan, Pokemon pokeGan, Hechizo hecGanador,
 			Entrenador entrenadorPer, Pokemon pokePer, Hechizo hecPerdedor) {
 		String hec1, hec2;
 		if (hecGanador != null)
@@ -362,6 +362,7 @@ public class Torneo2 {
 			hec2 = hecPerdedor.getNombre();
 		else
 			hec2 = "Ningun hechizo";
+		System.out.println(entrenadorPer.getNombre());
 		enfrentamientos.add(new Enfrentamiento(entrenadorGan.getNombre(), pokeGan.getNombre(), hec1,
 				entrenadorPer.getNombre(), pokePer.getNombre(), hec2));
 	}
@@ -387,7 +388,7 @@ public class Torneo2 {
 	 * @return El puntaje del Pokemon<br>
 	 *         Pre: pokemon no nulo
 	 */
-	protected double puntaje(Pokemon pokemon) {
+	public double puntaje(Pokemon pokemon) {
 		return pokemon.getEscudo() + pokemon.getVitalidad() + pokemon.getFuerza() * 0.5;
 	}
 
@@ -402,18 +403,18 @@ public class Torneo2 {
 	 * Revisa si un entrenador tiene como minimo 1 Pokemon<br>
 	 * Si no es asi, devuelve el {@link Entrenador}<br>
 	 */
-	//private Entrenador noTieneMinimoUnPokemon() {
-	//	Entrenador respuesta = null;
-		//Entrenador actual;
-		//int i = 0;
-		//while (i < 8 && respuesta == null) {
-		//	actual = entrenadores[i];
-		//	if (actual.cantidadPokemones() < 1)
-		//		respuesta = actual;
-		//	i++;
-		//}
-		//return respuesta;
-	//}
+	private Entrenador noTieneMinimoUnPokemon() {
+		Entrenador respuesta = null;
+		Entrenador actual;
+		int i = 0;
+		while (i < 8 && respuesta == null) {
+			actual = entrenadores[i];
+			if (actual.cantidadPokemones() < 1)
+				respuesta = actual;
+			i++;
+		}
+		return respuesta;
+	}
 
 	/**
 	 * @param entrenador Entrenador a agregar al torneo<br>
@@ -423,7 +424,15 @@ public class Torneo2 {
 	public void aniadirEntrenador(Entrenador entrenador)
 			throws MaximaCapacidadEntrenadoresException, EntrenadorRepetidoException {
 		if (entrenador != null) {
-			entrenadores.add(entrenador);
+			if (numeroEntrenadores == 8)
+				throw new MaximaCapacidadEntrenadoresException(
+						"Si quiere agregar un entrenador adicional a la capacidad maxima", 8);
+			else {
+				if (isRepetido(entrenador))
+					throw new EntrenadorRepetidoException("Se quiere inscribir un entrenador repetido", entrenador);
+				else
+					entrenadores[numeroEntrenadores++] = entrenador;
+			}
 		}
 	}
 
@@ -431,7 +440,7 @@ public class Torneo2 {
 		boolean repetido = false;
 		int i = 0;
 		while (!repetido && i < numeroEntrenadores) {
-			//if (entrenadores[i] == entrenador)
+			if (entrenadores[i] == entrenador)
 				repetido = true;
 			i++;
 		}
@@ -456,27 +465,32 @@ public class Torneo2 {
 		return sb.toString();
 	}
 
-	//private void inicializarHechizosDisponibles() {
-		//for (int i = 0; i < entrenadores.length; i++)
-			//entrenadores[i].setCantidadHechizos(entrenadores[i].getCategoria());
-	//}
+	private void inicializarHechizosDisponibles() {
+		for (int i = 0; i < entrenadores.length; i++)
+			entrenadores[i].setCantidadHechizos(entrenadores[i].getCategoria());
+	}
 
+	@Override
 	public ArrayList<Pokemon> getPokemon(Entrenador entrenador) {
 		return entrenador.getPokemones();
 	}
 
-	
+	@Override
+	public Entrenador[] getEntrenadores() {
+		return entrenadores;
+	}
 
+	public int getNumeroEntrenadores() {
+		return numeroEntrenadores;
+	}
 
-	//public int getNumeroEntrenadores() {
-		//return numeroEntrenadores;
-	//}
+	public void setNumeroEntrenadores(int numeroEntrenadores) {
+		this.numeroEntrenadores = numeroEntrenadores;
+	}
 
-	//public void setNumeroEntrenadores(int numeroEntrenadores) {
-	//	this.numeroEntrenadores = numeroEntrenadores;
-	//}
-		//return enfrentamientos;
-	//}
+	public ArrayList<Enfrentamiento> getEnfrentamientos() {
+		return enfrentamientos;
+	}
 
 	public void setEnfrentamientos(ArrayList<Enfrentamiento> enfrentamientos) {
 		this.enfrentamientos = enfrentamientos;
@@ -490,12 +504,20 @@ public class Torneo2 {
 		this.hechizos = hechizos;
 	}
 
-	public void setEtapa(IEtapas2 etapa) {
+	public IEtapas getEtapa() {
+		return etapa;
+	}
+
+	public void setEtapa(IEtapas etapa) {
 		this.etapa = etapa;
 	}
 
-	public void perdedor(Entrenador entrenador) {
-		ganadores.remove(entrenador);
+	public void setEntrenadores(Entrenador[] entrenadores) {
+		this.entrenadores = entrenadores;
+	}
+
+	public void sigueEnTorneo(Entrenador entrenador) {
+		restantes.add(entrenador);
 	}
 
 }

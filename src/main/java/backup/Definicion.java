@@ -1,4 +1,6 @@
-package modelo;
+package backup;
+
+import modelo.IState;
 
 public class Definicion implements IState {
 

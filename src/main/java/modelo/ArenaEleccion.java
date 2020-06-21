@@ -16,7 +16,6 @@ public class ArenaEleccion implements iStateArena {
 		arena.setHechizo1(null);
 		arena.setHechizo2(null);
 		
-		Random r = new Random();
 		arena.setPokemon1(arena.getEntrenador1().getPokemones().get(0));
 		arena.setPokemon2(arena.getEntrenador2().getPokemones().get(0));
 		

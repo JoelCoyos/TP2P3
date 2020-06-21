@@ -3,9 +3,9 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import modelo.CuartosFinal;
+import backup.CuartosFinal;
+import backup.Torneo;
 import modelo.Entrenador;
-import modelo.Torneo;
 import vista.IVista;
 import vista.VentanaTorneo;
 

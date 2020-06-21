@@ -1,6 +1,9 @@
-package modelo;
+package backup;
 
 import java.util.ArrayList;
+
+import modelo.Entrenador;
+import modelo.Pokemon;
 
 public interface ITorneo {
 	

@@ -10,10 +10,8 @@ import javax.swing.border.EmptyBorder;
 import controlador.Controlador;
 import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
-import modelo.ITorneo;
 import modelo.Pokemon;
 import modelo.PokemonFactory;
-import modelo.Torneo;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -29,6 +27,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.event.ListSelectionListener;
+
+import backup.ITorneo;
+import backup.Torneo;
+
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.ActionEvent;
 

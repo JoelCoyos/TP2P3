@@ -1,4 +1,7 @@
-package modelo;
+package backup;
+
+import modelo.IState;
+import modelo.Util;
 
 public class BatallaState implements IState {
 	

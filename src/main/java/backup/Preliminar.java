@@ -1,6 +1,9 @@
-package modelo;
+package backup;
 
 import java.util.Random;
+
+import modelo.IState;
+import modelo.Util;
 
 public class Preliminar implements IState {
 
