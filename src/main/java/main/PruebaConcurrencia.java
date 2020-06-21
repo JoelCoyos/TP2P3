@@ -5,12 +5,12 @@ import excepciones.MaximaCapacidadEntrenadoresException;
 import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
 import modelo.PokemonFactory;
-import modelo.Torneo;
+import modelo.Torneo2;
 
 public class PruebaConcurrencia {
 
 	public static void main(String[] args) {
-
+		
 		Entrenador e1 = new Entrenador("Ash");
 		Entrenador e2 = new Entrenador("Misty");
 		Entrenador e3 = new Entrenador("Brock");
@@ -19,7 +19,7 @@ public class PruebaConcurrencia {
 		Entrenador e6 = new Entrenador("Max");
 		Entrenador e7 = new Entrenador("Maya");
 		Entrenador e8 = new Entrenador("Ivy");
-
+		
 		try {
 			e1.aniadirPokemon(PokemonFactory.getPokemon("Pikachu", "Electrico", true));
 			e1.aniadirPokemon(PokemonFactory.getPokemon("Charizard", "Fuego", false));
@@ -56,16 +56,16 @@ public class PruebaConcurrencia {
 			// TODO Auto-generated catch block
 			e9.printStackTrace();
 		}
-
+		
 		try {
-			Torneo.getInstance().aniadirEntrenador(e1);
-			Torneo.getInstance().aniadirEntrenador(e2);
-			Torneo.getInstance().aniadirEntrenador(e3);
-			Torneo.getInstance().aniadirEntrenador(e4);
-			Torneo.getInstance().aniadirEntrenador(e5);
-			Torneo.getInstance().aniadirEntrenador(e6);
-			Torneo.getInstance().aniadirEntrenador(e7);
-			Torneo.getInstance().aniadirEntrenador(e8);
+			Torneo2.getInstance().aniadirEntrenador(e1);
+			Torneo2.getInstance().aniadirEntrenador(e2);
+			Torneo2.getInstance().aniadirEntrenador(e3);
+			Torneo2.getInstance().aniadirEntrenador(e4);
+			Torneo2.getInstance().aniadirEntrenador(e5);
+			Torneo2.getInstance().aniadirEntrenador(e6);
+			Torneo2.getInstance().aniadirEntrenador(e7);
+			Torneo2.getInstance().aniadirEntrenador(e8);
 		} catch (MaximaCapacidadEntrenadoresException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,11 +73,11 @@ public class PruebaConcurrencia {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		Torneo.getInstance().realizarRonda();
-		//Torneo.getInstance().realizarRonda();
-		//Torneo.getInstance().realizarRonda();
-		//Torneo.getInstance().realizarRonda();
+		
+		System.out.println("adasd");
+		
+		Torneo2.getInstance().realizarRonda();
+		
 	}
 
 }

@@ -2,6 +2,6 @@ package modelo;
 
 public interface IEtapas {
 	
-	void realizarRonda();
+	void realizarRonda(Entrenador[] restantes);
 
 }

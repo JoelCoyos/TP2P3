@@ -10,8 +10,10 @@ import javax.swing.border.EmptyBorder;
 import controlador.Controlador;
 import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
+import modelo.ITorneo;
 import modelo.Pokemon;
 import modelo.PokemonFactory;
+import modelo.Torneo;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -27,14 +29,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.event.ListSelectionListener;
-
-import backup.ITorneo;
-import backup.Torneo;
-
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.ActionEvent;
 
-public class VentanaTorneo extends JFrame implements IVista, ListSelectionListener {
+public class VentanaTorneo extends JFrame implements IVista, ListSelectionListener, ActionListener {
 
 	private JPanel contentPane;
 	private JPanel panelEntrenadores;
@@ -79,6 +77,7 @@ public class VentanaTorneo extends JFrame implements IVista, ListSelectionListen
 		listEntreanador.setModel(listaModelEntrenador);
 		
 		btnNewEntrenador = new JButton("Agregar Entrenador");
+		this.btnNewEntrenador.addActionListener(this);
 		panelEntrenadores.add(btnNewEntrenador, BorderLayout.NORTH);
 		
 		panelPokemones = new JPanel();
@@ -112,6 +111,7 @@ public class VentanaTorneo extends JFrame implements IVista, ListSelectionListen
 		scrollPane.setViewportView(listArena2);
 		
 		btnEmpezar = new JButton("Empezar");
+		this.btnEmpezar.setEnabled(false);
 		btnEmpezar.setActionCommand("EMPEZAR");
 		panelArenas.add(btnEmpezar);
 		
@@ -217,4 +217,13 @@ public class VentanaTorneo extends JFrame implements IVista, ListSelectionListen
 
 
 	
+	public void actionPerformed(ActionEvent arg0) {
+		
+		if (arg0.getActionCommand() == "Agregar Entrenador") {
+			//VentanaAgregarEntrenador ventana = new VentanaAgregarEntrenador();
+		}
+		else { //agregar pokemon
+			//VentanaAgregarPokemon ventana = new VentanaAgregarPokemon();
+		}
+	}
 }

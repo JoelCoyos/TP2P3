@@ -21,9 +21,6 @@ public class Arena {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		this.entrenador1 = entrenador1;
-		this.entrenador2 = entrenador2;
 	}
 
 	public void ejecutarFase() {
