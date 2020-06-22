@@ -15,7 +15,7 @@ public class Final implements IEtapas {
 		System.out.println("COMIENZA LA FINAL\n");
 		
 		Arena arena = Torneo.getInstance().getArenas().poll();
-		Batalla batalla = new Batalla(arena, participantes.remove(0), participantes.remove(0));
+		Batalla batalla = new Batalla( participantes.remove(0), participantes.remove(0),arena);
 		Torneo.getInstance().getArenas().add(arena);
 		batalla.start();
 		

@@ -49,6 +49,7 @@ public class ArenaFinalizacion implements iStateArena {
 		}
 
 		arena.setEstado(new ArenaLimpieza(arena));
+		arena.getSemaforo().release();
 
 	}
 

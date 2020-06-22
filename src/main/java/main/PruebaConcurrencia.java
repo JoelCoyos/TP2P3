@@ -75,9 +75,6 @@ public class PruebaConcurrencia {
 		}
 
 		Torneo.getInstance().realizarRonda();
-		//Torneo.getInstance().realizarRonda();
-		//Torneo.getInstance().realizarRonda();
-		//Torneo.getInstance().realizarRonda();
 	}
 
 }

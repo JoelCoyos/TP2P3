@@ -10,11 +10,12 @@ public class Semifinal implements IEtapas {
 		ArrayList<Entrenador> participantes = Torneo.getInstance().getParticipantesActuales();
 		Torneo.getInstance().setParticipantesActuales(new ArrayList<Entrenador>());
 		
+		
 		System.out.println("COMIENZAN LAS SEMIFINALES\n");
 
 		for (int i = 0; i < 2; i++) {
 			Arena arena = Torneo.getInstance().getArenas().poll();
-			Batalla batalla = new Batalla(arena, participantes.remove(0), participantes.remove(0));
+			Batalla batalla = new Batalla( participantes.remove(0), participantes.remove(0),arena);
 			Torneo.getInstance().getArenas().add(arena);
 			batalla.start();
 		}

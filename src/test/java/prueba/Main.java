@@ -1,6 +1,5 @@
 package prueba;
 
-import backup.Torneo;
 import excepciones.EntrenadorRepetidoException;
 import excepciones.FaltanEntrenadoresException;
 import excepciones.MaximaCapacidadEntrenadoresException;
