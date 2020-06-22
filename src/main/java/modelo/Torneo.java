@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Observable;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ import excepciones.RequisitosPokemonesException;
  * Este esta compuesto de 8 {@link Entrenador}. El ganador del torneo se
  * decidira en 3 rondas, en un sistema de eliminacion doble<br>
  */
-public class Torneo {
+public class Torneo extends Observable {
 
 	private int numeroEntrenadores = 0;
 	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
@@ -34,7 +35,6 @@ public class Torneo {
 	private static Torneo instance = null;
 
 	private Torneo() {
-
 	}
 
 	public ArrayList<Entrenador> getEntrenadores() {

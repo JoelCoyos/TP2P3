@@ -6,223 +6,211 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import controlador.Controlador;
-import excepciones.TipoNoEncontradoException;
-import modelo.Entrenador;
-import modelo.Pokemon;
-import modelo.PokemonFactory;
-import modelo.Torneo;
-
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Iterator;
 
 import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
-public class VentanaTorneo extends JFrame implements IVista, ListSelectionListener, ActionListener {
+import modelo.Entrenador;
+import modelo.Pokemon;
+import modelo.Torneo;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+
+public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener {
 
 	private JPanel contentPane;
-	private JPanel panelEntrenadores;
-	private JPanel panelPokemones;
-	private JPanel panelArenas;
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;
-	private JList<String> listArena1;
-	private JList<String> listArena2;
+	private JList<Entrenador> listEntrenadores1;
+	private JList<Pokemon> listPokemon1;
+	private JList<Entrenador> listEntrenadores2;
+	private JList<Pokemon> listPokemon2;
+	private DefaultListModel<Entrenador> listModelEntrenadores1 = new DefaultListModel<Entrenador>();
+	private DefaultListModel<Pokemon> listModelPokemon1 = new DefaultListModel<Pokemon>();
+	private DefaultListModel<Entrenador> listModelEntrenadores2 = new DefaultListModel<Entrenador>();
+	private DefaultListModel<Pokemon> listModelPokemon2 = new DefaultListModel<Pokemon>();
+	private JPanel panel;
 	private JScrollPane scrollPane_2;
-	private JScrollPane scrollPane_3;
-	private JList<Entrenador> listEntreanador;
-	private DefaultListModel<Entrenador> listaModelEntrenador = new DefaultListModel<Entrenador>();
-	private DefaultListModel<Pokemon> listaModelPokemon = new DefaultListModel<Pokemon>();
-	private JList<Pokemon> listPokemon;
-	private JButton btnNewEntrenador;
-	private JButton btnNewButton;
-	private JButton btnEmpezar;
+	private JPanel panel_1;
+	private JTextArea textAreaBatallas;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JButton btnElegirPokemon;
+	private JButton btnComenzarBatalla;
 	private ActionListener actionListener;
-	
+	private JPanel panel_4;
+	private JButton btnMostrarPokemon;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JScrollPane scrollPane_3;
+	private JScrollPane scrollPane_4;
+
 	/**
 	 * Create the frame.
 	 */
 	public VentanaTorneo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 677, 351);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 3, 0, 0));
+		setBounds(100, 100, 812, 413);
+		this.contentPane = new JPanel();
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(this.contentPane);
+		this.contentPane.setLayout(new GridLayout(0, 5, 0, 0));
 		
-		panelEntrenadores = new JPanel();
-		contentPane.add(panelEntrenadores);
-		panelEntrenadores.setLayout(new BorderLayout(0, 0));
+		this.scrollPane = new JScrollPane();
+		this.contentPane.add(this.scrollPane);
 		
-		scrollPane_2 = new JScrollPane();
-		panelEntrenadores.add(scrollPane_2, BorderLayout.CENTER);
+		this.listEntrenadores1 = new JList<Entrenador>();
+		this.listEntrenadores1.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.scrollPane.setViewportView(this.listEntrenadores1);
 		
-		listEntreanador = new JList();
-		listEntreanador.addListSelectionListener(this);
-		scrollPane_2.setViewportView(listEntreanador);
-		listEntreanador.setModel(listaModelEntrenador);
+		this.scrollPane_1 = new JScrollPane();
+		this.contentPane.add(this.scrollPane_1);
 		
-		btnNewEntrenador = new JButton("Agregar Entrenador");
-		this.btnNewEntrenador.addActionListener(this);
-		panelEntrenadores.add(btnNewEntrenador, BorderLayout.NORTH);
+		this.listPokemon1 = new JList<Pokemon>();
+		this.listPokemon1.setBorder(new TitledBorder(null, "Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.scrollPane_1.setViewportView(this.listPokemon1);
 		
-		panelPokemones = new JPanel();
-		contentPane.add(panelPokemones);
-		panelPokemones.setLayout(new BorderLayout(0, 0));
+		this.scrollPane_3 = new JScrollPane();
+		this.contentPane.add(this.scrollPane_3);
 		
-		scrollPane_3 = new JScrollPane();
-		panelPokemones.add(scrollPane_3);
+		this.listEntrenadores2 = new JList<Entrenador>();
+		this.listEntrenadores2.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.scrollPane_3.setViewportView(this.listEntrenadores2);
 		
-		listPokemon = new JList();
-		scrollPane_3.setViewportView(listPokemon);
-		listPokemon.setModel(listaModelPokemon);
+		this.scrollPane_4 = new JScrollPane();
+		this.contentPane.add(this.scrollPane_4);
 		
-		btnNewButton = new JButton("Agregar Pokemon");
-		scrollPane_3.setColumnHeaderView(btnNewButton);
+		this.listPokemon2 = new JList<Pokemon>();
+		this.listPokemon2.setBorder(new TitledBorder(null, "Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.scrollPane_4.setViewportView(this.listPokemon2);
 		
-		panelArenas = new JPanel();
-		contentPane.add(panelArenas);
-		panelArenas.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		this.panel = new JPanel();
+		this.contentPane.add(this.panel);
+		this.panel.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		scrollPane_1 = new JScrollPane();
-		panelArenas.add(scrollPane_1);
+		this.scrollPane_2 = new JScrollPane();
+		this.panel.add(this.scrollPane_2);
 		
-		listArena1 = new JList();
-		scrollPane_1.setViewportView(listArena1);
+		this.textAreaBatallas = new JTextArea();
+		this.textAreaBatallas.setBorder(new TitledBorder(null, "Batallas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.scrollPane_2.setViewportView(this.textAreaBatallas);
 		
-		scrollPane = new JScrollPane();
-		panelArenas.add(scrollPane);
+		this.panel_1 = new JPanel();
+		this.panel.add(this.panel_1);
+		this.panel_1.setLayout(new GridLayout(3, 0, 0, 0));
 		
-		listArena2 = new JList();
-		scrollPane.setViewportView(listArena2);
+		this.panel_2 = new JPanel();
+		this.panel_1.add(this.panel_2);
 		
-		btnEmpezar = new JButton("Empezar");
-		this.btnEmpezar.setEnabled(false);
-		btnEmpezar.setActionCommand("EMPEZAR");
-		panelArenas.add(btnEmpezar);
+		this.panel_5 = new JPanel();
+		this.panel_2.add(this.panel_5);
 		
+		this.btnMostrarPokemon = new JButton("Mostrar Pokemon");
+		this.panel_5.add(this.btnMostrarPokemon);
+		this.btnMostrarPokemon.addMouseListener(this);
+		
+		this.panel_3 = new JPanel();
+		this.panel_1.add(this.panel_3);
+		
+		this.panel_6 = new JPanel();
+		this.panel_3.add(this.panel_6);
+		
+		this.btnElegirPokemon = new JButton("Elegir Pokemon");
+		this.panel_6.add(this.btnElegirPokemon);
+		this.btnElegirPokemon.addMouseListener(this);
+		
+		this.panel_4 = new JPanel();
+		this.panel_1.add(this.panel_4);
+		
+		this.panel_7 = new JPanel();
+		this.panel_4.add(this.panel_7);
+		
+		this.btnComenzarBatalla = new JButton("Comenzar Batallas");
+		this.panel_7.add(this.btnComenzarBatalla);
+		this.btnComenzarBatalla.addMouseListener(this);
 		
 		this.setVisible(true);
 	}
-	
+
+	@Override
+	public void mostrarEntrenadores() {
+		for (int i=0; i<Torneo.getInstance().getEntrenadores().size(); i++) {
+			this.listModelEntrenadores1.addElement(Torneo.getInstance().getEntrenadores().get(i));
+		}
+		this.listEntrenadores1.setModel(listModelEntrenadores1);
+		this.listEntrenadores2.setModel(listModelEntrenadores1);
+	}
+
+	@Override
+	public void mostrarPokemon() {
+		if (this.listEntrenadores1.getSelectedValue() != null && this.listEntrenadores2.getSelectedValue() != null) {
+			this.listModelPokemon1.clear();
+			this.listPokemon1.setModel(listModelPokemon1);
+			this.listPokemon2.setModel(listModelPokemon1);
+			Entrenador e1 = this.listEntrenadores1.getSelectedValue();
+			Entrenador e2 = this.listEntrenadores2.getSelectedValue();
+			for (int i=0; i<e1.getPokemones().size(); i++)
+				this.listModelPokemon1.addElement(e1.getPokemones().get(i));
+			this.listPokemon1.setModel(listModelPokemon1);
+			for (int i=0; i<e2.getPokemones().size(); i++)
+				this.listModelPokemon2.addElement(e2.getPokemones().get(i));
+			this.listPokemon2.setModel(listModelPokemon2);
+		}
+	}
+
+	@Override
+	public void mostrarBatallas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void elegirPokemon() {
+		/*//ELIJO POKEMON DE CADA ENTRENADOR, LO AGREGO AL TEXTFIELD Y BORRO LOS ENTRENADORES DE LAS LISTAS
+		if (this.listPokemon1.getSelectedValue() != null && this.listPokemon2.getSelectedValue() != null) {
+			//Aca guardaria en alguna parte del torneo los entrenadores y los pokemon
+			this.listEntrenadores1.clearSelection();
+			this.listEntrenadores2.clearSelection();
+			if (this.listEntrenadores1.)
+		}*/
+	}
+
+	@Override
+	public void comenzarBatallas() {
+		
+	}
+
 	@Override
 	public void setActionListener(ActionListener actionListener) {
-		this.btnEmpezar.addActionListener(actionListener);
+		this.btnComenzarBatalla.addActionListener(actionListener);
+		this.btnElegirPokemon.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
+
+	public void mouseClicked(MouseEvent arg0) {
+	}
+	public void mouseEntered(MouseEvent arg0) {
+	}
+	public void mouseExited(MouseEvent arg0) {
+	}
 	
-
-	@Override
-	public void generarEntrenadores() {
-		this.listaModelEntrenador.clear();
-		Entrenador e1 = new Entrenador("Ash");
-		Entrenador e2 = new Entrenador("Misty");
-		Entrenador e3 = new Entrenador("Brock");
-		Entrenador e4 = new Entrenador("Tracey");
-		Entrenador e5 = new Entrenador("Aura");
-		Entrenador e6 = new Entrenador("Max");
-		Entrenador e7 = new Entrenador("Maya");
-		Entrenador e8 = new Entrenador("Ivy");
-		try {
-			e1.aniadirPokemon(PokemonFactory.getPokemon("Pikachu", "Electrico", true));
-			e1.aniadirPokemon(PokemonFactory.getPokemon("Charizard", "Fuego", false));
-			e1.aniadirPokemon(PokemonFactory.getPokemon("Articuno", "Hielo", true));
-
-			e2.aniadirPokemon(PokemonFactory.getPokemon("Lapras", "Agua", true));
-			e2.aniadirPokemon(PokemonFactory.getPokemon("Zapdos", "Electrico", false));
-			e2.aniadirPokemon(PokemonFactory.getPokemon("Diglett", "Tierra", true));
-
-			e3.aniadirPokemon(PokemonFactory.getPokemon("Jynx", "Hielo", true));
-			e3.aniadirPokemon(PokemonFactory.getPokemon("Charizard", "Fuego", false));
-			e3.aniadirPokemon(PokemonFactory.getPokemon("Ponyta", "Fuego", true));
-
-			e4.aniadirPokemon(PokemonFactory.getPokemon("Pikachu", "Electrico", true));
-			e4.aniadirPokemon(PokemonFactory.getPokemon("Milotic", "Agua", false));
-			e4.aniadirPokemon(PokemonFactory.getPokemon("Magikarp", "Agua", true));
-
-			e5.aniadirPokemon(PokemonFactory.getPokemon("Chimchar", "Fuego", true));
-			e5.aniadirPokemon(PokemonFactory.getPokemon("Dewgong", "Hielo", false));
-			e5.aniadirPokemon(PokemonFactory.getPokemon("Slowpoke", "Agua", true));
-
-			e6.aniadirPokemon(PokemonFactory.getPokemon("Vulpix", "Fuego", true));
-			e6.aniadirPokemon(PokemonFactory.getPokemon("Sandshrew", "Tierra", false));
-			e6.aniadirPokemon(PokemonFactory.getPokemon("Cubone", "Tierra", true));
-
-			e7.aniadirPokemon(PokemonFactory.getPokemon("Cubone", "Tierra", true));
-			e7.aniadirPokemon(PokemonFactory.getPokemon("Greninja", "Agua", false));
-			e7.aniadirPokemon(PokemonFactory.getPokemon("Cloyster", "Hielo", true));
-
-			e8.aniadirPokemon(PokemonFactory.getPokemon("Pikachu", "Electrico", true));
-			e8.aniadirPokemon(PokemonFactory.getPokemon("Slugma", "Fuego", false));
-			e8.aniadirPokemon(PokemonFactory.getPokemon("Diglett", "Tierra", true, true));
-		} catch (TipoNoEncontradoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		listaModelEntrenador.addElement(e1);
-		listaModelEntrenador.addElement(e2);
-		listaModelEntrenador.addElement(e3);
-		listaModelEntrenador.addElement(e4);
-		listaModelEntrenador.addElement(e5);
-		listaModelEntrenador.addElement(e6);
-		listaModelEntrenador.addElement(e7);
-		listaModelEntrenador.addElement(e8);
-		this.repaint();
+	public void mousePressed(MouseEvent arg0) {
+		ActionEvent evento;
+		String command;
+		JButton boton = (JButton) arg0.getSource();
+		command = boton.getActionCommand();
+		evento = new ActionEvent(boton,0,command);
+		this.actionListener.actionPerformed(evento);
 	}
-
-	@Override
-	public void generarPokemones(Entrenador entrenador) {
-		listaModelPokemon.clear();
-		Iterator<Pokemon> iterator = entrenador.getPokemones().iterator();
-		while(iterator.hasNext())
-		{
-			listaModelPokemon.addElement(iterator.next());
-		}
-		this.repaint();
-		
-		
-	}
-
-	public void valueChanged(ListSelectionEvent e) {
-		generarPokemones(this.listEntreanador.getSelectedValue());
-		
-	}
-
-	@Override
-	public Entrenador[] getEntrenadores() {
-		Entrenador[] entrenadores = new Entrenador[8];
-		for(int i=0;i<8;i++)
-		{
-			entrenadores[i] = listaModelEntrenador.get(i);
-		}
-		return entrenadores;
-		
-		
-	}
-
-
 	
-	public void actionPerformed(ActionEvent arg0) {
-		
-		if (arg0.getActionCommand() == "Agregar Entrenador") {
-			//VentanaAgregarEntrenador ventana = new VentanaAgregarEntrenador();
-		}
-		else { //agregar pokemon
-			//VentanaAgregarPokemon ventana = new VentanaAgregarPokemon();
-		}
+	public void mouseReleased(MouseEvent arg0) {
 	}
 }

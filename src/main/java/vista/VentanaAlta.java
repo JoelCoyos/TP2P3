@@ -30,8 +30,10 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
-public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, MouseListener, ActionListener {
+public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, MouseListener {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -110,7 +112,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	private JPanel panel_49;
 	private JPanel panel_50;
 	private JPanel panel_51;
-	private JButton btnNewButton;
+	private JButton btnNewButtonVer;
 	private JPanel panel_52;
 	private JList<Entrenador> listEntrenadores;
 	private JScrollPane scrollPane_1;
@@ -135,27 +137,11 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	private JPanel panel_64;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaAlta frame = new VentanaAlta();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public VentanaAlta() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 790, 697);
+		setBounds(100, 100, 1200, 700);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new TitledBorder(null, "Alta de Entrenadores y Pokemons", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(this.contentPane);
@@ -183,15 +169,15 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.panel_52 = new JPanel();
 		this.panel_10.add(this.panel_52);
 		
-		this.btnNewButton = new JButton("Ver Pokemon");
-		this.btnNewButton.addActionListener(this);
-		this.panel_52.add(this.btnNewButton);
+		this.btnNewButtonVer = new JButton("Ver Pokemon");
+		this.btnNewButtonVer.addMouseListener(this);
+		this.panel_52.add(this.btnNewButtonVer);
 		
 		this.panel_13 = new JPanel();
 		this.panel_10.add(this.panel_13);
 		
 		this.btnNewButtonTorneo = new JButton("Comenzar Torneo");
-		this.btnNewButtonTorneo.setEnabled(false);
+		this.btnNewButtonTorneo.addMouseListener(this);
 		this.panel_13.add(this.btnNewButtonTorneo);
 		
 		this.panel_11 = new JPanel();
@@ -525,10 +511,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.panel_7.add(this.panel_38);
 		
 		this.btnNewButtonAgregar = new JButton("Agregar");
-		this.btnNewButtonAgregar.addActionListener(this);
 		this.btnNewButtonAgregar.setEnabled(false);
-		this.btnNewButtonAgregar.addMouseListener(this);
-		this.btnNewButtonAgregar.addKeyListener(this);
 		this.panel_38.add(this.btnNewButtonAgregar);
 		
 		this.setVisible(true);
@@ -539,11 +522,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return this.textFieldNombre.getText();
 	}
 
-
 	@Override
 	public void comenzarTorneo() {
-		// TODO Auto-generated method stub
-		
+		this.dispose(); //CIERRA VENTANA ACTUAL
 	}
 	
 	public boolean recarga(String r) {
@@ -554,7 +535,6 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	public void agregarEntrenador() {
 		boolean error = false;
 		Entrenador entrenador = new Entrenador(this.getNombreEntrenador());
-		new PokemonFactory();
 		try {
 			entrenador.aniadirPokemon(PokemonFactory.getPokemon(this.getNombrePokemon1(),this.getTipoPokemon1(),recarga(this.getRecarga1()),recarga(this.getGranRecarga1())));
 		} catch (TipoNoEncontradoException e) {
@@ -719,7 +699,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
+		this.btnNewButtonAgregar.addActionListener(actionListener);
 		this.btnNewButtonTorneo.addActionListener(actionListener);
+		this.btnNewButtonVer.addActionListener(actionListener);
 		this.actionListener = actionListener;
 		
 	}
@@ -732,36 +714,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		
 	}
 
-	/*public void mousePressed(MouseEvent arg0) { //EN CONJUNTO CON CONTROLADOR
-		String command;
-		JButton boton = (JButton) arg0.getSource();
-		command = boton.getActionCommand();
-		this.actionListener.actionPerformed(new ActionEvent(boton,0,command));
-	}*/
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -804,19 +757,6 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	public String getRecarga6() {
 		return this.textFieldRecarga6.getText();
 	}
-	
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getActionCommand() == "Agregar")
-			this.agregarEntrenador();
-		else
-			this.mostrarPokemon();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public String getGranRecarga1() {
@@ -848,4 +788,35 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return this.textFieldGranRecarga6.getText();
 	}
 
+	public void mousePressed(MouseEvent e) {
+		ActionEvent evento;
+		String command;
+		JButton boton = (JButton) e.getSource();
+		command = boton.getActionCommand();
+		evento = new ActionEvent(boton,0,command);
+		this.actionListener.actionPerformed(evento);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+	}
 }

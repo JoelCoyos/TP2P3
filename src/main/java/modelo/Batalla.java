@@ -3,19 +3,51 @@ package modelo;
 public class Batalla extends Thread {
 
 	private Entrenador entrenador1, entrenador2;
+	private Pokemon pokemon1, pokemon2;
+	private Hechizo hechizo1, hechizo2;
 	private Arena arena;
-
-	public Batalla(Arena arena, Entrenador entrenador1, Entrenador entrenador2) {
-		this.arena = arena;
+	
+	public Batalla(Entrenador entrenador1, Entrenador entrenador2, Pokemon pokemon1, Pokemon pokemon2, Hechizo hechizo1,
+			Hechizo hechizo2, Arena arena) {
 		this.entrenador1 = entrenador1;
 		this.entrenador2 = entrenador2;
+		this.pokemon1 = pokemon1;
+		this.pokemon2 = pokemon2;
+		this.hechizo1 = hechizo1;
+		this.hechizo2 = hechizo2;
+		this.arena = arena;
+	}
+	
+	public Entrenador getEntrenador1() {
+		return entrenador1;
+	}
+
+	public Entrenador getEntrenador2() {
+		return entrenador2;
+	}
+
+	public Pokemon getPokemon1() {
+		return pokemon1;
+	}
+
+	public Pokemon getPokemon2() {
+		return pokemon2;
+	}
+
+	public Hechizo getHechizo1() {
+		return hechizo1;
+	}
+
+	public Hechizo getHechizo2() {
+		return hechizo2;
+	}
+
+	public Arena getArena() {
+		return arena;
 	}
 
 	public void run() {
 		try {
-			arena.ingresarArena(entrenador1, entrenador2);
-			arena.ejecutarFase(); // eleccion
-			sleep(1000);
 			arena.ejecutarFase(); // preliminar
 			sleep(2000);
 			arena.ejecutarFase(); // batalla
@@ -24,7 +56,6 @@ public class Batalla extends Thread {
 			sleep(1000);
 			arena.ejecutarFase(); // limpieza
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
