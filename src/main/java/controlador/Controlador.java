@@ -65,8 +65,9 @@ public class Controlador implements ActionListener, Observer {
 					else
 						if (comando == "Agregar Batalla")
 							this.vistaTorneo.elegirPokemonHechizo();
-						/*else
+						else
 							if (comando == "Comenzar Batallas")
+								this.vistaTorneo.comenzarBatallas();
 								//COMPLETAR*/
 						
 		//COMPLETAR

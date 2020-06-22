@@ -541,19 +541,19 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 			error = true;
 			JOptionPane.showMessageDialog(this,"El tipo ingresado no existe");
 		}
-		if (!this.getNombrePokemon2().isEmpty() && !this.getTipoPokemon2().isEmpty() && !this.getRecarga2().isEmpty() && !this.getGranRecarga2().isEmpty()) {
+		if (!this.getNombrePokemon2().isEmpty() && !this.getTipoPokemon2().isEmpty() && !this.getRecarga2().isEmpty() && (this.getGranRecarga2().isEmpty() || (!this.getGranRecarga2().isEmpty() && this.getTipoPokemon2().equalsIgnoreCase("Hielo")))){
 			try {
 				entrenador.aniadirPokemon(PokemonFactory.getPokemon(this.getNombrePokemon2(),this.getTipoPokemon2(),recarga(this.getRecarga2()),recarga(this.getGranRecarga2())));
-				if (!this.getNombrePokemon3().isEmpty() && !this.getTipoPokemon3().isEmpty() && !this.getRecarga3().isEmpty() && !this.getGranRecarga3().isEmpty()) {
+				if (!this.getNombrePokemon3().isEmpty() && !this.getTipoPokemon3().isEmpty() && !this.getRecarga3().isEmpty() && (this.getGranRecarga3().isEmpty() || (!this.getGranRecarga3().isEmpty() && this.getTipoPokemon3().equalsIgnoreCase("Hielo")))) {
 					try {
 						entrenador.aniadirPokemon(PokemonFactory.getPokemon(this.getNombrePokemon3(),this.getTipoPokemon3(),recarga(this.getRecarga3()),recarga(this.getGranRecarga3())));
-						if (!this.getNombrePokemon4().isEmpty() && !this.getTipoPokemon4().isEmpty() && !this.getRecarga4().isEmpty() && !this.getGranRecarga4().isEmpty()) {
+						if (!this.getNombrePokemon4().isEmpty() && !this.getTipoPokemon4().isEmpty() && !this.getRecarga4().isEmpty() && (this.getGranRecarga4().isEmpty() || (!this.getGranRecarga4().isEmpty() && this.getTipoPokemon4().equalsIgnoreCase("Hielo")))) {
 							try {
 								entrenador.aniadirPokemon(PokemonFactory.getPokemon(this.getNombrePokemon4(),this.getTipoPokemon4(),recarga(this.getRecarga4()),recarga(this.getGranRecarga4())));
-								if (!this.getNombrePokemon5().isEmpty() && !this.getTipoPokemon5().isEmpty() && !this.getRecarga5().isEmpty() && !this.getGranRecarga5().isEmpty()) {
+								if (!this.getNombrePokemon5().isEmpty() && !this.getTipoPokemon5().isEmpty() && !this.getRecarga5().isEmpty() && (this.getGranRecarga5().isEmpty() || (!this.getGranRecarga5().isEmpty() && this.getTipoPokemon5().equalsIgnoreCase("Hielo")))) {
 									try {
 										entrenador.aniadirPokemon(PokemonFactory.getPokemon(this.getNombrePokemon5(),this.getTipoPokemon5(),recarga(this.getRecarga5()),recarga(this.getGranRecarga5())));
-										if (!this.getNombrePokemon6().isEmpty() && !this.getTipoPokemon6().isEmpty() && !this.getRecarga6().isEmpty() && !this.getGranRecarga6().isEmpty()) {
+										if (!this.getNombrePokemon6().isEmpty() && !this.getTipoPokemon6().isEmpty() && !this.getRecarga6().isEmpty() && (this.getGranRecarga6().isEmpty() || (!this.getGranRecarga6().isEmpty() && this.getTipoPokemon6().equalsIgnoreCase("Hielo")))) {
 											try {
 												entrenador.aniadirPokemon(PokemonFactory.getPokemon(this.getNombrePokemon6(),this.getTipoPokemon6(),recarga(this.getRecarga6()),recarga(this.getGranRecarga6())));
 											} catch (TipoNoEncontradoException e) {
@@ -707,7 +707,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	}
 	
 	public void keyReleased(KeyEvent arg0) {
-		if (!this.getNombreEntrenador().isEmpty() && !this.getNombrePokemon1().isEmpty() && !this.getTipoPokemon1().isEmpty() && !this.getRecarga1().isEmpty() && !this.getGranRecarga1().isEmpty())
+		if (!this.getNombreEntrenador().isEmpty() && !this.getNombrePokemon1().isEmpty() && !this.getTipoPokemon1().isEmpty() && !this.getRecarga1().isEmpty() && (this.getGranRecarga1().isEmpty() || (!this.getGranRecarga1().isEmpty() && this.getTipoPokemon1().equalsIgnoreCase("Hielo"))))
 			this.btnNewButtonAgregar.setEnabled(true);
 		else
 			this.btnNewButtonAgregar.setEnabled(false);

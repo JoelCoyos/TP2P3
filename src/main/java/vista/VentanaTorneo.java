@@ -38,7 +38,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	private DefaultListModel<String> listModelHechizo1 = new DefaultListModel<String>();
 	private DefaultListModel<String> listModelHechizo2 = new DefaultListModel<String>();
 	private ActionListener actionListener;
-	private JPanel panel_1;
+	private JPanel panelGeneral;
 	private JPanel panel;
 	private JTextArea textAreaProgreso;
 	private JPanel panel_2;
@@ -55,9 +55,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	private JButton btnAgregarBatalla;
 	private JButton btnComenzarBatallas;
 	private JButton btnAvanzarFase;
-	private JScrollPane scrollPane_1;
+	private JScrollPane scrollPaneE1;
 	private JPanel panel_10;
-	private JScrollPane scrollPane_2;
+	private JScrollPane scrollPaneP1;
 	private JScrollPane scrollPane_3;
 	private JList<Entrenador> listEntrenadores1;
 	private JList<Pokemon> listPokemon1;
@@ -85,31 +85,31 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(new BorderLayout(0, 0));
 		
-		this.panel_1 = new JPanel();
-		this.contentPane.add(this.panel_1, BorderLayout.CENTER);
-		this.panel_1.setLayout(new GridLayout(0, 3, 0, 0));
+		this.panelGeneral = new JPanel();
+		this.contentPane.add(this.panelGeneral, BorderLayout.CENTER);
+		this.panelGeneral.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		this.panel_2 = new JPanel();
-		this.panel_1.add(this.panel_2);
+		this.panelGeneral.add(this.panel_2);
 		this.panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		this.scrollPane_1 = new JScrollPane();
-		this.panel_2.add(this.scrollPane_1);
+		this.scrollPaneE1 = new JScrollPane();
+		this.panel_2.add(this.scrollPaneE1);
 		
 		this.listEntrenadores1 = new JList<Entrenador>();
 		this.listEntrenadores1.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		this.scrollPane_1.setViewportView(this.listEntrenadores1);
+		this.scrollPaneE1.setViewportView(this.listEntrenadores1);
 		
 		this.panel_10 = new JPanel();
 		this.panel_2.add(this.panel_10);
 		this.panel_10.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		this.scrollPane_2 = new JScrollPane();
-		this.panel_10.add(this.scrollPane_2);
+		this.scrollPaneP1 = new JScrollPane();
+		this.panel_10.add(this.scrollPaneP1);
 		
 		this.listPokemon1 = new JList<Pokemon>();
 		this.listPokemon1.setBorder(new TitledBorder(null, "Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		this.scrollPane_2.setViewportView(this.listPokemon1);
+		this.scrollPaneP1.setViewportView(this.listPokemon1);
 		
 		this.scrollPane_3 = new JScrollPane();
 		this.panel_10.add(this.scrollPane_3);
@@ -119,7 +119,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.scrollPane_3.setViewportView(this.listHechizos1);
 		
 		this.panel_3 = new JPanel();
-		this.panel_1.add(this.panel_3);
+		this.panelGeneral.add(this.panel_3);
 		this.panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		this.scrollPane_4 = new JScrollPane();
@@ -148,7 +148,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.scrollPane_6.setViewportView(this.listHechizos2);
 		
 		this.panel_4 = new JPanel();
-		this.panel_1.add(this.panel_4);
+		this.panelGeneral.add(this.panel_4);
 		this.panel_4.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		this.scrollPane = new JScrollPane();
@@ -253,7 +253,6 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 
 	@Override
 	public void elegirPokemonHechizo() {
-		//ELIJO POKEMON DE CADA ENTRENADOR, LO AGREGO AL TEXTFIELD Y BORRO LOS ENTRENADORES DE LAS LISTAS
 		if (this.listPokemon1.getSelectedValue() != null && this.listPokemon2.getSelectedValue() != null && this.listEntrenadores1.getSelectedValue() != this.listEntrenadores2.getSelectedValue()) {
 			//Aca guardaria en alguna parte del torneo los entrenadores,los pokemon y los hechizos
 			String aux = this.textAreaBatallas.getText();
@@ -280,7 +279,14 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 
 	@Override
 	public void comenzarBatallas() {
-		this.contentPane.setEnabled(false);
+		this.btnComenzarBatallas.setEnabled(false);
+		this.listEntrenadores1.setEnabled(false);
+		this.listEntrenadores2.setEnabled(false);
+		this.listPokemon1.setEnabled(false);
+		this.listPokemon2.setEnabled(false);
+		this.listHechizos1.setEnabled(false);
+		this.listHechizos2.setEnabled(false);
+		this.textAreaBatallas.setEnabled(false);
 		this.textAreaProgreso.setEnabled(true);
 		//ACA COMIENZAN A EJECUTARSE LOS THREADS
 		
