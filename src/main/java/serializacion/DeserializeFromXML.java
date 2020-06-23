@@ -11,21 +11,17 @@ public class DeserializeFromXML {
 	
 	private static final String SERIALIZED_FILE_NAME = "torneo.xml";
 	
-	public static void leer()
+	public static void leer() throws FileNotFoundException
 	{
 		XMLDecoder decoder = null;
 		
-		try
-        {
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("No se encontro el archivo torneo.xml");
-        }
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
 		
-		Torneo.setInstance((Torneo)decoder.readObject());
-		
+		Torneo torneo = (Torneo)decoder.readObject();
+		if(torneo!=null)
+		{
+			Torneo.setInstance(torneo);
+		}
 	}
 
 }

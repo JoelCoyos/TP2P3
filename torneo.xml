@@ -507,5 +507,8 @@
     </object>
    </void>
   </void>
+  <void property="etapa">
+   <object class="modelo.Alta"/>
+  </void>
  </object>
 </java>

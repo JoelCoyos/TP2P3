@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.security.InvalidParameterException;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,10 +25,27 @@ public class Controlador implements ActionListener, Observer {
 	
 	public Controlador() {
 		
-		DeserializeFromXML.leer(); //Se recupera el torneo
-		vistaAlta = new VentanaAlta();
-		vistaAlta.setActionListener(this);
-		vistaAlta.setEntrenadores();
+		try {
+			DeserializeFromXML.leer();
+		} catch (FileNotFoundException e) {
+		} //Se recupera el torneo
+		if(Torneo.getInstance().getEtapa().getNombre()=="Alta")
+		{
+			vistaAlta = new VentanaAlta();
+			vistaAlta.setActionListener(this);
+			vistaAlta.setEntrenadores();
+		}
+		else {
+			comenzarBatalla();
+		}
+	}
+	
+	public void comenzarBatalla()
+	{
+		Torneo.getInstance().addObserver(this);
+		vistaTorneo = new VentanaTorneo();
+		vistaTorneo.setActionListener(this);
+		vistaTorneo.mostrarEntrenadores();
 	}
 
 	public IVistaAlta getVistaAlta() {
@@ -60,11 +78,16 @@ public class Controlador implements ActionListener, Observer {
 				this.vistaAlta.mostrarPokemon();
 			else
 				if (comando == "Comenzar Torneo") { //COMIENZA EL TORNEO
-					vistaAlta.comenzarTorneo();
-					Torneo.getInstance().addObserver(this);
-					vistaTorneo = new VentanaTorneo();
-					vistaTorneo.setActionListener(this);
-					vistaTorneo.mostrarEntrenadores();
+					if(vistaAlta.sePuedeEmpezar())
+					{
+						Torneo.getInstance().setEntrenadores(vistaAlta.getEntrenadores()); //Setea los entrenadores que creamos en la ventana
+						vistaAlta.comenzarTorneo();
+						comenzarBatalla();
+					}
+					else {
+						vistaAlta.noPuedeEmpezar();
+					}
+					
 				}
 				else
 					if (comando == "Mostrar Pokemon")

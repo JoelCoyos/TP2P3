@@ -1,10 +1,12 @@
 package main;
 
 import java.beans.Encoder;
+import java.io.FileNotFoundException;
 
 import excepciones.EntrenadorRepetidoException;
 import excepciones.MaximaCapacidadEntrenadoresException;
 import excepciones.TipoNoEncontradoException;
+import modelo.Alta;
 import modelo.CuartosFinal;
 import modelo.Entrenador;
 import modelo.PokemonFactory;
@@ -79,9 +81,14 @@ public class PruebaSerializacion {
 			e.printStackTrace();
 		}
 		
-		Torneo.getInstance().setEtapa(new CuartosFinal());
+		Torneo.getInstance().setEtapa(new Alta());
 		
-		SerializeToXML.escribirXML(Torneo.getInstance());
+		try {
+			SerializeToXML.escribirXML(Torneo.getInstance());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
