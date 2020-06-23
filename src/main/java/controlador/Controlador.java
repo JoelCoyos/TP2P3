@@ -6,6 +6,10 @@ import java.security.InvalidParameterException;
 import java.util.Observable;
 import java.util.Observer;
 
+import modelo.Final;
+import modelo.IEtapas;
+import modelo.Premiacion;
+import modelo.Semifinal;
 import modelo.Torneo;
 import vista.IVistaTorneo;
 import vista.IVistaAlta;
@@ -45,9 +49,8 @@ public class Controlador implements ActionListener, Observer {
 		
 		String comando = e.getActionCommand();
 		
-		if (comando == "Agregar") {//AGREGA ENTRENADOR CON SUS POKEMON A ARRAY DE ENTRENADORES
+		if (comando == "Agregar")//AGREGA ENTRENADOR CON SUS POKEMON A ARRAY DE ENTRENADORES
 			this.vistaAlta.agregarEntrenador();
-		}
 		else
 			if (comando == "Ver Pokemon") //MUESTRA EN LIST LOS POKEMON DEL ENTRENADOR SELECCIONADO
 				this.vistaAlta.mostrarPokemon();
@@ -65,27 +68,24 @@ public class Controlador implements ActionListener, Observer {
 					else
 						if (comando == "Agregar Batalla")
 							this.vistaTorneo.elegirPokemonHechizo();
-						else
-							if (comando == "Comenzar Batallas")
-								this.vistaTorneo.comenzarBatallas();
-								//COMPLETAR*/
-						
-		//COMPLETAR
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		IEtapas etapa = (IEtapas) arg1;
+		if (arg0 != Torneo.getInstance())
+			throw new InvalidParameterException();
+		else
+			if (etapa.getNombre() == "Cuartos de Final")
+				Torneo.getInstance().setEtapa(new Semifinal());
+			else
+				if (etapa.getNombre() == "Semifinal")
+					Torneo.getInstance().setEtapa(new Final());
+				else
+					if (etapa.getNombre() == "Final")
+						Torneo.getInstance().setEtapa(new Premiacion());
 		
 	}
-
-	/*@Override
-	public void update(Observable arg0, Object arg1) {
-		if (arg0 != this.torneo)
-			throw new InvalidParameterException();
-		//if (arg1.toString().contentEquals("Cuartos de final"))
-			//this.
-	}*/
 	
 
 }

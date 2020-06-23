@@ -288,7 +288,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.listHechizos2.setEnabled(false);
 		this.textAreaBatallas.setEnabled(false);
 		this.textAreaProgreso.setEnabled(true);
-		//ACA COMIENZAN A EJECUTARSE LOS THREADS
+		Torneo.getInstance().realizarRonda();
 		
 	}
 
@@ -318,5 +318,11 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	}
 	
 	public void mouseReleased(MouseEvent arg0) {
+	}
+
+	@Override
+	public void avanzarFase() {
+		// TODO Auto-generated method stub
+		
 	}
 }

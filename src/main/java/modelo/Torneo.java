@@ -1,5 +1,6 @@
 package modelo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -89,7 +90,13 @@ public class Torneo extends Observable {
 	 */
 
 	public void realizarRonda() {
-		this.etapa.realizarRonda(); // VER DE CAMBIAR POR GANADORES
+		this.etapa.comenzarBatallas(); // VER DE CAMBIAR POR GANADORES
+		//this.etapa.avanzarFase();
+		String datos[] = new String[2];
+		datos[0] = this.etapa.getNombre();
+		//datos[1] = this.etapa.
+		this.setChanged();
+		this.notifyObservers(this.etapa);
 	}
 
 	/**
@@ -461,6 +468,12 @@ public class Torneo extends Observable {
 	public void setParticipantesActuales(ArrayList<Entrenador> arrayList) {
 		participantesActuales = arrayList;
 	}
-
-
+	
+	public void agregarEntrenador(Entrenador entrenador) {
+		
+	}
+	
+	public void agregarBatalla(Batalla batalla) {
+		
+	}
 }

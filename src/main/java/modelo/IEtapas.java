@@ -2,6 +2,8 @@ package modelo;
 
 public interface IEtapas {
 	
-	void realizarRonda();
+	void comenzarBatallas();
+	//void avanzarFase();
+	String getNombre();
 
 }

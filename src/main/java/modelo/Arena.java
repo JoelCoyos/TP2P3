@@ -1,8 +1,9 @@
 package modelo;
 
+import java.util.Observable;
 import java.util.concurrent.Semaphore;
 
-public class Arena {
+public class Arena extends Observable {
 
 	private Batalla batalla;
 	private iStateArena estado;
@@ -86,6 +87,5 @@ public class Arena {
 	{
 		this.batalla.setHechizo2(hechizo2);
 	}
-
-
+	
 }

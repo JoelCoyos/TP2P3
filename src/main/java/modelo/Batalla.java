@@ -10,7 +10,6 @@ public class Batalla extends Thread {
 	
 	
 	public Batalla(Entrenador entrenador1, Entrenador entrenador2, Arena arena) {
-		super();
 		this.entrenador1 = entrenador1;
 		this.entrenador2 = entrenador2;
 		this.arena = arena;

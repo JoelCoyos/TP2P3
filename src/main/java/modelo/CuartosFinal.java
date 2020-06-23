@@ -9,15 +9,15 @@ public class CuartosFinal implements IEtapas {
 	}
 
 	@Override
-	public void realizarRonda() {
-
+	public void comenzarBatallas() {
+		//CAMBIAR ESTRUCTURAS A UNAS DONDE ESTEN ENTRENADORES, POKEMONS Y HECHIZOS
 		ArrayList<Entrenador> participantes = Torneo.getInstance().getEntrenadores();
 		Torneo.getInstance().setParticipantesActuales(new ArrayList<Entrenador>());
 		
 		Torneo.getInstance().getArenas().add(new Arena());
 		Torneo.getInstance().getArenas().add(new Arena());
 
-		System.out.println("COMIENZAN LOS CUARTOS DE FINAL\n");
+		//System.out.println("COMIENZAN LOS CUARTOS DE FINAL\n");
 
 
 		for (int i = 0; i < 4; i++) {
@@ -26,9 +26,12 @@ public class CuartosFinal implements IEtapas {
 			Torneo.getInstance().getArenas().add(arena);
 			batalla.start();
 		}
-
-		Torneo.getInstance().setEtapa(new Semifinal());
-	
 	}
+
+	@Override
+	public String getNombre() {
+		return "Cuartos de Final";
+	}
+
 
 }

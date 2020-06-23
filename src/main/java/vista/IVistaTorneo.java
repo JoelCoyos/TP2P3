@@ -8,6 +8,7 @@ public interface IVistaTorneo {
 	void mostrarPokemonHechizos();
 	void elegirPokemonHechizo();
 	void comenzarBatallas();
+	void avanzarFase();
 	void setActionListener(ActionListener actionListener);
 	
 }
