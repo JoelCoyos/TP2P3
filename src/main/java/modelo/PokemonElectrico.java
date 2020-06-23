@@ -20,6 +20,10 @@ public class PokemonElectrico extends Pokemon {
 	public PokemonElectrico(String nombre, boolean puedeRecargar) {
 		super(nombre, 450, 75, 140, puedeRecargar);
 	}
+	
+	public PokemonElectrico() {
+		// TODO Auto-generated constructor stub
+	}
 
 	
 	/**

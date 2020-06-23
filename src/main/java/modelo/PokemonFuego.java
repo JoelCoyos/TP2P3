@@ -21,6 +21,10 @@ public class PokemonFuego extends Pokemon implements Cloneable {
 		super(nombre, 530, 200, 80, tieneRecarga);
 	}
 	
+	public PokemonFuego() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	protected void recuperarse() {
 		this.vitalidad = 530;
 		this.escudo = 200;

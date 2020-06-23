@@ -29,6 +29,7 @@ public interface IVistaAlta {
 	String getGranRecarga4();
 	String getGranRecarga5();
 	String getGranRecarga6();
+	void setEntrenadores();
 	void comenzarTorneo();
 	void agregarEntrenador();
 	void mostrarPokemon();

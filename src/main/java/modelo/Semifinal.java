@@ -19,6 +19,10 @@ public class Semifinal implements IEtapas {
 			batalla.start();
 		}
 	}
+	
+	public Semifinal() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public String getNombre() {

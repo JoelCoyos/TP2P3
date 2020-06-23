@@ -31,6 +31,9 @@ public abstract class Pokemon implements Hechizable, Clasificable {
 		this.fuerza = fuerza;
 		this.puedeRecargar = puedeRecargar;
 	}
+	
+	public Pokemon() {
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -145,4 +148,26 @@ public abstract class Pokemon implements Hechizable, Clasificable {
 	 * Al ejecutarse el Pokemon recuperar� sus estadisticas iniciales<br>
 	 */
 	protected abstract void recuperarse();
+
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+
+	public void setEscudo(double escudo) {
+		this.escudo = escudo;
+	}
+
+	public void setVitalidad(double vitalidad) {
+		this.vitalidad = vitalidad;
+	}
+
+	public void setFuerza(double fuerza) {
+		this.fuerza = fuerza;
+	}
+
+	public void setPuedeRecargar(boolean puedeRecargar) {
+		this.puedeRecargar = puedeRecargar;
+	}
+	
+	
 }

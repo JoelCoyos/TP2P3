@@ -22,6 +22,11 @@ public class Entrenador implements Cloneable, Clasificable {
 		super();
 		this.nombre = nombre;
 	}
+	
+	public Entrenador()
+	{
+		
+	}
 
 	/**
 	 * @param pokemon Pokemon a a�adir<br>
@@ -165,4 +170,18 @@ public class Entrenador implements Cloneable, Clasificable {
 	public String toString() {
 		return this.nombre;
 	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setPokemones(ArrayList<Pokemon> pokemones) {
+		this.pokemones = pokemones;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+	
+	
 }

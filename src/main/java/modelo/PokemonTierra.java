@@ -20,6 +20,10 @@ public class PokemonTierra extends Pokemon implements Cloneable {
 	public PokemonTierra(String nombre, boolean puedeRecargar) {
 		super(nombre, 700, 100, 50, puedeRecargar); // resistente, pero poca fuerza.
 	}
+	
+	public PokemonTierra() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 *Recarga las estadisticas del Pokemon dependiendo de su categoria<br>

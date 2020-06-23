@@ -87,5 +87,19 @@ public class Arena extends Observable {
 	{
 		this.batalla.setHechizo2(hechizo2);
 	}
+
+	public iStateArena getEstado() {
+		return estado;
+	}
+
+	public void setBatalla(Batalla batalla) {
+		this.batalla = batalla;
+	}
+
+	public void setSemaforo(Semaphore semaforo) {
+		this.semaforo = semaforo;
+	}
+	
+	
 	
 }

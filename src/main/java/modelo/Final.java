@@ -23,5 +23,9 @@ public class Final implements IEtapas {
 	public String getNombre() {
 		return "Final";
 	}
+	
+	public Final() {
+		// TODO Auto-generated constructor stub
+	}
 
 }

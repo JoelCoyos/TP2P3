@@ -19,6 +19,10 @@ public class PokemonAgua extends Pokemon implements Cloneable {
 	public PokemonAgua(String nombre, boolean puedeRecargar) {
 		super(nombre, 500, 100, 120, puedeRecargar);
 	}
+	
+	public PokemonAgua() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 *Recarga las estadisticas del Pokemon dependiendo de su categoria<br>

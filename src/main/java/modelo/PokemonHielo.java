@@ -23,6 +23,10 @@ public class PokemonHielo extends Pokemon {
 		super(nombre, 500, 120, 100, puedeRecargar);
 		this.superRecarga = superRecarga;
 	}
+	
+	public PokemonHielo() {
+		// TODO Auto-generated constructor stub
+	}
 
 	protected void recuperarse() {
 		this.vitalidad = 500;
@@ -131,4 +135,14 @@ public class PokemonHielo extends Pokemon {
 	public String toString() {
 		return "Hielo " + super.toString() + " [superRecarga=" + superRecarga + "]";
 	}
+
+	public boolean isSuperRecarga() {
+		return superRecarga;
+	}
+
+	public void setSuperRecarga(boolean superRecarga) {
+		this.superRecarga = superRecarga;
+	}
+	
+	
 }

@@ -819,4 +819,12 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	public void mouseReleased(MouseEvent e) {
 		
 	}
+
+	@Override
+	public void setEntrenadores() {
+		this.listaModelEntrenador.addAll(Torneo.getInstance().getEntrenadores());
+		this.listEntrenadores.setModel(listaModelEntrenador);
+		
+	}
+
 }

@@ -11,6 +11,7 @@ import modelo.IEtapas;
 import modelo.Premiacion;
 import modelo.Semifinal;
 import modelo.Torneo;
+import serializacion.DeserializeFromXML;
 import vista.IVistaTorneo;
 import vista.IVistaAlta;
 import vista.VentanaAlta;
@@ -22,8 +23,11 @@ public class Controlador implements ActionListener, Observer {
 	private IVistaAlta vistaAlta;
 	
 	public Controlador() {
+		
+		DeserializeFromXML.leer(); //Se recupera el torneo
 		vistaAlta = new VentanaAlta();
 		vistaAlta.setActionListener(this);
+		vistaAlta.setEntrenadores();
 	}
 
 	public IVistaAlta getVistaAlta() {

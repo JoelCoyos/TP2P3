@@ -1,5 +1,6 @@
 package modelo;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,9 +34,10 @@ public class Torneo extends Observable {
 	private Queue<Arena> arenas = new LinkedList<Arena>();
 	private IEtapas etapa = new CuartosFinal();
 
+
 	private static Torneo instance = null;
 
-	private Torneo() {
+	public Torneo() {
 	}
 
 	public ArrayList<Entrenador> getEntrenadores() {
@@ -476,4 +478,39 @@ public class Torneo extends Observable {
 	public void agregarBatalla(Batalla batalla) {
 		
 	}
+
+	public int getNumeroEntrenadores() {
+		return numeroEntrenadores;
+	}
+
+	public void setNumeroEntrenadores(int numeroEntrenadores) {
+		this.numeroEntrenadores = numeroEntrenadores;
+	}
+
+	public ArrayList<Enfrentamiento> getEnfrentamientos() {
+		return enfrentamientos;
+	}
+
+	public void setEnfrentamientos(ArrayList<Enfrentamiento> enfrentamientos) {
+		this.enfrentamientos = enfrentamientos;
+	}
+
+	public IEtapas getEtapa() {
+		return etapa;
+	}
+
+	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
+		this.entrenadores = entrenadores;
+	}
+
+	public void setArenas(Queue<Arena> arenas) {
+		this.arenas = arenas;
+	}
+	
+	public static void setInstance(Torneo instance) {
+		Torneo.instance = instance;
+	}
+
+	
+	
 }
