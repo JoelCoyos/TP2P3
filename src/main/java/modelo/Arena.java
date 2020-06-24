@@ -13,12 +13,7 @@ public class Arena extends Observable {
 	}
 	
 	public void ingresarArena(Batalla batalla) {
-		try {
-			semaforo.acquire();
-			estado = new ArenaPreliminar(this);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		estado = new ArenaPreliminar(this);
 		this.batalla = batalla;
 	}
 	

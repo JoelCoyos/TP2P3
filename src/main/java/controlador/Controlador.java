@@ -110,6 +110,7 @@ public class Controlador implements ActionListener, Observer {
 			}
 			else
 				if (comando == "Comenzar Torneo") { //COMIENZA EL TORNEO
+					comenzarBatalla();
 					Torneo.getInstance().avanzarFase();
 				}
 				else

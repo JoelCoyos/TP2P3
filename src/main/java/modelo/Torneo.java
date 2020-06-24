@@ -34,6 +34,7 @@ public class Torneo extends Observable {
 	private Queue<Arena> arenas = new LinkedList<Arena>();
 	private IEtapas etapa = new Alta();
 	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
+	private Semaphore semaphore = new Semaphore(2);
 
 	public ArrayList<Batalla> getBatallas() {
 		return batallas;
@@ -42,6 +43,8 @@ public class Torneo extends Observable {
 	private static Torneo instance = null;
 
 	public Torneo() {
+		arenas.add(new Arena());
+		arenas.add(new Arena());
 	}
 
 	public ArrayList<Entrenador> getEntrenadores() {
@@ -112,11 +115,11 @@ public class Torneo extends Observable {
 	}
 
 	public void agregarBatalla(Batalla batalla) {
-		etapa.agregarBatalla(batalla);
+		Torneo.getInstance().getBatallas().add(batalla);
 	}
 
 	public void agregarEntrenador(Entrenador entrenador) {
-		etapa.agregarEntrenador(entrenador);
+		Torneo.getInstance().getEntrenadores().add(entrenador);
 	}
 
 	void ganadorBatalla(Entrenador entrenador) {
@@ -477,8 +480,20 @@ public class Torneo extends Observable {
 	}
 
 	public Arena asignarArena() {
+		try {
+			semaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Arena asignar = this.arenas.poll();
 		arenas.add(asignar);
 		return asignar;
+	}
+	
+	public void liberarArena(Arena arena)
+	{
+		arenas.add(arena);
+		semaphore.release();
 	}
 }
