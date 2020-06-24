@@ -28,36 +28,28 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.awt.event.MouseEvent;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
-public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, MouseListener, ActionListener, ListSelectionListener {
+public class VentanaAlta extends JFrame
+		implements KeyListener, IVistaAlta, MouseListener, ActionListener, ListSelectionListener {
 
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private JPanel panel_9;
-	private JPanel panel_10;
 	private JPanel panel_11;
 	private JPanel panel_39;
 	private JScrollPane scrollPane;
 	private DefaultListModel<Entrenador> listaModelEntrenador = new DefaultListModel<Entrenador>();
 	private DefaultListModel<Pokemon> listaModelPokemon = new DefaultListModel<Pokemon>();
 	private ActionListener actionListener;
-	private JButton btnVer;
-	private JPanel panel_52;
 	private JList<Entrenador> listEntrenadores;
 	private JList<Pokemon> listPokemon;
 	private JPanel panel_3;
@@ -85,128 +77,130 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	 */
 	public VentanaAlta() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1276, 467);
+		setBounds(100, 100, 1500, 450);
 		this.contentPane = new JPanel();
-		this.contentPane.setBorder(new TitledBorder(null, "Alta de Entrenadores y Pokemons", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.contentPane.setBorder(new TitledBorder(null, "Alta de Entrenadores y Pokemons", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		this.panel = new JPanel();
 		this.contentPane.add(this.panel);
 		this.panel.setLayout(new BorderLayout(0, 0));
-		
+
 		this.panel_9 = new JPanel();
-		this.panel_9.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Entrenador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		this.panel_9.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Entrenador",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		this.panel.add(this.panel_9, BorderLayout.NORTH);
-		
+
 		this.panel_12 = new JPanel();
 		this.panel_12.setBorder(new TitledBorder(null, "Nombre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panel_9.add(this.panel_12);
-		
+
 		this.textFieldNombreEntrenador = new JTextField();
+		this.textFieldNombreEntrenador.addKeyListener(this);
 		this.panel_12.add(this.textFieldNombreEntrenador);
 		this.textFieldNombreEntrenador.setColumns(10);
-		
+
 		this.panel_14 = new JPanel();
 		this.panel_9.add(this.panel_14);
-		
+
 		this.btnAgregarEntrenador = new JButton("Agregar Entrenador");
+		this.btnAgregarEntrenador.addActionListener(this);
 		this.panel_14.add(this.btnAgregarEntrenador);
-		
-		this.panel_10 = new JPanel();
-		this.panel.add(this.panel_10, BorderLayout.SOUTH);
-		
-		this.panel_52 = new JPanel();
-		this.panel_10.add(this.panel_52);
-		
-		this.btnVer = new JButton("Ver Pokemons");
-		this.btnVer.addMouseListener(this);
-		this.panel_52.add(this.btnVer);
-		
+
 		this.panel_11 = new JPanel();
 		this.panel.add(this.panel_11, BorderLayout.CENTER);
 		this.panel_11.setLayout(new BorderLayout(0, 0));
-		
+
 		this.panel_39 = new JPanel();
 		this.panel_11.add(this.panel_39);
 		this.panel_39.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		this.scrollPane = new JScrollPane();
 		this.panel_39.add(this.scrollPane);
-		
+
 		this.listEntrenadores = new JList<Entrenador>();
 		listEntrenadores.addListSelectionListener(this);
-		this.listEntrenadores.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.listEntrenadores
+				.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.scrollPane.setViewportView(this.listEntrenadores);
-		
+
 		this.panel_1 = new JPanel();
 		this.contentPane.add(this.panel_1);
 		this.panel_1.setLayout(new BorderLayout(0, 0));
-		
+
 		this.panel_2 = new JPanel();
 		this.panel_2.setBorder(null);
 		this.panel_1.add(this.panel_2);
 		this.panel_2.setLayout(new BorderLayout(0, 0));
-		
+
 		this.panel_3 = new JPanel();
 		this.panel_3.setBorder(new TitledBorder(null, "Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panel_2.add(this.panel_3, BorderLayout.NORTH);
 		this.panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		this.panel_4 = new JPanel();
 		this.panel_4.setBorder(new TitledBorder(null, "Nombre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panel_3.add(this.panel_4);
-		
+
 		this.textFieldNombrePokemon = new JTextField();
+		this.textFieldNombrePokemon.addKeyListener(this);
 		this.panel_4.add(this.textFieldNombrePokemon);
 		this.textFieldNombrePokemon.setColumns(10);
-		
+
 		this.panel_5 = new JPanel();
 		this.panel_5.setBorder(new TitledBorder(null, "Tipo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panel_3.add(this.panel_5);
-		
+
 		this.textFieldTipo = new JTextField();
+		this.textFieldTipo.addKeyListener(this);
 		this.panel_5.add(this.textFieldTipo);
 		this.textFieldTipo.setColumns(10);
-		
+
 		this.panel_6 = new JPanel();
 		this.panel_6.setBorder(new TitledBorder(null, "Recarga?", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panel_3.add(this.panel_6);
-		
+
 		this.textFieldRecarga = new JTextField();
+		this.textFieldRecarga.addKeyListener(this);
 		this.panel_6.add(this.textFieldRecarga);
 		this.textFieldRecarga.setColumns(10);
-		
+
 		this.panel_7 = new JPanel();
-		this.panel_7.setBorder(new TitledBorder(null, "Gran Recarga?", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.panel_7
+				.setBorder(new TitledBorder(null, "Gran Recarga?", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.panel_3.add(this.panel_7);
-		
+
 		this.textFieldGranRecarga = new JTextField();
+		this.textFieldGranRecarga.addKeyListener(this);
 		this.panel_7.add(this.textFieldGranRecarga);
 		this.textFieldGranRecarga.setColumns(10);
-		
+
 		this.panel_15 = new JPanel();
 		this.panel_3.add(this.panel_15);
-		
+
 		this.btnAgregarPokemon = new JButton("Agregar Pokemon");
+		this.btnAgregarPokemon.addActionListener(this);
 		this.panel_15.add(this.btnAgregarPokemon);
-		
+
 		this.scrollPane_2 = new JScrollPane();
 		this.panel_2.add(this.scrollPane_2, BorderLayout.CENTER);
-		
+
 		listPokemon = new JList<Pokemon>();
-		this.listPokemon.setBorder(new TitledBorder(null, "Pokemons", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		this.listPokemon
+				.setBorder(new TitledBorder(null, "Pokemons", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.scrollPane_2.setViewportView(this.listPokemon);
-		
+
 		this.panel_8 = new JPanel();
 		this.panel_2.add(this.panel_8, BorderLayout.SOUTH);
-		
+
 		this.panel_13 = new JPanel();
 		this.panel_8.add(this.panel_13);
-		
+
 		this.btnTorneo = new JButton("Comenzar Torneo");
 		this.panel_13.add(this.btnTorneo);
-		
+
 		this.setVisible(true);
 	}
 
@@ -217,54 +211,52 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	@Override
 	public void comenzarTorneo() {
-		this.dispose(); //CIERRA VENTANA ACTUAL
+		this.dispose(); // CIERRA VENTANA ACTUAL
 	}
-	
+
 	public boolean recarga(String r) {
 		return r.equalsIgnoreCase("Si");
 	}
-	
+
 	@Override
 	public void agregarEntrenador() {
-		if(this.listaModelEntrenador.getSize()<8)
-		{
+		if (this.listaModelEntrenador.getSize() < 8) {
+			System.out.println(this.listaModelEntrenador.getSize());
 			this.listaModelEntrenador.addElement(new Entrenador(this.getNombreEntrenador()));
-		}
-		else 
-		{
-			JOptionPane.showMessageDialog(this,"No puede agregar mas entrenadores");
+			this.listEntrenadores.setModel(listaModelEntrenador);
+		} else {
+			JOptionPane.showMessageDialog(this, "No puede agregar mas entrenadores");
+			this.reseteaCampos();
 		}
 	}
-	
+
 	@Override
 	public void agregarPokemon() {
-		
-		if(listEntrenadores.getSelectedValue()!=null)
-		{
-			if(!getTipoPokemon().equalsIgnoreCase("hielo"))
-			{
+
+		if (listEntrenadores.getSelectedValue() != null) {
+			if (!getTipoPokemon().equalsIgnoreCase("hielo")) {
 				try {
-					listEntrenadores.getSelectedValue().aniadirPokemon(PokemonFactory.getPokemon(getNombrePokemon(), getTipoPokemon(), recarga(getRecarga())));
+					listEntrenadores.getSelectedValue().aniadirPokemon(
+							PokemonFactory.getPokemon(getNombrePokemon(), getTipoPokemon(), recarga(getRecarga())));
 				} catch (TipoNoEncontradoException e) {
-					JOptionPane.showMessageDialog(this,"El tipo ingresado no existe");
+					JOptionPane.showMessageDialog(this, "El tipo ingresado no existe");
 				}
-			}
-			else {
+			} else {
 				try {
-					listEntrenadores.getSelectedValue().aniadirPokemon(PokemonFactory.getPokemon(getNombrePokemon(), getTipoPokemon(), recarga(getRecarga()),recarga(getGranRecarga())));
+					listEntrenadores.getSelectedValue().aniadirPokemon(PokemonFactory.getPokemon(getNombrePokemon(),
+							getTipoPokemon(), recarga(getRecarga()), recarga(getGranRecarga())));
 				} catch (TipoNoEncontradoException e) {
-					JOptionPane.showMessageDialog(this,"El tipo ingresado no existe");
+					JOptionPane.showMessageDialog(this, "El tipo ingresado no existe");
 				}
-				
+
 			}
 			mostrarPokemon();
 			reseteaCampos();
-		}
-		else {
-			JOptionPane.showMessageDialog(this,"Seleccione un entrenador");
+		} else {
+			JOptionPane.showMessageDialog(this, "Seleccione un entrenador");
 		}
 	}
-	
+
 	public void reseteaCampos() {
 		this.textFieldNombreEntrenador.setText("");
 		this.textFieldNombrePokemon.setText("");
@@ -272,13 +264,13 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.textFieldRecarga.setText("");
 		this.textFieldGranRecarga.setText("");
 	}
-	
+
 	@Override
 	public void mostrarPokemon() {
-		if(this.listEntrenadores.getSelectedValue()!=null)
-		{
+		if (this.listEntrenadores.getSelectedValue() != null) {
 			listaModelPokemon.clear();
-			listaModelPokemon.addAll(listEntrenadores.getSelectedValue().getPokemones());
+			for (int i = 0; i < this.listEntrenadores.getSelectedValue().getPokemones().size(); i++)
+				listaModelPokemon.addElement(this.listEntrenadores.getSelectedValue().getPokemones().get(i));
 			listPokemon.setModel(listaModelPokemon);
 		}
 	}
@@ -292,27 +284,24 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAgregarPokemon.addActionListener(actionListener);
 		this.btnTorneo.addActionListener(actionListener);
-		this.btnVer.addActionListener(actionListener);
 		this.actionListener = actionListener;
-		
+
 	}
-	
+
 	public void keyReleased(KeyEvent arg0) {
-		
-		if (!this.getNombrePokemon().isEmpty() && !this.getTipoPokemon().isEmpty() && !this.getRecarga().isEmpty() && (this.getGranRecarga().isEmpty() || (!this.getGranRecarga().isEmpty() && this.getTipoPokemon().equalsIgnoreCase("Hielo"))))
-		{
+
+		if (!this.getNombrePokemon().isEmpty() && !this.getTipoPokemon().isEmpty() && !this.getRecarga().isEmpty()
+				&& (this.getGranRecarga().isEmpty()
+						|| (!this.getGranRecarga().isEmpty() && this.getTipoPokemon().equalsIgnoreCase("Hielo")))) {
 			this.btnAgregarPokemon.setEnabled(true);
-		}
-		else {
+		} else {
 			this.btnAgregarPokemon.setEnabled(false);
 		}
-		
+
 	}
 
-	
-
 	@Override
-	public void keyPressed(KeyEvent e) {	
+	public void keyPressed(KeyEvent e) {
 	}
 
 	@Override
@@ -323,6 +312,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	public String getRecarga() {
 		return this.textFieldRecarga.getText();
 	}
+
 	@Override
 	public String getGranRecarga() {
 		return this.textFieldGranRecarga.getText();
@@ -333,12 +323,12 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		String command;
 		JButton boton = (JButton) e.getSource();
 		command = boton.getActionCommand();
-		evento = new ActionEvent(boton,0,command);
+		evento = new ActionEvent(boton, 0, command);
 		this.actionListener.actionPerformed(evento);
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {	
+	public void mouseClicked(MouseEvent e) {
 	}
 
 	@Override
@@ -346,29 +336,26 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {	
+	public void mouseExited(MouseEvent e) {
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void setEntrenadores() {
-		this.listaModelEntrenador.addAll(Torneo.getInstance().getEntrenadores());
+		for (int i = 0; i < Torneo.getInstance().getEntrenadores().size(); i++)
+			this.listaModelEntrenador.addElement(Torneo.getInstance().getEntrenadores().get(i));
 		this.listEntrenadores.setModel(listaModelEntrenador);
-		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getActionCommand().equals("AgregarEntrenador"))
-		{
+
+		if (e.getActionCommand().equals("Agregar Entrenador")) {
 			agregarEntrenador();
-		}
-		else if(e.getActionCommand().equals("AgregarPokemon"))
-		{
+		} else if (e.getActionCommand().equals("Agregar Pokemon")) {
 			agregarPokemon();
 		}
 	}
@@ -378,26 +365,23 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return textFieldTipo.getText();
 	}
 
-	
 	public void valueChanged(ListSelectionEvent e) {
-		
+
 		mostrarPokemon();
 	}
 
 	@Override
 	public ArrayList<Entrenador> getEntrenadores() {
-		return Collections.list(listaModelEntrenador.elements()); //Pasa list model a ArrayList
+		return Collections.list(listaModelEntrenador.elements()); // Pasa list model a ArrayList
 	}
 
 	@Override
 	public boolean sePuedeEmpezar() {
-		if(listaModelEntrenador.getSize()<8)
-		{
+		if (listaModelEntrenador.getSize() < 8) {
 			return false;
-		}
-		else {
+		} else {
 			for (int i = 0; i < listaModelEntrenador.getSize(); i++) {
-				if(listaModelEntrenador.get(i).getPokemones().size()<3)
+				if (listaModelEntrenador.get(i).getPokemones().size() < 3)
 					return false;
 			}
 			return true;
@@ -406,7 +390,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	@Override
 	public void noPuedeEmpezar() {
-		JOptionPane.showMessageDialog(this,"No se cumplen las condiciones necesarias como para comenzar");
+		JOptionPane.showMessageDialog(this, "No se cumplen las condiciones necesarias como para comenzar");
 	}
-	
+
 }
