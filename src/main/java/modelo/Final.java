@@ -2,41 +2,30 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Desarrollo implements IEtapas {
+public class Final implements IEtapas {
 	
-	private int cantidadParticipantes;
-	
-	public Desarrollo() {
-		this.cantidadParticipantes = Torneo.getInstance().getParticipantesActuales().size();
-	}
-
 	@Override
 	public void comenzarBatallas() {
-		
+
 		ArrayList<Batalla> batallas = Torneo.getInstance().getBatallas();
 		Torneo.getInstance().getParticipantesActuales().clear();
-		
-		while (!batallas.isEmpty())
-			batallas.remove(0).start();
+
+		// System.out.println("COMIENZAN LOS CUARTOS DE FINAL\n");
+
+		Arena arena = Torneo.getInstance().getArenas().poll();
+		batallas.get(0).start();
+		Torneo.getInstance().getArenas().add(arena);
 	}
 
 	@Override
 	public void avanzarFase() {
-		if (cantidadParticipantes == 1)
-			Torneo.getInstance().setEtapa(new Premiacion());
-		else
-			Torneo.getInstance().setEtapa(new Desarrollo());
-	}
-
-	@Override
-	public String getNombre() {
-		return "Desarrollo";
+		Torneo.getInstance().setEtapa(new Alta());
 	}
 
 	@Override
 	public void agregarEntrenador(Entrenador entrenador) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -45,13 +34,22 @@ public class Desarrollo implements IEtapas {
 	}
 
 	@Override
+	public String getNombre() {
+		return "Final";
+	}
+
+	public Final() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
 	public void ganadorBatalla(Entrenador entrenador) {
 		Torneo.getInstance().getParticipantesActuales().add(entrenador);
 	}
 
 	@Override
 	public boolean faseCompletada() {
-		return (cantidadParticipantes/2 == Torneo.getInstance().getParticipantesActuales().size());
+		return (Torneo.getInstance().getBatallas().size() == 0);
 	}
 
 }
