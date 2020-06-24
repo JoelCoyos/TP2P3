@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Alta implements IEtapas {
 
 	@Override
@@ -13,7 +16,14 @@ public class Alta implements IEtapas {
 
 	@Override
 	public void avanzarFase() {
-			Torneo.getInstance().setEtapa(new CuartosFinal());
+			ArrayList<Entrenador> participantes = new ArrayList<Entrenador>();
+			Iterator<Entrenador> it = Torneo.getInstance().getEntrenadores().iterator();
+			
+			while (it.hasNext())
+				participantes.add(it.next());
+			
+			Torneo.getInstance().setParticipantesActuales(participantes);
+			Torneo.getInstance().setEtapa(new Desarrollo());
 	}
 
 	@Override
@@ -35,6 +45,12 @@ public class Alta implements IEtapas {
 	
 	public boolean faseCompletada() {
 		return 	(Torneo.getInstance().cantidadEntrenadoresNecesaria());
+	}
+
+	@Override
+	public void premiar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

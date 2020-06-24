@@ -28,7 +28,7 @@ public class Torneo extends Observable {
 
 	private int numeroEntrenadores = 0;
 	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
-	private ArrayList<Entrenador> participantesActuales = new ArrayList<Entrenador>();
+	private ArrayList<Entrenador> participantesActuales;
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	private Queue<Arena> arenas = new LinkedList<Arena>();
@@ -468,4 +468,13 @@ public class Torneo extends Observable {
 		this.arenas = arenas;
 	}
 
+	public static void setInstance(Torneo torneo) {
+		instance = torneo;
+	}
+
+	public Arena asignarArena() {
+		Arena asignar = this.arenas.poll();
+		this.arenas.add(asignar);
+		return asignar;
+	}
 }

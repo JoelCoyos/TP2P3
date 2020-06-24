@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Final implements IEtapas {
-	
+
 	@Override
 	public void comenzarBatallas() {
 
@@ -19,7 +19,7 @@ public class Final implements IEtapas {
 
 	@Override
 	public void avanzarFase() {
-		Torneo.getInstance().setEtapa(new Alta());
+			Torneo.getInstance().setEtapa(new Premiacion());
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class Final implements IEtapas {
 	public Final() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public void ganadorBatalla(Entrenador entrenador) {
 		Torneo.getInstance().getParticipantesActuales().add(entrenador);
@@ -49,7 +49,13 @@ public class Final implements IEtapas {
 
 	@Override
 	public boolean faseCompletada() {
-		return (Torneo.getInstance().getBatallas().size() == 0);
+		return (Torneo.getInstance().getBatallas().isEmpty());
+	}
+
+	@Override
+	public void premiar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

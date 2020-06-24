@@ -1,41 +1,43 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Observable;
 
-public class CuartosFinal implements IEtapas {
+public class Desarrollo implements IEtapas {
 
-	public CuartosFinal() {
+	private int participantesFase;
+
+	public Desarrollo() {
+		participantesFase = Torneo.getInstance().getParticipantesActuales().size();
 	}
 
 	@Override
 	public void comenzarBatallas() {
-		// CAMBIAR ESTRUCTURAS A UNAS DONDE ESTEN ENTRENADORES, POKEMONS Y HECHIZOS
 
 		ArrayList<Batalla> batallas = Torneo.getInstance().getBatallas();
 		Torneo.getInstance().getParticipantesActuales().clear();
 
-		Torneo.getInstance().getArenas().add(new Arena()); // POR AHORA
-		Torneo.getInstance().getArenas().add(new Arena());
-
+		if (participantesFase == 8) {
+			Torneo.getInstance().getArenas().add(new Arena()); // POR AHORA
+			Torneo.getInstance().getArenas().add(new Arena());
+		}
 		// System.out.println("COMIENZAN LOS CUARTOS DE FINAL\n");
 
-		for (int i = 0; i < 4; i++) {
-			Arena arena = Torneo.getInstance().getArenas().poll();
-			batallas.get(0).start();
-			Torneo.getInstance().getArenas().add(arena);
+		for (int i = 0; i < participantesFase / 2; i++) {
+			batallas.remove(0).start();
 		}
 	}
 
 	@Override
 	public String getNombre() {
-		return "Cuartos de Final";
+		return "Desarrollo";
 	}
 
 	@Override
 	public void avanzarFase() {
-		Torneo.getInstance().setEtapa(new Final());
+		if (Torneo.getInstance().getParticipantesActuales().size() == 1)
+			Torneo.getInstance().setEtapa(new Premiacion());
+		else
+			Torneo.getInstance().setEtapa(new Desarrollo());
 	}
 
 	@Override
@@ -56,13 +58,14 @@ public class CuartosFinal implements IEtapas {
 
 	@Override
 	public boolean faseCompletada() {
-		return (Torneo.getInstance().getBatallas().size() == 0 && Torneo.getInstance().getParticipantesActuales().size() == 4);
+		return (Torneo.getInstance().getBatallas().isEmpty()
+				&& Torneo.getInstance().getParticipantesActuales().size() == participantesFase / 2);
 	}
 
 	@Override
 	public void premiar() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
