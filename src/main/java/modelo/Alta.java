@@ -34,18 +34,26 @@ public class Alta implements IEtapas {
 
 	@Override
 	public void agregarBatalla(Batalla batalla) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void ganadorBatalla(Entrenador entrenador) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public boolean faseCompletada() {
-		return (Torneo.getInstance().cantidadEntrenadoresNecesaria());
+		boolean respuesta = true;
+		if (Torneo.getInstance().cantidadEntrenadoresNecesaria()) {
+			respuesta = false;
+		} else {
+			Iterator<Entrenador> it = Torneo.getInstance().getEntrenadores().iterator();
+			while (it.hasNext() && respuesta == true) {
+				Entrenador e = it.next();
+				if (e.cantidadPokemones() < 3)
+					respuesta = false;
+			}		
+			respuesta = true;
+		}
+		return respuesta;
 	}
 
 }

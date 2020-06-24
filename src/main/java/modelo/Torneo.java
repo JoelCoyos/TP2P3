@@ -105,6 +105,10 @@ public class Torneo extends Observable {
 			setChanged();
 			notifyObservers(this.etapa);
 		}
+		else {
+			setChanged();
+			notifyObservers(null);
+		}
 	}
 
 	public void agregarBatalla(Batalla batalla) {
@@ -388,7 +392,7 @@ public class Torneo extends Observable {
 	/**
 	 * Revisa si la cantidad de entrenadores inscriptos es 8<br>
 	 */
-	protected boolean cantidadEntrenadoresNecesaria() {
+	public boolean cantidadEntrenadoresNecesaria() {
 		return numeroEntrenadores == 8;
 	}
 

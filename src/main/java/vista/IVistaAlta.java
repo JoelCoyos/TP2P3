@@ -3,7 +3,9 @@ package vista;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
+import modelo.Pokemon;
 
 public interface IVistaAlta {
 	
@@ -14,13 +16,14 @@ public interface IVistaAlta {
 	String getGranRecarga();
 	void setEntrenadores();
 	void comenzarTorneo();
-	void agregarEntrenador();
-	void agregarPokemon();
 	void mostrarPokemon();
 	void setActionListener(ActionListener actionListener);
 	void reseteaCampos();
-	ArrayList<Entrenador> getEntrenadores();
-	boolean sePuedeEmpezar();
-	void noPuedeEmpezar();
+	void agregarEntrenador(Entrenador entrenador);
+	Entrenador getEntrenador();
+	void mensajeAlerta(String string);
+	Entrenador entrenadorSeleccionado();
+	void agregarPokemon(Pokemon pokemon);
+	Pokemon getPokemon() throws TipoNoEncontradoException;
 
 }
