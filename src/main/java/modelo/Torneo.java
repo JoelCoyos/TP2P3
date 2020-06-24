@@ -32,7 +32,7 @@ public class Torneo extends Observable {
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	private Queue<Arena> arenas = new LinkedList<Arena>();
-	private IEtapas etapa = new CuartosFinal();
+	private IEtapas etapa = new Alta();
 	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
 
 	public ArrayList<Batalla> getBatallas() {
@@ -468,4 +468,13 @@ public class Torneo extends Observable {
 		this.arenas = arenas;
 	}
 
+	public static void setInstance(Torneo torneo) {
+		instance = torneo;
+	}
+
+	public Arena asignarArena() {
+		Arena asignar = this.arenas.poll();
+		arenas.add(asignar);
+		return asignar;
+	}
 }

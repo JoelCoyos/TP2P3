@@ -11,11 +11,11 @@ public class Arena extends Observable {
 
 	public Arena() {
 	}
-
+	
 	public void ingresarArena(Batalla batalla) {
 		try {
 			semaforo.acquire();
-			estado = new ArenaEleccion(this);
+			estado = new ArenaPreliminar(this);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -68,25 +68,6 @@ public class Arena extends Observable {
 		return this.batalla.getHechizo2();
 	}
 	
-	public void setPokemon1(Pokemon pokemon1)
-	{
-		this.batalla.setPokemon1(pokemon1);
-	}
-	
-	public void setPokemon2(Pokemon pokemon2)
-	{
-		this.batalla.setPokemon2(pokemon2);
-	}
-	
-	public void setHechizo1(Hechizo hechizo1)
-	{
-		this.batalla.setHechizo1(hechizo1);
-	}
-	
-	public void setHechizo2(Hechizo hechizo2)
-	{
-		this.batalla.setHechizo2(hechizo2);
-	}
 
 	public iStateArena getEstado() {
 		return estado;
@@ -95,11 +76,5 @@ public class Arena extends Observable {
 	public void setBatalla(Batalla batalla) {
 		this.batalla = batalla;
 	}
-
-	public void setSemaforo(Semaphore semaforo) {
-		this.semaforo = semaforo;
-	}
-	
-	
 	
 }
