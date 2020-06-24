@@ -35,13 +35,11 @@ public class Desarrollo implements IEtapas {
 
 	@Override
 	public void agregarEntrenador(Entrenador entrenador) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void agregarBatalla(Batalla batalla) {
-		batalla.setArena(Torneo.getInstance().asignarArena());
 		Torneo.getInstance().getBatallas().add(batalla);
 	}
 

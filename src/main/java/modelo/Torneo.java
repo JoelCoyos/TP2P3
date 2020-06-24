@@ -115,11 +115,11 @@ public class Torneo extends Observable {
 	}
 
 	public void agregarBatalla(Batalla batalla) {
-		Torneo.getInstance().getBatallas().add(batalla);
+		this.etapa.agregarBatalla(batalla);
 	}
 
 	public void agregarEntrenador(Entrenador entrenador) {
-		Torneo.getInstance().getEntrenadores().add(entrenador);
+		this.etapa.agregarEntrenador(entrenador);
 	}
 
 	void ganadorBatalla(Entrenador entrenador) {
@@ -487,7 +487,6 @@ public class Torneo extends Observable {
 			e.printStackTrace();
 		}
 		Arena asignar = this.arenas.poll();
-		arenas.add(asignar);
 		return asignar;
 	}
 	
