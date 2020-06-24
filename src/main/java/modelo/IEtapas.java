@@ -15,6 +15,4 @@ public interface IEtapas {
 	void ganadorBatalla(Entrenador entrenador);
 
 	boolean faseCompletada();
-	
-	void premiar();
 }

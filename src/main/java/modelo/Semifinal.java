@@ -54,10 +54,4 @@ public class Semifinal implements IEtapas {
 	public boolean faseCompletada() {
 		return (Torneo.getInstance().getBatallas().size() == 0 && Torneo.getInstance().getParticipantesActuales().size() == 2);
 	}
-
-	@Override
-	public void premiar() {
-		// TODO Auto-generated method stub
-		
-	}
 }

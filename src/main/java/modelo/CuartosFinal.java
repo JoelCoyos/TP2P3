@@ -59,10 +59,4 @@ public class CuartosFinal implements IEtapas {
 		return (Torneo.getInstance().getBatallas().size() == 0 && Torneo.getInstance().getParticipantesActuales().size() == 4);
 	}
 
-	@Override
-	public void premiar() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
