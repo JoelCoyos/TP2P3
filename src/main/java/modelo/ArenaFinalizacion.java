@@ -21,11 +21,12 @@ public class ArenaFinalizacion implements iStateArena {
 		System.out.println("Entrenador " + arena.getEntrenador2().getNombre() + " Pokemon: "
 				+ arena.getPokemon2().getNombre() + " Puntaje: " + puntaje2 + "\n");
 
-		System.out.println(arena.getPokemon1().toString());
+		System.out.println(arena.getPokemon1().toString(
+				));
 		System.out.println(arena.getPokemon2().toString());
 
 		if (puntaje1 > puntaje2) {
-			Torneo.getInstance().sigueEnTorneo(arena.getEntrenador1());
+			Torneo.getInstance().ganadorBatalla(arena.getEntrenador1());
 			arena.getEntrenador2().quitarPokemon(arena.getPokemon2());
 			arena.getEntrenador1().aniadirPokemon(arena.getPokemon2());
 			arena.getPokemon1().ganar();
@@ -36,7 +37,7 @@ public class ArenaFinalizacion implements iStateArena {
 					"\n" + arena.getEntrenador1().getNombre() + " gano el enfrentamiento. Toma control del pokemon "
 							+ arena.getPokemon2().getNombre() + " de " + arena.getEntrenador2().getNombre());
 		} else {
-			Torneo.getInstance().sigueEnTorneo(arena.getEntrenador2());
+			Torneo.getInstance().ganadorBatalla(arena.getEntrenador1());
 			arena.getEntrenador1().quitarPokemon(arena.getPokemon1());
 			arena.getEntrenador2().aniadirPokemon(arena.getPokemon1());
 			arena.getPokemon2().ganar();

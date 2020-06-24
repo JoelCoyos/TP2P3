@@ -33,7 +33,11 @@ public class Torneo extends Observable {
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	private Queue<Arena> arenas = new LinkedList<Arena>();
 	private IEtapas etapa = new CuartosFinal();
+	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
 
+	public ArrayList<Batalla> getBatallas() {
+		return batallas;
+	}
 
 	private static Torneo instance = null;
 
@@ -91,14 +95,28 @@ public class Torneo extends Observable {
 	 * , numeroEntrenadores, 8); }
 	 */
 
-	public void realizarRonda() {
-		this.etapa.comenzarBatallas(); // VER DE CAMBIAR POR GANADORES
-		//this.etapa.avanzarFase();
-		String datos[] = new String[2];
-		datos[0] = this.etapa.getNombre();
-		//datos[1] = this.etapa.
-		this.setChanged();
-		this.notifyObservers(this.etapa);
+	public void comenzarBatallas() {
+		etapa.comenzarBatallas();
+	}
+
+	public void avanzarFase() {
+		if (etapa.faseCompletada()) {
+			etapa.avanzarFase();
+			setChanged();
+			notifyObservers(this.etapa);
+		}
+	}
+
+	public void agregarBatalla(Batalla batalla) {
+		etapa.agregarBatalla(batalla);
+	}
+
+	public void agregarEntrenador(Entrenador entrenador) {
+		etapa.agregarEntrenador(entrenador);
+	}
+
+	void ganadorBatalla(Entrenador entrenador) {
+		etapa.ganadorBatalla(entrenador);
 	}
 
 	/**
@@ -370,7 +388,7 @@ public class Torneo extends Observable {
 	/**
 	 * Revisa si la cantidad de entrenadores inscriptos es 8<br>
 	 */
-	private boolean cantidadEntrenadoresNecesaria() {
+	protected boolean cantidadEntrenadoresNecesaria() {
 		return numeroEntrenadores == 8;
 	}
 
@@ -396,23 +414,12 @@ public class Torneo extends Observable {
 	 * @throws MaximaCapacidadEntrenadoresException Si se agrega mas de 8
 	 *                                              entrenadores<br>
 	 */
-	public void aniadirEntrenador(Entrenador entrenador)
-			throws MaximaCapacidadEntrenadoresException, EntrenadorRepetidoException {
-		if (entrenador != null) {
-			entrenadores.add(entrenador);
-		}
-	}
 
-	private boolean isRepetido(Entrenador entrenador) {
-		boolean repetido = false;
-		int i = 0;
-		while (!repetido && i < numeroEntrenadores) {
-			// if (entrenadores[i] == entrenador)
-			repetido = true;
-			i++;
-		}
-		return repetido;
-	}
+	/*
+	 * private boolean isRepetido(Entrenador entrenador) { boolean repetido = false;
+	 * int i = 0; while (!repetido && i < numeroEntrenadores) { // if
+	 * (entrenadores[i] == entrenador) repetido = true; i++; } return repetido; }
+	 */
 
 	public void aniadirHechizo(Hechizo hechizo) {
 		if (hechizo != null)
@@ -441,76 +448,24 @@ public class Torneo extends Observable {
 		return entrenador.getPokemones();
 	}
 
-	// public int getNumeroEntrenadores() {
-	// return numeroEntrenadores;
-	// }
-
-	// public void setNumeroEntrenadores(int numeroEntrenadores) {
-	// this.numeroEntrenadores = numeroEntrenadores;
-	// }
-	// return enfrentamientos;
-	// }
-
 	public ArrayList<Hechizo> getHechizos() {
 		return hechizos;
-	}
-
-	public void setHechizos(ArrayList<Hechizo> hechizos) {
-		this.hechizos = hechizos;
 	}
 
 	public void setEtapa(IEtapas etapa) {
 		this.etapa = etapa;
 	}
 
-	public void sigueEnTorneo(Entrenador entrenador) {
-		participantesActuales.add(entrenador);
-	}
-
 	public void setParticipantesActuales(ArrayList<Entrenador> arrayList) {
 		participantesActuales = arrayList;
-	}
-	
-	public void agregarEntrenador(Entrenador entrenador) {
-		
-	}
-	
-	public void agregarBatalla(Batalla batalla) {
-		
-	}
-
-	public int getNumeroEntrenadores() {
-		return numeroEntrenadores;
-	}
-
-	public void setNumeroEntrenadores(int numeroEntrenadores) {
-		this.numeroEntrenadores = numeroEntrenadores;
-	}
-
-	public ArrayList<Enfrentamiento> getEnfrentamientos() {
-		return enfrentamientos;
-	}
-
-	public void setEnfrentamientos(ArrayList<Enfrentamiento> enfrentamientos) {
-		this.enfrentamientos = enfrentamientos;
 	}
 
 	public IEtapas getEtapa() {
 		return etapa;
 	}
 
-	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
-		this.entrenadores = entrenadores;
-	}
-
 	public void setArenas(Queue<Arena> arenas) {
 		this.arenas = arenas;
 	}
-	
-	public static void setInstance(Torneo instance) {
-		Torneo.instance = instance;
-	}
 
-	
-	
 }
