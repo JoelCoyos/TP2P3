@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_251" class="java.beans.XMLDecoder">
+<java version="14.0.1" class="java.beans.XMLDecoder">
  <object class="modelo.TorneoSerializable" id="TorneoSerializable0">
   <void property="arenas">
    <void method="add">
@@ -239,7 +239,7 @@
    </void>
   </void>
   <void property="etapa">
-   <object class="modelo.Desarrollo"/>
+   <object class="modelo.Alta"/>
   </void>
   <void property="participantesActuales">
    <void method="add">

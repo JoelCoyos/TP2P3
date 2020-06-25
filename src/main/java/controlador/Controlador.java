@@ -46,7 +46,9 @@ public class Controlador implements ActionListener, Observer {
 		} else {
 			Iterator<Arena> it = Torneo.getInstance().getArenas().iterator();
 			while (it.hasNext()) {
-				arenas.add(it.next());
+				Arena arena = it.next();
+				arena.addObserver(this);
+				arenas.add(arena);
 			}
 			comenzarTorneo();
 		}

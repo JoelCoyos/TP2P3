@@ -21,6 +21,7 @@ public class Desarrollo implements IEtapas {
 	public void comenzarBatallas() {
 		
 		ArrayList<Batalla> batallas = Torneo.getInstance().getBatallas();
+		cantidadParticipantes = Torneo.getInstance().getParticipantesActuales().size();
 		Torneo.getInstance().getParticipantesActuales().clear();
 		
 		while (!batallas.isEmpty())
