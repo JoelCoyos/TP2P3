@@ -504,6 +504,18 @@ public class Torneo extends Observable {
 		semaphore.release();
 	}*/
 
+	public ArrayList<Enfrentamiento> getEnfrentamientos() {
+		return enfrentamientos;
+	}
+
+	public void setEnfrentamientos(ArrayList<Enfrentamiento> enfrentamientos) {
+		this.enfrentamientos = enfrentamientos;
+	}
+
+	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
+		this.entrenadores = entrenadores;
+	}
+
 	/*public void inicializarArenas() {
 		if (arenas.isEmpty()) {
 			arenas.add(new Arena());
@@ -511,4 +523,6 @@ public class Torneo extends Observable {
 		}
 		//semaphore = new Semaphore(arenas.size(), false);
 	}*/
+	
+	
 }
