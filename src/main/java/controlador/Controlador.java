@@ -18,6 +18,7 @@ import modelo.Pokemon;
 import modelo.Premiacion;
 import modelo.Torneo;
 import serializacion.DeserializeFromXML;
+import serializacion.SerializeToXML;
 import vista.IVistaTorneo;
 import vista.IVistaAlta;
 import vista.IVistaPremiacion;
@@ -53,7 +54,6 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	public void comenzarTorneo() {
-		vistaAlta.comenzarTorneo();
 		vistaTorneo = new VentanaTorneo();
 		vistaTorneo.setActionListener(this);
 		vistaTorneo.mostrarEntrenadores(Torneo.getInstance().getParticipantesActuales());
@@ -127,6 +127,15 @@ public class Controlador implements ActionListener, Observer {
 		} else {
 			if (comando == "Avanzar de Fase") {
 				Torneo.getInstance().avanzarFase();
+				//Para que se escriba el torneo despues de cada fase sacar el comentario
+				/*
+				try {
+					SerializeToXML.escribirXML(Torneo.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				*/
 			}
 		}
 
@@ -149,6 +158,7 @@ public class Controlador implements ActionListener, Observer {
 						arena.addObserver(this);
 					}
 				}
+				vistaAlta.comenzarTorneo();
 				this.comenzarTorneo();
 			} else
 				vistaPremiacion = new VentanaPremiacion();
@@ -157,8 +167,8 @@ public class Controlador implements ActionListener, Observer {
 			if (vector[0] == null) {
 
 			} else {
-				System.out.println("Entro a progreso");
-				vistaTorneo.progresoBatallas((Batalla) vector[0]);
+				/*System.out.println("Entro a progreso");
+				vistaTorneo.progresoBatallas((Batalla) vector[0]);*/
 			}
 		} else
 			throw new InvalidParameterException();

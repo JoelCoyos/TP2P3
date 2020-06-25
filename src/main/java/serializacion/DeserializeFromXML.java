@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import modelo.Torneo;
+import modelo.TorneoSerializable;
 
 public class DeserializeFromXML {
 
@@ -16,8 +17,12 @@ public class DeserializeFromXML {
 
 		decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
 		
-		Object torneo = decoder.readObject();
-		Torneo.getInstance().setInstance((Torneo) torneo);
+		Object torneo = (TorneoSerializable) decoder.readObject();
+		TorneoSerializable torneoSerializable = (TorneoSerializable)torneo;
+		Torneo.getInstance().setEnfrentamientos(torneoSerializable.getEnfrentamientos());
+		Torneo.getInstance().setEntrenadores(torneoSerializable.getEntrenadores());
+		Torneo.getInstance().setEtapa(torneoSerializable.getEtapa());
+		Torneo.getInstance().setParticipantesActuales(torneoSerializable.getParticipantesActuales());
 
 	}
 
