@@ -47,7 +47,7 @@ public class Controlador implements ActionListener, Observer {
 		{
 			vistaAlta = new VentanaAlta();
 			vistaAlta.setActionListener(this);
-			vistaAlta.setEntrenadores();
+			vistaAlta.setEntrenadores(Torneo.getInstance().getEntrenadores());
 		}
 		else {
 			comenzarTorneo();
@@ -91,8 +91,10 @@ public class Controlador implements ActionListener, Observer {
 				this.vistaAlta.agregarEntrenador(entrenador);
 				Torneo.getInstance().agregarEntrenador(entrenador);
 			}
-			else
+			else {
+				vistaAlta.reseteaCampos();
 				vistaAlta.mensajeAlerta("No puede agregar mas entrenadores");
+			}
 		}
 		else
 			if (comando == "Agregar Pokemon") {
@@ -100,16 +102,24 @@ public class Controlador implements ActionListener, Observer {
 				if (entrenadorSeleccionado != null) {
 					try {
 						Pokemon pokemon = vistaAlta.getPokemon();
-						vistaAlta.agregarPokemon(pokemon);
+						if (pokemon == null) {
+							vistaAlta.reseteaCampos();
+							vistaAlta.mensajeAlerta("Debe introducir si o no para las recargas");
+						}
+						else
+							vistaAlta.agregarPokemon(pokemon);
 					} catch (TipoNoEncontradoException e1) {
+						vistaAlta.reseteaCampos();
 						vistaAlta.mensajeAlerta("El tipo no existe");
 					}
 				}
-				else
+				else {
+					vistaAlta.reseteaCampos();
 					vistaAlta.mensajeAlerta("Seleccione un entrenador");
+				}
 			}
 			else
-				if (comando == "Comenzar Torneo") { //COMIENZA EL TORNEO
+				if (comando == "Comenzar Torneo") {
 					Torneo.getInstance().avanzarFase();
 				}
 				else

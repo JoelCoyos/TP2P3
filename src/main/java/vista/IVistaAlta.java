@@ -14,7 +14,6 @@ public interface IVistaAlta {
 	String getTipoPokemon();
 	String getRecarga();
 	String getGranRecarga();
-	void setEntrenadores();
 	void comenzarTorneo();
 	void mostrarPokemon();
 	void setActionListener(ActionListener actionListener);
@@ -25,5 +24,6 @@ public interface IVistaAlta {
 	Entrenador entrenadorSeleccionado();
 	void agregarPokemon(Pokemon pokemon);
 	Pokemon getPokemon() throws TipoNoEncontradoException;
+	void setEntrenadores(ArrayList<Entrenador> entrenadores);
 
 }

@@ -334,12 +334,6 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	public void mouseReleased(MouseEvent arg0) {
 	}
 
-	@Override
-	public void avanzarFase() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void mensajeAlerta(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
@@ -352,5 +346,10 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 					this.listPokemon1.getSelectedValue(), this.listPokemon2.getSelectedValue(),
 					this.listHechizos1.getSelectedValue(), this.listHechizos2.getSelectedValue());
 		return batalla;
+	}
+	
+	public void progresoBatallas(String progreso) {
+		String aux = this.textAreaProgreso.getText();
+		this.textAreaProgreso.setText(aux + progreso + '\n');
 	}
 }

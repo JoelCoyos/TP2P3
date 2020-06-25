@@ -11,10 +11,10 @@ public interface IVistaTorneo {
 	void mostrarPokemonHechizos();
 	void agregarBatalla();
 	void comenzarBatallas();
-	void avanzarFase();
 	void setActionListener(ActionListener actionListener);
 	void mensajeAlerta(String string);
 	Batalla getBatalla();
 	void mostrarEntrenadores(ArrayList<Entrenador> entrenadores);
+	void progresoBatallas(String progreso);
 	
 }

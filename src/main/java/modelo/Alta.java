@@ -42,7 +42,7 @@ public class Alta implements IEtapas {
 
 	public boolean faseCompletada() {
 		boolean respuesta = true;
-		if (Torneo.getInstance().cantidadEntrenadoresNecesaria()) {
+		if (!Torneo.getInstance().cantidadEntrenadoresNecesaria()) {
 			respuesta = false;
 		} else {
 			Iterator<Entrenador> it = Torneo.getInstance().getEntrenadores().iterator();

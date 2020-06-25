@@ -15,6 +15,8 @@ public class Arena extends Observable {
 	public void ingresarArena(Batalla batalla) {
 		estado = new ArenaPreliminar(this);
 		this.batalla = batalla;
+		setChanged();
+		//notifyObservers()
 	}
 	
 	public Batalla getBatalla() {

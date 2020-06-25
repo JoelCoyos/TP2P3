@@ -26,7 +26,6 @@ import excepciones.RequisitosPokemonesException;
  */
 public class Torneo extends Observable {
 
-	private int numeroEntrenadores = 0;
 	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
 	private ArrayList<Entrenador> participantesActuales = new ArrayList<Entrenador>();
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
@@ -396,7 +395,7 @@ public class Torneo extends Observable {
 	 * Revisa si la cantidad de entrenadores inscriptos es 8<br>
 	 */
 	public boolean cantidadEntrenadoresNecesaria() {
-		return numeroEntrenadores == 8;
+		return entrenadores.size() == 8;
 	}
 
 	/**

@@ -235,11 +235,14 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	}
 	
 	public Pokemon getPokemon() throws TipoNoEncontradoException {
-		Pokemon pokemon;
-		if (!getTipoPokemon().equalsIgnoreCase("hielo")) 
-			pokemon = PokemonFactory.getPokemon(getNombrePokemon(), getTipoPokemon(), recarga(getRecarga()));
-		else 
-			pokemon = PokemonFactory.getPokemon(getNombrePokemon(),getTipoPokemon(), recarga(getRecarga()), recarga(getGranRecarga()));
+		Pokemon pokemon = null;
+		if (this.getRecarga().equalsIgnoreCase("Si") || this.getRecarga().equalsIgnoreCase("No")) {
+			if (!getTipoPokemon().equalsIgnoreCase("hielo")) 
+				pokemon = PokemonFactory.getPokemon(getNombrePokemon(), getTipoPokemon(), recarga(getRecarga()));
+			else
+				if (this.getGranRecarga().equalsIgnoreCase("Si") || this.getGranRecarga().equalsIgnoreCase("No"))
+					pokemon = PokemonFactory.getPokemon(getNombrePokemon(),getTipoPokemon(), recarga(getRecarga()), recarga(getGranRecarga()));
+		}
 		return pokemon;
 	}
 
@@ -339,9 +342,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	}
 
 	@Override
-	public void setEntrenadores() {
-		for (int i = 0; i < Torneo.getInstance().getEntrenadores().size(); i++)
-			this.listaModelEntrenador.addElement(Torneo.getInstance().getEntrenadores().get(i));
+	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
+		for (int i = 0; i < entrenadores.size(); i++)
+			this.listaModelEntrenador.addElement(entrenadores.get(i));
 		this.listEntrenadores.setModel(listaModelEntrenador);
 	}
 
