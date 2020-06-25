@@ -77,6 +77,7 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	public VentanaAlta() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1500, 450);
+		this.setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new TitledBorder(null, "Alta de Entrenadores y Pokemons", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));

@@ -20,8 +20,10 @@ import modelo.Torneo;
 import serializacion.DeserializeFromXML;
 import vista.IVistaTorneo;
 import vista.IVistaAlta;
+import vista.IVistaArena;
 import vista.IVistaPremiacion;
 import vista.VentanaAlta;
+import vista.VentanaArena;
 import vista.VentanaPremiacion;
 import vista.VentanaTorneo;
 
@@ -31,6 +33,7 @@ public class Controlador implements ActionListener, Observer {
 	private IVistaAlta vistaAlta;
 	private IVistaPremiacion vistaPremiacion;
 	private ArrayList<Arena> arenas = new ArrayList<Arena>();
+	private IVistaArena vistaArena;
 
 	public Controlador() {
 
@@ -122,6 +125,7 @@ public class Controlador implements ActionListener, Observer {
 				this.vistaTorneo.agregarBatalla();
 			}
 		} else if (comando == "Comenzar Batallas") {
+			this.vistaArena = new VentanaArena();
 			Torneo.getInstance().comenzarBatallas();
 			this.vistaTorneo.comenzarBatallas();
 		} else {
@@ -140,22 +144,28 @@ public class Controlador implements ActionListener, Observer {
 				vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
 			else if (etapa.getNombre() == "Alta")
 				vistaAlta = new VentanaAlta();
-			else if (etapa.getNombre() == "Desarrollo") {
-				if (arenas.isEmpty()) {
-					Iterator<Arena> it = Torneo.getInstance().getArenas().iterator();
-					while (it.hasNext()) {
-						Arena arena = it.next();
-						arenas.add(arena);
-						arena.addObserver(this);
+			else {
+				if (this.vistaArena != null)
+					this.vistaArena.cerrarVentana();
+				if (etapa.getNombre() == "Desarrollo") {
+					if (arenas.isEmpty()) {
+						Iterator<Arena> it = Torneo.getInstance().getArenas().iterator();
+						while (it.hasNext()) {
+							Arena arena = it.next();
+							arenas.add(arena);
+							arena.addObserver(this);
+						}
 					}
-				}
-				this.comenzarTorneo();
-			} else
-				vistaPremiacion = new VentanaPremiacion();
+					this.comenzarTorneo();
+				} else
+					vistaPremiacion = new VentanaPremiacion();
+			}
 		} else if (arenas.contains(arg0)) {
 			Object vector[] = (Object[]) arg1;
 			if (vector[0] == null) {
-
+				int numeroArena = arenas.indexOf(arg0);
+				System.out.println(numeroArena);
+				vistaArena.muestraMensaje((String) vector[1], numeroArena);
 			} else {
 				System.out.println("Entro a progreso");
 				vistaTorneo.progresoBatallas((Batalla) vector[0]);

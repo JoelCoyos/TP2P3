@@ -83,6 +83,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	public VentanaTorneo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 812, 467);
+		this.setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);

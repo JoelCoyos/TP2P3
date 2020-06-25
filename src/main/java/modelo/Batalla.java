@@ -77,7 +77,7 @@ public class Batalla extends Thread {
 			arena.ejecutarFase(); // definicion
 			sleep(1000);
 			arena.ejecutarFase(); // limpieza
-			Torneo.getInstance().liberarArena(arena);
+			//Torneo.getInstance().liberarArena(arena);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

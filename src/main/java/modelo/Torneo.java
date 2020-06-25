@@ -3,6 +3,7 @@ package modelo;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -33,7 +34,7 @@ public class Torneo extends Observable {
 	private Queue<Arena> arenas = new LinkedList<Arena>();
 	private IEtapas etapa = new Alta();
 	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
-	private Semaphore semaphore = new Semaphore(2);
+	//private HashMap<Integer,Semaphore> semaforos = new HashMap<Integer,Semaphore>();
 	private static int cantidadSets = 1;
 
 	public ArrayList<Batalla> getBatallas() {
@@ -480,22 +481,28 @@ public class Torneo extends Observable {
 			cantidadSets--;
 		}
 	}
-
+	
 	public Arena asignarArena() {
+		Arena asignar = this.arenas.poll();
+		this.arenas.add(asignar);
+		return asignar;
+	}
+
+	/*public Arena asignarArena() {
+		Arena asignar = this.arenas.peek();
 		try {
-			semaphore.acquire();
+			semaforos.get(asignar.getNroArena()).acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Arena asignar = this.arenas.poll();
+		
 		return asignar;
 	}
 
 	public void liberarArena(Arena arena) {
 		arenas.add(arena);
 		semaphore.release();
-	}
+	}*/
 
 	/*public void inicializarArenas() {
 		if (arenas.isEmpty()) {
