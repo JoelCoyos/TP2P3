@@ -15,6 +15,6 @@ public interface IVistaTorneo {
 	void mensajeAlerta(String string);
 	Batalla getBatalla();
 	void mostrarEntrenadores(ArrayList<Entrenador> entrenadores);
-	void progresoBatallas(String progreso);
+	void progresoBatallas(Batalla vector);
 	
 }

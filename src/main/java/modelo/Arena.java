@@ -16,7 +16,9 @@ public class Arena extends Observable {
 		estado = new ArenaPreliminar(this);
 		this.batalla = batalla;
 		setChanged();
-		//notifyObservers()
+		notifyObservers(new Object[] {null,"Inicia Batalla"});
+		setChanged();
+		notifyObservers(new Object[] {batalla,"Inicia"});
 	}
 	
 	public Batalla getBatalla() {

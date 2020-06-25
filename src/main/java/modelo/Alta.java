@@ -16,6 +16,7 @@ public class Alta implements IEtapas {
 
 	@Override
 	public void avanzarFase() {
+		//Torneo.getInstance().inicializarArenas();
 		
 		ArrayList<Entrenador> participantes = new ArrayList<Entrenador>();
 		Iterator<Entrenador> it = Torneo.getInstance().getEntrenadores().iterator();

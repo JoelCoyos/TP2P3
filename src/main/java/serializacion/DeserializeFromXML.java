@@ -15,11 +15,10 @@ public class DeserializeFromXML {
 		XMLDecoder decoder = null;
 
 		decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(SERIALIZED_FILE_NAME)));
+		
+		Object torneo = decoder.readObject();
+		Torneo.getInstance().setInstance((Torneo) torneo);
 
-		Torneo torneo = (Torneo) decoder.readObject();
-		if (torneo != null) {
-			Torneo.setInstance(torneo);
-		}
 	}
 
 }

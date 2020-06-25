@@ -18,4 +18,9 @@ public class ArenaLimpieza implements iStateArena {
 		arena.getSemaforo().release();
 	}
 
+	@Override
+	public String nombreEstado() {
+		return "Limpieza";
+	}
+
 }

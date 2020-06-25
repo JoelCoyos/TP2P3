@@ -29,4 +29,9 @@ public class ArenaPreliminar implements iStateArena {
 		
 	}
 
+	@Override
+	public String nombreEstado() {
+		return "Preliminar";
+	}
+
 }

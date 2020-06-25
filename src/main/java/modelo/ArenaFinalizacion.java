@@ -54,4 +54,9 @@ public class ArenaFinalizacion implements iStateArena {
 
 	}
 
+	@Override
+	public String nombreEstado() {
+		return "Finalizacion";
+	}
+
 }

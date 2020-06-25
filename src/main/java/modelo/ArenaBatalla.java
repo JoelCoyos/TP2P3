@@ -53,4 +53,9 @@ public class ArenaBatalla implements iStateArena {
 	
 	}
 
+	@Override
+	public String nombreEstado() {
+		return "Batalla";
+	}
+
 }

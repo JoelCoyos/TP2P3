@@ -347,9 +347,12 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 					this.listHechizos1.getSelectedValue(), this.listHechizos2.getSelectedValue());
 		return batalla;
 	}
-	
-	public void progresoBatallas(String progreso) {
+
+	public void progresoBatallas(Batalla batalla) {
 		String aux = this.textAreaProgreso.getText();
-		this.textAreaProgreso.setText(aux + progreso + '\n');
+		this.textAreaProgreso.setText(aux + "Comienza la batalla entre " + batalla.getEntrenador1().getNombre() + " y "
+				+ batalla.getEntrenador2().getNombre() + '\n');
+
 	}
+
 }

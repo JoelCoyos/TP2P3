@@ -34,6 +34,7 @@ public class Torneo extends Observable {
 	private IEtapas etapa = new Alta();
 	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
 	private Semaphore semaphore = new Semaphore(2);
+	private static int cantidadSets = 1;
 
 	public ArrayList<Batalla> getBatallas() {
 		return batallas;
@@ -106,8 +107,7 @@ public class Torneo extends Observable {
 			etapa.avanzarFase();
 			setChanged();
 			notifyObservers(this.etapa);
-		}
-		else {
+		} else {
 			setChanged();
 			notifyObservers(null);
 		}
@@ -475,7 +475,10 @@ public class Torneo extends Observable {
 	}
 
 	public static void setInstance(Torneo torneo) {
-		instance = torneo;
+		if (cantidadSets > 0) {
+			instance = torneo;
+			cantidadSets--;
+		}
 	}
 
 	public Arena asignarArena() {
@@ -488,10 +491,17 @@ public class Torneo extends Observable {
 		Arena asignar = this.arenas.poll();
 		return asignar;
 	}
-	
-	public void liberarArena(Arena arena)
-	{
+
+	public void liberarArena(Arena arena) {
 		arenas.add(arena);
 		semaphore.release();
 	}
+
+	/*public void inicializarArenas() {
+		if (arenas.isEmpty()) {
+			arenas.add(new Arena());
+			arenas.add(new Arena());
+		}
+		//semaphore = new Semaphore(arenas.size(), false);
+	}*/
 }
