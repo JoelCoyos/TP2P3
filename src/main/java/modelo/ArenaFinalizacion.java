@@ -37,7 +37,7 @@ public class ArenaFinalizacion implements iStateArena {
 					"\n" + arena.getEntrenador1().getNombre() + " gano el enfrentamiento. Toma control del pokemon "
 							+ arena.getPokemon2().getNombre() + " de " + arena.getEntrenador2().getNombre());
 		} else {
-			Torneo.getInstance().ganadorBatalla(arena.getEntrenador1());
+			Torneo.getInstance().ganadorBatalla(arena.getEntrenador2());
 			arena.getEntrenador1().quitarPokemon(arena.getPokemon1());
 			arena.getEntrenador2().aniadirPokemon(arena.getPokemon1());
 			arena.getPokemon2().ganar();

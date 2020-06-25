@@ -28,6 +28,7 @@ import modelo.Torneo;
 import modelo.Viento;
 
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import java.awt.FlowLayout;
 
@@ -223,9 +224,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	}
 
 	@Override
-	public void mostrarEntrenadores() {
-		for (int i = 0; i < Torneo.getInstance().getEntrenadores().size(); i++) {
-			this.listModelEntrenadores.addElement(Torneo.getInstance().getEntrenadores().get(i));
+	public void mostrarEntrenadores(ArrayList<Entrenador> entrenadores) {
+		for (int i = 0; i < entrenadores.size(); i++) {
+			this.listModelEntrenadores.addElement(entrenadores.get(i));
 		}
 		this.listEntrenadores1.setModel(listModelEntrenadores);
 		this.listEntrenadores2.setModel(listModelEntrenadores);
@@ -300,9 +301,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.listHechizos2.setEnabled(false);
 		this.textAreaBatallas.setEnabled(false);
 		this.textAreaProgreso.setEnabled(true);
-
-		// Torneo.getInstance().comenzarBatallas();
-
+		this.btnAvanzarFase.setEnabled(true);
 	}
 
 	@Override

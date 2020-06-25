@@ -50,16 +50,16 @@ public class Controlador implements ActionListener, Observer {
 			vistaAlta.setEntrenadores();
 		}
 		else {
-			comenzarBatalla();
+			comenzarTorneo();
 		}
 	}
 	
-	public void comenzarBatalla()
+	public void comenzarTorneo()
 	{
-		Torneo.getInstance().addObserver(this);
+		vistaAlta.comenzarTorneo();
 		vistaTorneo = new VentanaTorneo();
 		vistaTorneo.setActionListener(this);
-		vistaTorneo.mostrarEntrenadores();
+		vistaTorneo.mostrarEntrenadores(Torneo.getInstance().getParticipantesActuales());
 	}
 
 	public IVistaAlta getVistaAlta() {
@@ -110,7 +110,6 @@ public class Controlador implements ActionListener, Observer {
 			}
 			else
 				if (comando == "Comenzar Torneo") { //COMIENZA EL TORNEO
-					comenzarBatalla();
 					Torneo.getInstance().avanzarFase();
 				}
 				else
@@ -129,14 +128,20 @@ public class Controlador implements ActionListener, Observer {
 						else
 							if (comando == "Comenzar Batallas") {
 								Torneo.getInstance().comenzarBatallas();
+								this.vistaTorneo.comenzarBatallas();
+							}
+							else {
+								if (comando == "Avanzar de Fase") {
+									Torneo.getInstance().avanzarFase();
+								}
 							}
 
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		IEtapas etapa = (IEtapas) arg1;
-		if (arg0 != Torneo.getInstance())
+		if (arg0 == Torneo.getInstance()) {
+			IEtapas etapa = (IEtapas) arg1;
 			if (arg1 == null) 
 				vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
 			else 
@@ -144,17 +149,11 @@ public class Controlador implements ActionListener, Observer {
 					vistaAlta = new VentanaAlta();
 				else
 					if (etapa.getNombre() == "Desarrollo")
-						vistaTorneo = new VentanaTorneo();
+						this.comenzarTorneo();
 					else
 						vistaPremiacion = new VentanaPremiacion();
-		/*else
-			if (arenas.contains(arg0)) {
-				
-			}
-			else
-				throw new InvalidParameterException();
-			}*/
-			
-	
+		}
+		else
+			throw new InvalidParameterException();
 	}
 }
