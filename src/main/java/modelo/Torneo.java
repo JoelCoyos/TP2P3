@@ -31,7 +31,7 @@ public class Torneo extends Observable {
 	private ArrayList<Entrenador> participantesActuales = new ArrayList<Entrenador>();
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
-	private Queue<Arena> arenas = new LinkedList<Arena>();
+	private ArrayList<Arena> arenas = new ArrayList<Arena>();
 	private IEtapas etapa = new Alta();
 	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
 	//private HashMap<Integer,Semaphore> semaforos = new HashMap<Integer,Semaphore>();
@@ -61,10 +61,6 @@ public class Torneo extends Observable {
 
 	public ArrayList<Entrenador> getParticipantesActuales() {
 		return participantesActuales;
-	}
-
-	public Queue<Arena> getArenas() {
-		return arenas;
 	}
 
 	/**
@@ -471,10 +467,6 @@ public class Torneo extends Observable {
 		return etapa;
 	}
 
-	public void setArenas(Queue<Arena> arenas) {
-		this.arenas = arenas;
-	}
-
 	public static void setInstance(Torneo torneo) {
 		if (cantidadSets > 0) {
 			instance = torneo;
@@ -482,9 +474,17 @@ public class Torneo extends Observable {
 		}
 	}
 	
-	public Arena asignarArena() {
-		Arena asignar = this.arenas.poll();
-		this.arenas.add(asignar);
+	public synchronized Arena asignarArena() {
+		
+		while (arenas.isEmpty())
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		Arena asignar = this.arenas.remove(0);
 		return asignar;
 	}
 
@@ -497,12 +497,12 @@ public class Torneo extends Observable {
 		}
 		
 		return asignar;
-	}
-
-	public void liberarArena(Arena arena) {
-		arenas.add(arena);
-		semaphore.release();
 	}*/
+
+	public synchronized void liberarArena(Arena arena) {
+		arenas.add(arena);
+		notifyAll();
+	}
 
 	public ArrayList<Enfrentamiento> getEnfrentamientos() {
 		return enfrentamientos;
@@ -514,6 +514,10 @@ public class Torneo extends Observable {
 
 	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
 		this.entrenadores = entrenadores;
+	}
+
+	public ArrayList<Arena> getArenas() {
+		return arenas;
 	}
 
 	/*public void inicializarArenas() {

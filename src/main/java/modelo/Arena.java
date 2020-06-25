@@ -7,26 +7,14 @@ public class Arena extends Observable {
 
 	private Batalla batalla;
 	private iStateArena estado;
-	private Semaphore semaforo = new Semaphore(1);
 
 	public Arena() {
 	}
-	
-	public Semaphore getSemaforo() {
-		return semaforo;
-	}
 
 	public void ingresarArena(Batalla batalla) {
-		try {
-			semaforo.acquire();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		estado = new ArenaPreliminar(this);
 		this.batalla = batalla;
-		//notificaEstado("Inicia Batalla");
 		setChanged();
-		System.out.println("Llega");
 		notifyObservers(new Object[] { batalla, "Inicia" });
 	}
 

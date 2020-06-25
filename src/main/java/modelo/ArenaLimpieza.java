@@ -10,8 +10,7 @@ public class ArenaLimpieza implements iStateArena {
 	
 	@Override
 	public void ejecutarFase() {
-		System.out.println("\nSE REALIZAN LAS TAREAS DE LIMPIEZA EN PREPARACION PARA LA SIGUIENTE BATALLA\n");
-		arena.getSemaforo().release();
+		arena.notificaEstado("\nSE REALIZAN LAS TAREAS DE LIMPIEZA EN PREPARACION PARA LA SIGUIENTE BATALLA\n");
 	}
 
 	@Override

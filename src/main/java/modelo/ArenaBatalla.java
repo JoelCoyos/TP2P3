@@ -18,13 +18,13 @@ public class ArenaBatalla implements iStateArena {
 		Random r = new Random();
 		int primero = r.nextInt(2);
 
-		System.out.println("SE DA INICIO A LA BATALLA\n");
+		arena.notificaEstado("SE DA INICIO A LA BATALLA\n");
 
 		if (arena.getHechizo1() != null)
 			try {
 				arena.getEntrenador1().hechizar(arena.getHechizo1(), arena.getPokemon2());
 			} catch (FaltanHechizosException e) {
-				System.out.println("El entrenador " + e.getNombreEntrenador() + " intento usar el hechizo "
+				arena.notificaEstado("El entrenador " + e.getNombreEntrenador() + " intento usar el hechizo "
 						+ e.getNombreHechizo() + " pero no le quedaban mas."); // VER SI QUITAR, DEPENDE DE VENTANA
 			}
 		
@@ -32,7 +32,7 @@ public class ArenaBatalla implements iStateArena {
 			try {
 				arena.getEntrenador2().hechizar(arena.getHechizo2(), arena.getPokemon1());
 			} catch (FaltanHechizosException e) {
-				System.out.println("El entrenador " + e.getNombreEntrenador() + " intento usar el hechizo "
+				arena.notificaEstado("El entrenador " + e.getNombreEntrenador() + " intento usar el hechizo "
 						+ e.getNombreHechizo() + " pero no le quedaban mas."); // VER SI QUITAR, DEPENDE DE VENTANA
 			}
 
@@ -48,7 +48,7 @@ public class ArenaBatalla implements iStateArena {
 			
 		}
 		
-		System.out.println("FINALIZA LA BATALLA\n");
+		arena.notificaEstado("FINALIZA LA BATALLA\n");
 		arena.setEstado(new ArenaFinalizacion(arena));
 	
 	}

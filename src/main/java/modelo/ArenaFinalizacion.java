@@ -14,16 +14,16 @@ public class ArenaFinalizacion implements iStateArena {
 		double puntaje1 = Torneo.getInstance().puntaje(arena.getPokemon1());
 		double puntaje2 = Torneo.getInstance().puntaje(arena.getPokemon2());
 
-		System.out.println("RESULTADOS FINALES\n");
+		arena.notificaEstado("RESULTADOS FINALES\n");
 
-		System.out.println("\nEntrenador " + arena.getEntrenador1().getNombre() + " Pokemon: "
+		arena.notificaEstado("\nEntrenador " + arena.getEntrenador1().getNombre() + " Pokemon: "
 				+ arena.getPokemon1().getNombre() + " Puntaje: " + puntaje1);
-		System.out.println("Entrenador " + arena.getEntrenador2().getNombre() + " Pokemon: "
+		arena.notificaEstado("Entrenador " + arena.getEntrenador2().getNombre() + " Pokemon: "
 				+ arena.getPokemon2().getNombre() + " Puntaje: " + puntaje2 + "\n");
 
-		System.out.println(arena.getPokemon1().toString(
+		arena.notificaEstado(arena.getPokemon1().toString(
 				));
-		System.out.println(arena.getPokemon2().toString());
+		arena.notificaEstado(arena.getPokemon2().toString());
 
 		if (puntaje1 > puntaje2) {
 			Torneo.getInstance().ganadorBatalla(arena.getEntrenador1());
@@ -33,7 +33,7 @@ public class ArenaFinalizacion implements iStateArena {
 			arena.getPokemon2().perder();
 			Torneo.getInstance().aniadirEnfrentamiento(arena.getEntrenador1(), arena.getPokemon1(), arena.getHechizo1(),
 					arena.getEntrenador2(), arena.getPokemon2(), arena.getHechizo2());
-			System.out.println(
+			arena.notificaEstado(
 					"\n" + arena.getEntrenador1().getNombre() + " gano el enfrentamiento. Toma control del pokemon "
 							+ arena.getPokemon2().getNombre() + " de " + arena.getEntrenador2().getNombre());
 		} else {
@@ -44,7 +44,7 @@ public class ArenaFinalizacion implements iStateArena {
 			arena.getPokemon1().perder();
 			Torneo.getInstance().aniadirEnfrentamiento(arena.getEntrenador2(), arena.getPokemon2(), arena.getHechizo2(),
 					arena.getEntrenador1(), arena.getPokemon1(), arena.getHechizo1());
-			System.out.println(
+			arena.notificaEstado(
 					"\n" + arena.getEntrenador2().getNombre() + " gano el enfrentamiento. Toma control del pokemon "
 							+ arena.getPokemon1().getNombre() + " de " + arena.getEntrenador1().getNombre());
 		}

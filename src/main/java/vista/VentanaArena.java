@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.JScrollPane;
 import java.awt.Color;
@@ -18,8 +19,6 @@ import javax.swing.border.LineBorder;
 import java.awt.Insets;
 
 public class VentanaArena extends JFrame implements IVistaArena {
-
-	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;
 	private JTextArea textAreaArena1;
@@ -48,7 +47,7 @@ public class VentanaArena extends JFrame implements IVistaArena {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 300);
 		this.setResizable(false);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
@@ -74,14 +73,19 @@ public class VentanaArena extends JFrame implements IVistaArena {
 
 	@Override
 	public void muestraMensaje(String mensaje, int numeroPanel) {
-		if (numeroPanel == 0) {
-			String aux = this.textAreaArena1.getText();
-			this.textAreaArena1.setText(aux + mensaje + '\n');
-		}
-		else {
-			String aux = this.textAreaArena2.getText();
-			this.textAreaArena2.setText(aux + mensaje + '\n');
-		}
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				if (numeroPanel == 0) {
+					String aux = textAreaArena1.getText();
+					textAreaArena1.setText(aux + mensaje + '\n');
+				}
+				else {
+					String aux = textAreaArena2.getText();
+					textAreaArena2.setText(aux + mensaje + '\n');
+				}
+			}
+		});
+
 	}
 
 	@Override

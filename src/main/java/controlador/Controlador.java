@@ -126,8 +126,8 @@ public class Controlador implements ActionListener, Observer {
 			}
 		} else if (comando == "Comenzar Batallas") {
 			this.vistaArena = new VentanaArena();
-			Torneo.getInstance().comenzarBatallas();
 			this.vistaTorneo.comenzarBatallas();
+			Torneo.getInstance().comenzarBatallas();
 		} else {
 			if (comando == "Avanzar de Fase") {
 				Torneo.getInstance().avanzarFase();
@@ -148,6 +148,8 @@ public class Controlador implements ActionListener, Observer {
 				if (this.vistaArena != null)
 					this.vistaArena.cerrarVentana();
 				if (etapa.getNombre() == "Desarrollo") {
+					if (vistaTorneo != null)
+						vistaTorneo.cerrarVentana();
 					if (arenas.isEmpty()) {
 						Iterator<Arena> it = Torneo.getInstance().getArenas().iterator();
 						while (it.hasNext()) {
@@ -162,12 +164,11 @@ public class Controlador implements ActionListener, Observer {
 			}
 		} else if (arenas.contains(arg0)) {
 			Object vector[] = (Object[]) arg1;
+			int numeroArena = arenas.indexOf(arg0);
 			if (vector[0] == null) {
-				int numeroArena = arenas.indexOf(arg0);
-				System.out.println(numeroArena);
 				vistaArena.muestraMensaje((String) vector[1], numeroArena);
 			} else {
-				System.out.println("Entro a progreso");
+				vistaArena.muestraMensaje("--------------------INICIA LA BATALLA--------------------", numeroArena);
 				vistaTorneo.progresoBatallas((Batalla) vector[0]);
 			}
 		} else

@@ -16,5 +16,6 @@ public interface IVistaTorneo {
 	Batalla getBatalla();
 	void mostrarEntrenadores(ArrayList<Entrenador> entrenadores);
 	void progresoBatallas(Batalla vector);
+	void cerrarVentana();
 	
 }

@@ -69,7 +69,6 @@ public class Batalla extends Thread {
 		try {
 			this.arena = Torneo.getInstance().asignarArena();
 			arena.ingresarArena(this);
-			this.arena.setEstado(new ArenaPreliminar(arena));
 			arena.ejecutarFase(); // preliminar
 			sleep(2000);
 			arena.ejecutarFase(); // batalla
@@ -77,7 +76,7 @@ public class Batalla extends Thread {
 			arena.ejecutarFase(); // definicion
 			sleep(1000);
 			arena.ejecutarFase(); // limpieza
-			//Torneo.getInstance().liberarArena(arena);
+			Torneo.getInstance().liberarArena(arena);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

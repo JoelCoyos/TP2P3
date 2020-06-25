@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import modelo.Batalla;
@@ -350,10 +351,19 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	}
 
 	public void progresoBatallas(Batalla batalla) {
-		String aux = this.textAreaProgreso.getText();
-		this.textAreaProgreso.setText(aux + "Comienza la batalla entre " + batalla.getEntrenador1().getNombre() + " y "
-				+ batalla.getEntrenador2().getNombre() + '\n');
+		String aux = "Comienza la batalla entre " + batalla.getEntrenador1().getNombre() + " y "
+				+ batalla.getEntrenador2().getNombre() + '\n';
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				textAreaProgreso.append(aux);
+			}
+		});
 
+	}
+
+	@Override
+	public void cerrarVentana() {
+		this.dispose();
 	}
 
 }
