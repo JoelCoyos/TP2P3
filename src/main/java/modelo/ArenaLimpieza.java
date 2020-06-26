@@ -8,6 +8,10 @@ public class ArenaLimpieza implements iStateArena {
 		this.arena = arena;
 	}
 	
+	public ArenaLimpieza() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public void ejecutarFase() {
 		arena.notificaEstado("\nSE REALIZAN LAS TAREAS DE LIMPIEZA EN PREPARACION PARA LA SIGUIENTE BATALLA\n");
@@ -16,6 +20,14 @@ public class ArenaLimpieza implements iStateArena {
 	@Override
 	public String nombreEstado() {
 		return "Limpieza";
+	}
+	
+	public Arena getArena() {
+		return arena;
+	}
+
+	public void setArena(Arena arena) {
+		this.arena = arena;
 	}
 
 }

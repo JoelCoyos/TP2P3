@@ -8,6 +8,10 @@ public class ArenaPreliminar implements iStateArena {
 		this.arena = arena;
 	}
 	
+	public ArenaPreliminar() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public void ejecutarFase() {
 
@@ -32,6 +36,14 @@ public class ArenaPreliminar implements iStateArena {
 	@Override
 	public String nombreEstado() {
 		return "Preliminar";
+	}
+	
+	public Arena getArena() {
+		return arena;
+	}
+
+	public void setArena(Arena arena) {
+		this.arena = arena;
 	}
 
 }

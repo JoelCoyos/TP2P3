@@ -15,6 +15,9 @@ public class Batalla extends Thread {
 		this.pokemon1 = pokemon1;
 		this.pokemon2 = pokemon2;
 	}
+	
+	public Batalla() {
+	}
 
 	public void setArena(Arena arena) {
 		this.arena = arena;
@@ -81,5 +84,15 @@ public class Batalla extends Thread {
 			e.printStackTrace();
 		}
 	}
+
+	public void setEntrenador1(Entrenador entrenador1) {
+		this.entrenador1 = entrenador1;
+	}
+
+	public void setEntrenador2(Entrenador entrenador2) {
+		this.entrenador2 = entrenador2;
+	}
+	
+	
 
 }

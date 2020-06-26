@@ -9,6 +9,10 @@ public class ArenaBatalla implements iStateArena {
 	public ArenaBatalla(Arena arena) {
 		this.arena = arena;
 	}
+	
+	public ArenaBatalla() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void ejecutarFase() {
@@ -49,6 +53,14 @@ public class ArenaBatalla implements iStateArena {
 	@Override
 	public String nombreEstado() {
 		return "Batalla";
+	}
+	
+	public Arena getArena() {
+		return arena;
+	}
+
+	public void setArena(Arena arena) {
+		this.arena = arena;
 	}
 
 }

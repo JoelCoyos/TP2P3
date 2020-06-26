@@ -54,7 +54,7 @@ public class Entrenador implements Cloneable, Clasificable {
 		return cantidadHechizos;
 	}
 
-	protected void setCantidadHechizos(int cantidadHechizos) {
+	public void setCantidadHechizos(int cantidadHechizos) {
 		this.cantidadHechizos = cantidadHechizos;
 	}
 

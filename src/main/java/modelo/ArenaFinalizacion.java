@@ -7,6 +7,9 @@ public class ArenaFinalizacion implements iStateArena {
 	public ArenaFinalizacion(Arena arena) {
 		this.arena = arena;
 	}
+	
+	public ArenaFinalizacion() {
+	}
 
 	@Override
 	public void ejecutarFase() {
@@ -56,5 +59,15 @@ public class ArenaFinalizacion implements iStateArena {
 	public String nombreEstado() {
 		return "Finalizacion";
 	}
+
+	public Arena getArena() {
+		return arena;
+	}
+
+	public void setArena(Arena arena) {
+		this.arena = arena;
+	}
+	
+	
 
 }
