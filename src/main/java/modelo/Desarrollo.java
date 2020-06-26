@@ -2,6 +2,10 @@ package modelo;
 
 import java.util.ArrayList;
 
+/**
+ * Clase vinculada a la realización de batallas en el torneo
+ *
+ */
 public class Desarrollo implements IEtapas {
 	
 	private int cantidadParticipantes = Torneo.getInstance().getParticipantesActuales().size();
@@ -57,11 +61,21 @@ public class Desarrollo implements IEtapas {
 		
 	}
 
+	/**
+	 * Método que agrega una batalla a ejecutarse en el torneo.
+	 * 
+	 * <b>Pre: </b> batalla distinta de null
+	 */
 	@Override
 	public void agregarBatalla(Batalla batalla) {
 		Torneo.getInstance().getBatallas().add(batalla);
 	}
 
+	/**
+	 * Método que guarda el ganador de una batalla ya ejecutada en el torneo.
+	 * 
+	 * <b>Pre: </b> entrenador distinto de null
+	 */
 	@Override
 	public void ganadorBatalla(Entrenador entrenador) {
 		Torneo.getInstance().getParticipantesActuales().add(entrenador);

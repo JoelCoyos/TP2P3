@@ -14,7 +14,6 @@ public class ArenaBatalla implements iStateArena {
 	}
 	
 	public ArenaBatalla() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class ArenaBatalla implements iStateArena {
 
 		}
 
-		arena.notificaEstado("FINALIZA LA BATALLA\n");
+		arena.notificaEstado("\nFINALIZA LA BATALLA\n");
 		arena.setEstado(new ArenaFinalizacion(arena));
 
 	}

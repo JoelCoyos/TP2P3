@@ -28,16 +28,16 @@ public class Torneo extends Observable {
 	/**
 	 * Al crear un Torneo se añaden las dos Arenas que se usaran
 	 */
-	public Torneo() {
-		arenas.add(new Arena());
-		arenas.add(new Arena());
+	private Torneo() {
 	}
 
 	public ArrayList<Entrenador> getEntrenadores() {
 		return entrenadores;
 	}
 
-	/**Aplicacion del patron Singleton
+	/**
+	 * Aplicacion del patron Singleton
+	 * 
 	 * @return instancia estatica del torneo
 	 */
 	public static Torneo getInstance() {
@@ -83,15 +83,17 @@ public class Torneo extends Observable {
 		etapa.ganadorBatalla(entrenador);
 	}
 
-	/** Añade un nuevo enfrentamiento
-	 * @param entGanador Entrenador que gano la batalla
-	 * @param pokeGanador Pokemon que gano la batalla
-	 * @param hecGanador Hechizo que uso el entrenador ganador
-	 * @param entPerdedor Entrenador que perdio la batalla
-	 * @param pokePerdedor Pokemon que gano la batalla
-	 * @param hecPerdedor Hechizo que uso el entrenador perdedor
+	/**
+	 * Añade un nuevo enfrentamiento
 	 * 
-	 * <b>Pre: </b> todas las variables distintas de null
+	 * @param entGanador   Entrenador que gano la batalla
+	 * @param pokeGanador  Pokemon que gano la batalla
+	 * @param hecGanador   Hechizo que uso el entrenador ganador
+	 * @param entPerdedor  Entrenador que perdio la batalla
+	 * @param pokePerdedor Pokemon que gano la batalla
+	 * @param hecPerdedor  Hechizo que uso el entrenador perdedor
+	 * 
+	 *                     <b>Pre: </b> todas las variables distintas de null
 	 */
 	public void aniadirEnfrentamiento(Entrenador entrenadorGan, Pokemon pokeGan, Hechizo hecGanador,
 			Entrenador entrenadorPer, Pokemon pokePer, Hechizo hecPerdedor) {
@@ -187,9 +189,10 @@ public class Torneo extends Observable {
 
 	/**
 	 * Espera que el arrayList de arenas no este vacio
+	 * 
 	 * @return la primera arena del arrayList
 	 * 
-	 * <b>Pre: </b>arenas distinto de null
+	 *         <b>Pre: </b>arenas distinto de null
 	 */
 	public synchronized Arena asignarArena() {
 
@@ -206,9 +209,10 @@ public class Torneo extends Observable {
 
 	/**
 	 * Agrega una arena al arrayList de arenas y lo notifica
+	 * 
 	 * @param arena: arena a ingresar
 	 * 
-	 * <b>Pre: </b> arena distinto de null
+	 *               <b>Pre: </b> arena distinto de null
 	 */
 	public synchronized void liberarArena(Arena arena) {
 		arenas.add(arena);
@@ -242,6 +246,5 @@ public class Torneo extends Observable {
 	public void setBatallas(ArrayList<Batalla> batallas) {
 		this.batallas = batallas;
 	}
-
 
 }

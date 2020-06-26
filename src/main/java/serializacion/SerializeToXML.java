@@ -13,6 +13,8 @@ public class SerializeToXML {
 	private static final String SERIALIZED_FILE_NAME = "torneo.xml";
 	
 	/** 
+	 * Método que al finalizar una etapa es invocado y realiza la serialización de los atributos de la clase Torneo 
+	 * mediante una clase intermedia de nombre TorneoSerializable, siendo esta la que se almacena en el archivo XML.
 	 * @throws FileNotFoundException
 	 */
 	public static void escribirXML() throws FileNotFoundException

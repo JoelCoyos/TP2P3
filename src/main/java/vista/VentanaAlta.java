@@ -31,6 +31,11 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+/**
+ * Ventana donde se realiza el alta de entrenadores y pokemons.
+ * En la misma se los podrá agregar y se lanzarán mensajes de advertencia en caso que no se cumpla alguna de las condiciones
+ * para la relización del torneo. Finalizado esto, se dara comienzo al torneo.
+ */
 @SuppressWarnings("serial")
 public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, MouseListener, ListSelectionListener {
 
@@ -203,19 +208,40 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return this.textFieldNombreEntrenador.getText();
 	}
 
+	/**
+	 * Método que cierra la ventana del alta para luego dar lugar a la ventana del torneo.
+	 */
 	@Override
 	public void comenzarTorneo() {
-		this.dispose(); // CIERRA VENTANA ACTUAL
+		this.dispose();
 	}
 
+	/**
+	 * Método que transforma lo ingresado en los campos Recarga y Gran Recarga en una variable booleana
+	 * @param r: String ingresado en los campos de texto correspondientes
+	 * @return True para "Si" y False para "No"
+	 * 
+	 * <b> Pre: </b> r solo puede ser "Si" o "No"
+	 */
 	public boolean recarga(String r) {
 		return r.equalsIgnoreCase("Si");
 	}
 
+	/**
+	 * Notifica una advertencia de alguna condición no cumplida
+	 * 
+	 * <b> Pre: </b> mensaje distinto de null
+	 */
 	public void mensajeAlerta(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
 
+	/**
+	 * Método que agrega un entrenador a la JList de Entrenadores.
+	 * Luego resetea los campos.
+	 * 
+	 * <b> Pre: </b> entrenador distinto de null
+	 */
 	@Override
 	public void agregarEntrenador(Entrenador entrenador) {
 		this.listaModelEntrenador.addElement(entrenador);
@@ -223,6 +249,10 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.reseteaCampos();
 	}
 
+	/**
+	 * Método que crea y retorna un entrenador en base al nombre ingresado en la ventana.
+	 * En caso de no haber ingresado nombre, retorna null.
+	 */
 	public Entrenador getEntrenador() {
 		if(this.getNombreEntrenador().isEmpty())
 		{
@@ -234,10 +264,17 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		
 	}
 	
+	/**
+	 * Método que devuelve un entrenador, el cual fue seleccionado en la JList de Entrenadores
+	 */
 	public Entrenador entrenadorSeleccionado() {
 		return listEntrenadores.getSelectedValue();
 	}
 	
+	/**
+	 * Método que crea y devuelve un Pokemon a partir de los parámetros ingresados por el usuario en la ventana.
+	 * @throws TipoNoEncontradoException, cuando el tipo ingresado no se corresponde a uno de los tipos de pokemon predeterminados
+	 */
 	public Pokemon getPokemon() throws TipoNoEncontradoException {
 		Pokemon pokemon = null;
 		if (this.getRecarga().equalsIgnoreCase("Si") || this.getRecarga().equalsIgnoreCase("No")) {
@@ -250,6 +287,10 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return pokemon;
 	}
 
+	/**
+	 * Método que agrega un pokemon a la Jlist de Pokemon del Entrenador seleccionado en la JList de Entrenadores.
+	 * Luego resetea los campos de texto.
+	 */
 	@Override
 	public void agregarPokemon(Pokemon pokemon) {
 		this.listEntrenadores.getSelectedValue().aniadirPokemon(pokemon);
@@ -257,6 +298,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		reseteaCampos();
 	}
 
+	/**
+	 * Método que, luego de ingresar un entrenador o un pokemon, resetea los campos para dejarlos vacíos.
+	 */
 	public void reseteaCampos() {
 		this.textFieldNombreEntrenador.setText("");
 		this.textFieldNombrePokemon.setText("");
@@ -265,6 +309,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.textFieldGranRecarga.setText("");
 	}
 
+	/**
+	 * Método que, a partir de un entrenador seleccionado en la JList de Entrenadores, muestra en la JList de Pokemones, sus pokemones correspondientes
+	 */
 	@Override
 	public void mostrarPokemon() {
 		if (this.listEntrenadores.getSelectedValue() != null) {
@@ -280,6 +327,11 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return this.textFieldNombrePokemon.getText();
 	}
 
+	/**
+	 * Método que setea al Controlador como listener de los botones de la ventana.
+	 * 
+	 * <b> Pre: </b> actionListener distinto de null
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAgregarEntrenador.addActionListener(actionListener);
@@ -289,6 +341,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	}
 
+	/**
+	 * Método que habilita o deshabilita el botón para agregar Pokemon dependiendo de los campos ingresados.
+	 */
 	public void keyReleased(KeyEvent arg0) {
 
 		if (!this.getNombrePokemon().isEmpty() && !this.getTipoPokemon().isEmpty() && !this.getRecarga().isEmpty()
@@ -319,6 +374,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return this.textFieldGranRecarga.getText();
 	}
 
+	/**
+	 * Método que, cuando se presiona un botón, envía un evento al Controlador para ejecutar los métodos correspondientes
+	 */
 	public void mousePressed(MouseEvent e) {
 		ActionEvent evento;
 		String command;
@@ -345,6 +403,11 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	}
 
+	/**
+	 * Método que muestra en el JList de Entrenadores, los entrenadores ingresados hasta el momento.
+	 * 
+	 * <b> Pre: </b> entrenadores distinto de null
+	 */
 	@Override
 	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
 		for (int i = 0; i < entrenadores.size(); i++)
@@ -357,13 +420,11 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return textFieldTipo.getText();
 	}
 
+	/**
+	 * Método que al cambiar una seleccion de la JList de Entrenadores, automaticamente muestra los Pokemones del entrenador seleccionado.
+	 */
 	public void valueChanged(ListSelectionEvent e) {
 		mostrarPokemon();
 	}
-
-	/*@Override
-	public ArrayList<Entrenador> getEntrenadores() {
-		return Collections.list(listaModelEntrenador.elements()); // Pasa list model a ArrayList
-	}*/
 
 }

@@ -23,7 +23,7 @@ public class ArenaFinalizacion implements iStateArena {
 		double puntaje1 = Torneo.getInstance().puntaje(arena.getPokemon1());
 		double puntaje2 = Torneo.getInstance().puntaje(arena.getPokemon2());
 
-		arena.notificaEstado("RESULTADOS FINALES\n");
+		arena.notificaEstado("RESULTADOS FINALES");
 
 		arena.notificaEstado("\nEntrenador " + arena.getEntrenador1().getNombre() + " Pokemon: "
 				+ arena.getPokemon1().getNombre() + " Puntaje: " + puntaje1);

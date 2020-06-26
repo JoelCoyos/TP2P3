@@ -3,6 +3,7 @@ package excepciones;
 /**
  * Excepcion lanzada si se ingresa el tipo de un pokemon y el mismo no existe <br>
  */
+
 @SuppressWarnings("serial")
 public class TipoNoEncontradoException extends Exception {
 	private String nombre;

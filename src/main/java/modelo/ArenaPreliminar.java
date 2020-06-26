@@ -9,7 +9,6 @@ public class ArenaPreliminar implements iStateArena {
 	}
 	
 	public ArenaPreliminar() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -20,7 +19,7 @@ public class ArenaPreliminar implements iStateArena {
 	@Override
 	public void ejecutarFase() {
 
-		arena.notificaEstado("LOS ENTRENADORES " + arena.getEntrenador1().getNombre() + " Y " + arena.getEntrenador2().getNombre() + " INGRESAN A LA ARENA\n");
+		arena.notificaEstado("\nLOS ENTRENADORES " + arena.getEntrenador1().getNombre() + " Y " + arena.getEntrenador2().getNombre() + " INGRESAN A LA ARENA\n");
 		arena.notificaEstado(arena.getEntrenador1().getNombre() + " utilizara a su Pokemon " + arena.getPokemon1().getNombre());
 		arena.notificaEstado(arena.getEntrenador2().getNombre() + " utilizara a su Pokemon " + arena.getPokemon2().getNombre() + "\n");
 		if (arena.getHechizo1() == null) {

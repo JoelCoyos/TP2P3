@@ -1,5 +1,9 @@
 package modelo;
 
+/**
+ * La clase Batalla se extiene de Thread, ya que se van a ejecutar varias batallas en paralelo.
+ *
+ */
 public class Batalla extends Thread {
 
 	private Entrenador entrenador1, entrenador2;
@@ -76,6 +80,11 @@ public class Batalla extends Thread {
 		this.hechizo2 = hechizo2;
 	}
 
+	/**
+	 * Método que invoca todos los métodos referidos a las fases de la batalla.
+	 * Primero se obtiene una arena sobre la cual se desarrollará la batalla.
+	 * Luego las fases se ejecutarán a partir de la misma.
+	 */
 	public void run() {
 		try {
 			this.arena = Torneo.getInstance().asignarArena();

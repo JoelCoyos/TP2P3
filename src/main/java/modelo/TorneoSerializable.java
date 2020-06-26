@@ -3,19 +3,18 @@ package modelo;
 import java.util.ArrayList;
 
 public class TorneoSerializable {
-	
-	
-	
+
 	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
 	private ArrayList<Entrenador> participantesActuales = new ArrayList<Entrenador>();
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	private ArrayList<Arena> arenas = new ArrayList<Arena>();
-	private ArrayList<Batalla> batallas = new ArrayList<Batalla>(); 
+	private ArrayList<Batalla> batallas = new ArrayList<Batalla>();
 	private IEtapas etapa;
-	
+
 	/**
-	 * Objecto que usara para guardar las variables del torneo que queremos escribir en un archivo
+	 * Objecto que usara para guardar las variables del torneo que queremos escribir
+	 * en un archivo
 	 */
 	public TorneoSerializable() {
 	}
@@ -75,7 +74,5 @@ public class TorneoSerializable {
 	public void setBatallas(ArrayList<Batalla> batallas) {
 		this.batallas = batallas;
 	}
-	
-	
 
 }

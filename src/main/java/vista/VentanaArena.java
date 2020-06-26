@@ -14,6 +14,9 @@ import java.awt.GridLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Insets;
 
+/**
+ * Ventana que muestra el desarrollo 
+ */
 @SuppressWarnings("serial")
 public class VentanaArena extends JFrame implements IVistaArena {
 	private JScrollPane scrollPane;
@@ -42,7 +45,7 @@ public class VentanaArena extends JFrame implements IVistaArena {
 	 */
 	public VentanaArena() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 300);
+		setBounds(100, 100, 950, 500);
 		this.setResizable(false);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

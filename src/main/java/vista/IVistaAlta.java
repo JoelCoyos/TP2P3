@@ -7,6 +7,9 @@ import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
 import modelo.Pokemon;
 
+/**
+ * Interfaz implementada en la ventana donde se realiza el alta de los entrenadores y sus pokemones
+ */
 public interface IVistaAlta {
 	
 	String getNombreEntrenador();

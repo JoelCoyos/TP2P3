@@ -9,7 +9,6 @@ public class ArenaLimpieza implements iStateArena {
 	}
 	
 	public ArenaLimpieza() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

@@ -25,6 +25,10 @@ import vista.VentanaAlta;
 import vista.VentanaArena;
 import vista.VentanaTorneo;
 
+/**
+ * Clase Controlador, perteneciente al patrón MVC. Vínculo entre las vistas y el modelo. Observa a las arenas y el torneo.
+ *
+ */
 public class Controlador implements ActionListener, Observer {
 
 	private IVistaTorneo vistaTorneo;
@@ -32,6 +36,10 @@ public class Controlador implements ActionListener, Observer {
 	private ArrayList<Arena> arenas = new ArrayList<Arena>();
 	private IVistaArena vistaArena;
 
+	/**
+	 * Constructor de la clase. Si existe un archivo XML para recuperar, lo hace. 
+	 * En base al estado actual se setea la ventana correspondiente
+	 */
 	public Controlador() {
 
 		try {
@@ -54,6 +62,9 @@ public class Controlador implements ActionListener, Observer {
 		}
 	}
 
+	/**
+	 * Dicho método comienza el torneo. Abre las ventanas correspondientes.
+	 */
 	public void comenzarTorneo() {
 		if (vistaAlta != null)
 			vistaAlta.comenzarTorneo();
@@ -80,6 +91,9 @@ public class Controlador implements ActionListener, Observer {
 		this.vistaTorneo.setActionListener(this);
 	}
 
+	/**
+	 * Método que en base a acciones realizadas en las ventanas, ejecuta los métodos correspondientes
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -146,6 +160,9 @@ public class Controlador implements ActionListener, Observer {
 
 	}
 
+	/**
+	 * Método que recibe notificaciones desde el modelo para efectuar los cambios en las ventanas, como por ejemplo los cambios de fase.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 == Torneo.getInstance()) {
@@ -190,7 +207,7 @@ public class Controlador implements ActionListener, Observer {
 			if (vector[0] == null) {
 				vistaArena.muestraMensaje((String) vector[1], numeroArena);
 			} else {
-				vistaArena.muestraMensaje("--------------------INICIA LA BATALLA--------------------", numeroArena);
+				vistaArena.muestraMensaje("----------------------------------------------------------------------------------------------------INICIA LA BATALLA----------------------------------------------------------------------------------------------------", numeroArena);
 				vistaTorneo.progresoBatallas((Batalla) vector[0]);
 			}
 		} else
