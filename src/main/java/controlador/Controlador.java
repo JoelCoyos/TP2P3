@@ -160,7 +160,11 @@ public class Controlador implements ActionListener, Observer {
 			}
 		} else if (comando == "Comenzar Torneo") {
 			if (Torneo.getInstance().tieneMinimoUnPokemon())
+			{
+				vistaAlta.cerrarVentana();
 				Torneo.getInstance().avanzarFase();
+			}
+				
 			else
 				vistaAlta.mensajeAlerta("Todos los entrenadores tienen que tener minimo un pokemon");
 		} else if (comando == "Mostrar Pokemon")
@@ -205,7 +209,13 @@ public class Controlador implements ActionListener, Observer {
 		if (arg0 == Torneo.getInstance()) {
 			IEtapas etapa = (IEtapas) arg1;
 			if (arg1 == null)
-				vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
+			{
+				if(vistaTorneo!=null)
+					vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
+				else if(vistaAlta!=null)
+					vistaAlta.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
+			}
+				
 			else {
 				try {
 					SerializeToXML.escribirXML();

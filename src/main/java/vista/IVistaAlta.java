@@ -25,5 +25,6 @@ public interface IVistaAlta {
 	void agregarPokemon(Pokemon pokemon);
 	Pokemon getPokemon() throws TipoNoEncontradoException;
 	void setEntrenadores(ArrayList<Entrenador> entrenadores);
+	void cerrarVentana();
 
 }

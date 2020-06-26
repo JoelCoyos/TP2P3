@@ -420,4 +420,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		mostrarPokemon();
 	}
 
+	@Override
+	public void cerrarVentana() {
+		this.dispose();
+	}
+
 }
