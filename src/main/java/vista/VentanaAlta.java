@@ -198,24 +198,41 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.setVisible(true);
 	}
 
+	/**
+	 *Devuelve string que hay en el campo nombre del entrenador
+	 */
 	@Override
 	public String getNombreEntrenador() {
 		return this.textFieldNombreEntrenador.getText();
 	}
 
+	/**
+	 *Cierra esta ventana
+	 */
 	@Override
 	public void comenzarTorneo() {
-		this.dispose(); // CIERRA VENTANA ACTUAL
+		this.dispose(); 
 	}
 
+	/**
+	 * @param r el string que hay en el campo recarga del Pokemon
+	 * @return true si en el campo se escribio "si",false de lo contrario
+	 */
 	public boolean recarga(String r) {
 		return r.equalsIgnoreCase("Si");
 	}
+	
 
+	/**
+	 * Muestra en una ventana de dialogo el String que se paso como parametro
+	 */
 	public void mensajeAlerta(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
 
+	/**
+	 *Agrega a la lista de Entrenadores el Entrenador que se paso como parametro y resetea los campos
+	 */
 	@Override
 	public void agregarEntrenador(Entrenador entrenador) {
 		this.listaModelEntrenador.addElement(entrenador);
@@ -223,6 +240,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.reseteaCampos();
 	}
 
+	/**
+	 * Si el nombre del nombre esta vacio, retorna null, sino crea un nuevo {@link Entrenador} con el String del campo nombre
+	 */
 	public Entrenador getEntrenador() {
 		if(this.getNombreEntrenador().isEmpty())
 		{
@@ -234,10 +254,17 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		
 	}
 	
+	/**
+	 * Retorna el entrenador seleccionado
+	 */
 	public Entrenador entrenadorSeleccionado() {
 		return listEntrenadores.getSelectedValue();
 	}
 	
+	/**
+	 *Si el tipo y la recarga son correctos, se crea un nuevo {@link Pokemon} con los parametros de los campos de la ventana
+	 *y lo devuelve
+	 */
 	public Pokemon getPokemon() throws TipoNoEncontradoException {
 		Pokemon pokemon = null;
 		if (this.getRecarga().equalsIgnoreCase("Si") || this.getRecarga().equalsIgnoreCase("No")) {
@@ -250,6 +277,11 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return pokemon;
 	}
 
+	/**
+	 *Añade al Entrenador seleccionado un Pokemon pasado por parametro
+	 *
+	 *<b>pre:</b> Pokemon distinto de null
+	 */
 	@Override
 	public void agregarPokemon(Pokemon pokemon) {
 		this.listEntrenadores.getSelectedValue().aniadirPokemon(pokemon);
@@ -257,6 +289,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		reseteaCampos();
 	}
 
+	/**
+	 * Limpia los campos de los nombres, el tipo y las recargas
+	 */
 	public void reseteaCampos() {
 		this.textFieldNombreEntrenador.setText("");
 		this.textFieldNombrePokemon.setText("");
@@ -265,6 +300,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.textFieldGranRecarga.setText("");
 	}
 
+	/**
+	 *Si hay algun entrenador seleccionado, limpia la lista de Pokemones y añade todos los que tenga el entrenador
+	 */
 	@Override
 	public void mostrarPokemon() {
 		if (this.listEntrenadores.getSelectedValue() != null) {
@@ -275,11 +313,17 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		}
 	}
 
+	/**
+	 *Devuelve el String del campo de nombre del pokemon
+	 */
 	@Override
 	public String getNombrePokemon() {
 		return this.textFieldNombrePokemon.getText();
 	}
 
+	/**
+	 *Añade a los botones el action listener dado de parametro
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAgregarEntrenador.addActionListener(actionListener);
@@ -289,6 +333,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	}
 
+	/**
+	 *Despues de escribir cada letra nos fijamos si se puede habilitar el boton de agregar pokemon
+	 */
 	public void keyReleased(KeyEvent arg0) {
 
 		if (!this.getNombrePokemon().isEmpty() && !this.getTipoPokemon().isEmpty() && !this.getRecarga().isEmpty()
@@ -319,6 +366,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		return this.textFieldGranRecarga.getText();
 	}
 
+	/**
+	 *Delegamos las acciones de los botones al action listener
+	 */
 	public void mousePressed(MouseEvent e) {
 		ActionEvent evento;
 		String command;
@@ -345,6 +395,9 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 
 	}
 
+	/**
+	 *Dado un ArrayList de entrenadores, los agregamos a la lista de entrenadores de la ventana
+	 */
 	@Override
 	public void setEntrenadores(ArrayList<Entrenador> entrenadores) {
 		for (int i = 0; i < entrenadores.size(); i++)
@@ -352,18 +405,19 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 		this.listEntrenadores.setModel(listaModelEntrenador);
 	}
 
+	/**
+	 *Devuelve el String del campo tipo del pokemon
+	 */
 	@Override
 	public String getTipoPokemon() {
 		return textFieldTipo.getText();
 	}
 
+	/**
+	 *Cuando seleccionamos un entrenador muestra sus Pokemon
+	 */
 	public void valueChanged(ListSelectionEvent e) {
 		mostrarPokemon();
 	}
-
-	/*@Override
-	public ArrayList<Entrenador> getEntrenadores() {
-		return Collections.list(listaModelEntrenador.elements()); // Pasa list model a ArrayList
-	}*/
 
 }
