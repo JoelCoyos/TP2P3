@@ -224,7 +224,14 @@ public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, Mous
 	}
 
 	public Entrenador getEntrenador() {
-		return new Entrenador(this.getNombreEntrenador());
+		if(this.getNombreEntrenador().isEmpty())
+		{
+			return null;
+		}
+		else {
+			return new Entrenador(this.getNombreEntrenador());
+		}
+		
 	}
 	
 	public Entrenador entrenadorSeleccionado() {

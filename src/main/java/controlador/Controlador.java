@@ -88,8 +88,15 @@ public class Controlador implements ActionListener, Observer {
 		if (comando == "Agregar Entrenador") {
 			if (!Torneo.getInstance().cantidadEntrenadoresNecesaria()) {
 				Entrenador entrenador = vistaAlta.getEntrenador();
-				this.vistaAlta.agregarEntrenador(entrenador);
-				Torneo.getInstance().agregarEntrenador(entrenador);
+				if(entrenador !=null)
+				{
+					this.vistaAlta.agregarEntrenador(entrenador);
+					Torneo.getInstance().agregarEntrenador(entrenador);
+				}
+				else {
+					vistaAlta.mensajeAlerta("Ingrese un nombre valido");
+				}
+				
 			} else {
 				vistaAlta.reseteaCampos();
 				vistaAlta.mensajeAlerta("No puede agregar mas entrenadores");

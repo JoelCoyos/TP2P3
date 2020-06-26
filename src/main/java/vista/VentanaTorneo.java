@@ -29,9 +29,11 @@ import modelo.Viento;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 @SuppressWarnings("serial")
-public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener {
+public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener, ListSelectionListener {
 
 	private JPanel contentPane;
 	private DefaultListModel<Entrenador> listModelEntrenadores = new DefaultListModel<Entrenador>();
@@ -100,6 +102,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.panel_2.add(this.scrollPaneE1);
 
 		this.listEntrenadores1 = new JList<Entrenador>();
+		listEntrenadores1.addListSelectionListener(this);
 		this.listEntrenadores1
 				.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.scrollPaneE1.setViewportView(this.listEntrenadores1);
@@ -132,6 +135,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.panel_3.add(this.scrollPane_4);
 
 		this.listEntrenadores2 = new JList<Entrenador>();
+		listEntrenadores2.addListSelectionListener(this);
 		this.listEntrenadores2
 				.setBorder(new TitledBorder(null, "Entrenadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		this.scrollPane_4.setViewportView(this.listEntrenadores2);
@@ -370,4 +374,10 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.dispose();
 	}
 
+	public void valueChanged(ListSelectionEvent e) {
+		this.listModelPokemon1.clear();
+		this.listModelPokemon2.clear();
+		this.listModelHechizo1.clear();
+		this.listModelHechizo2.clear();
+	}
 }
