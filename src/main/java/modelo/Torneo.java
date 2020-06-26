@@ -25,6 +25,9 @@ public class Torneo extends Observable {
 
 	private static Torneo instance = null;
 
+	/**
+	 * Al crear un Torneo se añaden las dos Arenas que se usaran
+	 */
 	public Torneo() {
 		arenas.add(new Arena());
 		arenas.add(new Arena());
@@ -34,6 +37,9 @@ public class Torneo extends Observable {
 		return entrenadores;
 	}
 
+	/**Aplicacion del patron Singleton
+	 * @return instancia estatica del torneo
+	 */
 	public static Torneo getInstance() {
 
 		if (Torneo.instance == null)
@@ -49,6 +55,11 @@ public class Torneo extends Observable {
 		etapa.comenzarBatallas();
 	}
 
+	/**
+	 * Revisa si es posible avanzar de etapa y lo notifica a sus observadores
+	 * 
+	 * <b>Pre: </b> etapa distinto de null
+	 */
 	public void avanzarFase() {
 		if (etapa.faseCompletada()) {
 			etapa.avanzarFase();
@@ -72,6 +83,16 @@ public class Torneo extends Observable {
 		etapa.ganadorBatalla(entrenador);
 	}
 
+	/** Añade un nuevo enfrentamiento
+	 * @param entGanador Entrenador que gano la batalla
+	 * @param pokeGanador Pokemon que gano la batalla
+	 * @param hecGanador Hechizo que uso el entrenador ganador
+	 * @param entPerdedor Entrenador que perdio la batalla
+	 * @param pokePerdedor Pokemon que gano la batalla
+	 * @param hecPerdedor Hechizo que uso el entrenador perdedor
+	 * 
+	 * <b>Pre: </b> todas las variables distintas de null
+	 */
 	public void aniadirEnfrentamiento(Entrenador entrenadorGan, Pokemon pokeGan, Hechizo hecGanador,
 			Entrenador entrenadorPer, Pokemon pokePer, Hechizo hecPerdedor) {
 		String hec1, hec2;
@@ -164,6 +185,12 @@ public class Torneo extends Observable {
 		return etapa;
 	}
 
+	/**
+	 * Espera que el arrayList de arenas no este vacio
+	 * @return la primera arena del arrayList
+	 * 
+	 * <b>Pre: </b>arenas distinto de null
+	 */
 	public synchronized Arena asignarArena() {
 
 		while (arenas.isEmpty())
@@ -177,6 +204,12 @@ public class Torneo extends Observable {
 		return asignar;
 	}
 
+	/**
+	 * Agrega una arena al arrayList de arenas y lo notifica
+	 * @param arena: arena a ingresar
+	 * 
+	 * <b>Pre: </b> arena distinto de null
+	 */
 	public synchronized void liberarArena(Arena arena) {
 		arenas.add(arena);
 		notifyAll();

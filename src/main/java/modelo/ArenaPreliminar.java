@@ -12,6 +12,11 @@ public class ArenaPreliminar implements iStateArena {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 *Se notifican los entrenadores que participaran en esta arena. Se cambia el estado de la arena a {@link ArenaBatalla}
+	 *
+	 *<b>Pre: </b> arena distinto de null, y con entrenador1, entrenador2, pokemon1, pokemon2 distintos de null
+	 */
 	@Override
 	public void ejecutarFase() {
 

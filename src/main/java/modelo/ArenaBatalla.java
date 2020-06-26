@@ -6,6 +6,9 @@ public class ArenaBatalla implements iStateArena {
 
 	private Arena arena;
 
+	/**
+	 * @param arena: Arena a la cual pertenece esta fase
+	 */
 	public ArenaBatalla(Arena arena) {
 		this.arena = arena;
 	}
@@ -14,6 +17,12 @@ public class ArenaBatalla implements iStateArena {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Se decide al azar que Entrenador comenzara, si tienen se elijen sus hechizos, y ambos Pokemones se enfrentan. 
+	 * Se notifica por la arena que termino la batalla y se cambia el estado a {@link ArenaFinalizacion}
+	 * 
+	 * <b>Pre: </b> arena distinto de null, y con entrenador1, entrenador2, pokemon1, pokemon2 distintos de null
+	 */
 	@Override
 	public void ejecutarFase() {
 

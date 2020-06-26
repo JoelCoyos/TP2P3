@@ -12,6 +12,9 @@ public class DeserializeFromXML {
 
 	private static final String SERIALIZED_FILE_NAME = "torneo.xml";
 
+	/** Lee el archivo "torneo.xml" y crea un {@link TorneoSerializable} con sus datos, luego se los pasamos al {@link Torneo} singleton
+	 * @throws FileNotFoundException no hay un archivo llamado torneo.xml
+	 */
 	public static void leer() throws FileNotFoundException {
 		XMLDecoder decoder = null;
 

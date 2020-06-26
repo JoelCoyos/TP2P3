@@ -7,6 +7,14 @@ public class Batalla extends Thread {
 	private Hechizo hechizo1, hechizo2;
 	private Arena arena;
 	
+	/**
+	 * @param entrenador1
+	 * @param entrenador2
+	 * @param pokemon1
+	 * @param pokemon2
+	 * @param hechizo1
+	 * @param hechizo2
+	 */
 	public Batalla(Entrenador entrenador1, Entrenador entrenador2, Pokemon pokemon1, Pokemon pokemon2, Hechizo hechizo1, Hechizo hechizo2) {
 		this.entrenador1 = entrenador1;
 		this.entrenador2 = entrenador2;

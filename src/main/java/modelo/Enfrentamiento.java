@@ -8,6 +8,17 @@ public class Enfrentamiento {
 	String pokeGanador, pokePerdedor;
 	String hecGanador, hecPerdedor;
 
+	/**
+	 * Guarda los datos de cada batalla
+	 * @param entGanador Entrenador que gano la batalla
+	 * @param pokeGanador Pokemon que gano la batalla
+	 * @param hecGanador Nombre del hechizo que uso el entrenador ganador
+	 * @param entPerdedor Entrenador que perdio la batalla
+	 * @param pokePerdedor Pokemon que gano la batalla
+	 * @param hecPerdedor Nombre del hechizo que uso el entrenador perdedor
+	 * 
+	 * <b>Pre: </b> todas las variables distintas de null
+	 */
 	public Enfrentamiento(String entGanador, String pokeGanador, String hecGanador, String entPerdedor,
 			String pokePerdedor, String hecPerdedor) {
 		this.entGanador = entGanador;

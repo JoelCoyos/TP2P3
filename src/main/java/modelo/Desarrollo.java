@@ -17,6 +17,11 @@ public class Desarrollo implements IEtapas {
 		this.cantidadParticipantes = cantidadParticipantes;
 	}
 
+	/**
+	 *Toma los participantes actuales y las batallas del {@link Torneo}, limpia los participantes actuales y comienza los threads de cada batalla
+	 *
+	 *<b>Pre: </b> batallas distinto de null, participantes actuales distinto de null
+	 */
 	@Override
 	public void comenzarBatallas() {
 		
@@ -28,6 +33,10 @@ public class Desarrollo implements IEtapas {
 			batallas.remove(0).start();
 	}
 
+	/**
+	 *Si la cantidad de particpantes actuales son 2 es porque ocurrio la final, se cambia la etapa del torneo a {@link Alta}. 
+	 *De lo contrario, se cambia la etapa a un nuevo {@link Desarrollo}
+	 */
 	@Override
 	public void avanzarFase() {
 		if (cantidadParticipantes == 2) {
@@ -58,6 +67,11 @@ public class Desarrollo implements IEtapas {
 		Torneo.getInstance().getParticipantesActuales().add(entrenador);
 	}
 
+	/**
+	 *Retorna true si la cantidad de participantes actuales es igual a la mitad de partipantes que empezaron la etapa
+	 *
+	 *<b>Pre: </b> participantes actuales distinto de null
+	 */
 	@Override
 	public boolean faseCompletada() {
 		return (cantidadParticipantes/2 == Torneo.getInstance().getParticipantesActuales().size());

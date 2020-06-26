@@ -11,6 +11,12 @@ public class ArenaFinalizacion implements iStateArena {
 	public ArenaFinalizacion() {
 	}
 
+	/**
+	 * Se calcula el puntaje de cada entrenador, se notifica a traves de la arena los puntajes, el ganador y el perdedor. 
+	 * Se cambia el estado de la arena a {@link ArenaLimpieza}
+	 * 
+	 * <b>Pre: </b> arena distinto de null, y con entrenador1, entrenador2, pokemon1, pokemon2 distintos de null
+	 */
 	@Override
 	public void ejecutarFase() {
 

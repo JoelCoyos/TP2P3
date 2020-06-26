@@ -12,6 +12,9 @@ public class SerializeToXML {
 	
 	private static final String SERIALIZED_FILE_NAME = "torneo.xml";
 	
+	/** 
+	 * @throws FileNotFoundException
+	 */
 	public static void escribirXML() throws FileNotFoundException
 	{
 		XMLEncoder encoder = null;

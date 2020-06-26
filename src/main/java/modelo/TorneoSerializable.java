@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class TorneoSerializable {
 	
+	
+	
 	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
 	private ArrayList<Entrenador> participantesActuales = new ArrayList<Entrenador>();
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
@@ -12,6 +14,9 @@ public class TorneoSerializable {
 	private ArrayList<Batalla> batallas = new ArrayList<Batalla>(); 
 	private IEtapas etapa;
 	
+	/**
+	 * Objecto que usara para guardar las variables del torneo que queremos escribir en un archivo
+	 */
 	public TorneoSerializable() {
 	}
 

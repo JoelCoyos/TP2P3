@@ -10,6 +10,12 @@ public class Arena extends Observable {
 	public Arena() {
 	}
 
+	/**
+	 * @param batalla: Batalla que ingresara a esta Arena
+	 * Se avisa a los observadores que una Batalla ingreso a la Arena
+	 * <b>Pre: </b> batalla distinto de null
+	 * 
+	 */
 	public void ingresarArena(Batalla batalla) {
 		estado = new ArenaPreliminar(this);
 		this.batalla = batalla;
@@ -17,6 +23,11 @@ public class Arena extends Observable {
 		notifyObservers(new Object[] { batalla, "Inicia" });
 	}
 
+
+	/**
+	 * @param string: mensaje que se envia a los observadores
+	 * <b>Pre: </b> string distinto de null
+	 */
 	public void notificaEstado(String string) {
 		setChanged();
 		notifyObservers(new Object[] { null, string });
@@ -26,6 +37,10 @@ public class Arena extends Observable {
 		return batalla;
 	}
 
+
+	/**
+	 * Delega el funcionamiento de cada fase a su estado
+	 */
 	public void ejecutarFase() {
 		estado.ejecutarFase();
 	}
