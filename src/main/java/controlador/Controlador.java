@@ -39,16 +39,8 @@ public class Controlador implements ActionListener, Observer {
 	private IVistaArena vistaArena;
 
 	/**
-<<<<<<< HEAD
 	 * Constructor de la clase. Si existe un archivo XML para recuperar, lo hace. 
 	 * En base al estado actual se setea la ventana correspondiente
-=======
-	 * Lee el archivo torneo.xml y observa al Torneo.
-	 * Si no hay un archivo, el Torneo empieza sin ningun entrenador y se abre la {@link VentanaAlta}
-	 * Si el torneo del archivo estaba en la etapa {@link Alta}, abre la VentanaAlta, se agrega como action listener y le pasa los entrenadores del archivo
-	 * Si el torneo del archivo estaba en la etapa {@link Desarrollo}, se obtienen las arenas del Torneo, se las observa, y se comienza el Torneo
-	 * 
->>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	public Controlador() {
 
@@ -73,14 +65,7 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Dicho método comienza el torneo. Abre las ventanas correspondientes.
-=======
-	 * Si hay alguna {@link VentanaAlta} abierta, la cierra
-	 * Se abre una {@link VentanaTorneo} , le agregamos el action listener y le damos los participantes actuales del torneo
-	 * 
-	 * <b>Pre: </b> participantes actuales del torneo distinto de null
->>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	public void comenzarTorneo() {
 		if (vistaAlta != null)
@@ -109,9 +94,6 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Método que en base a acciones realizadas en las ventanas, ejecuta los métodos correspondientes
-=======
 	 * Action listener de aquellos boton que necesiten alguna informacion del Torneo, o que quieran modificarlos
 	 * 
 	 * Agregar Entrenador: Revisa si no se esta excediendo de entrenadores, si no lo esta, 
@@ -134,7 +116,6 @@ public class Controlador implements ActionListener, Observer {
 	 * <n>
 	 * Avanzar Fase: Le pide al Torneo avanzar de fase
 	 * 
->>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -207,9 +188,7 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Método que recibe notificaciones desde el modelo para efectuar los cambios en las ventanas, como por ejemplo los cambios de fase.
-=======
 	 *Recibira las notificaciones de los observados
 	 *<n>
 	 *Si el Observable es el Torneo, nos enviara como objecto una {@link IEtapas}, que sera la siguiente etapa<n>
@@ -223,7 +202,6 @@ public class Controlador implements ActionListener, Observer {
 	 *el String que nos paso como objeto en la {@link VentanaArena}
 	 *<n>
 	 *Si no es ninguno de estos Observable, arroja una Excepcion
->>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
