@@ -23,6 +23,9 @@ public class DeserializeFromXML {
 		Torneo.getInstance().setEntrenadores(torneoSerializable.getEntrenadores());
 		Torneo.getInstance().setEtapa(torneoSerializable.getEtapa());
 		Torneo.getInstance().setParticipantesActuales(torneoSerializable.getParticipantesActuales());
+		Torneo.getInstance().setArenas(torneoSerializable.getArenas());
+		Torneo.getInstance().setBatallas(torneoSerializable.getBatallas());
+		Torneo.getInstance().setHechizos(torneoSerializable.getHechizos());
 
 	}
 

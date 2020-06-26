@@ -15,23 +15,20 @@ import modelo.Batalla;
 import modelo.Entrenador;
 import modelo.IEtapas;
 import modelo.Pokemon;
-import modelo.Premiacion;
 import modelo.Torneo;
 import serializacion.DeserializeFromXML;
+import serializacion.SerializeToXML;
 import vista.IVistaTorneo;
 import vista.IVistaAlta;
 import vista.IVistaArena;
-import vista.IVistaPremiacion;
 import vista.VentanaAlta;
 import vista.VentanaArena;
-import vista.VentanaPremiacion;
 import vista.VentanaTorneo;
 
 public class Controlador implements ActionListener, Observer {
 
 	private IVistaTorneo vistaTorneo;
 	private IVistaAlta vistaAlta;
-	private IVistaPremiacion vistaPremiacion;
 	private ArrayList<Arena> arenas = new ArrayList<Arena>();
 	private IVistaArena vistaArena;
 
@@ -56,7 +53,8 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	public void comenzarTorneo() {
-		vistaAlta.comenzarTorneo();
+		if (vistaAlta != null)
+			vistaAlta.comenzarTorneo();
 		vistaTorneo = new VentanaTorneo();
 		vistaTorneo.setActionListener(this);
 		vistaTorneo.mostrarEntrenadores(Torneo.getInstance().getParticipantesActuales());
@@ -113,7 +111,10 @@ public class Controlador implements ActionListener, Observer {
 				vistaAlta.mensajeAlerta("Seleccione un entrenador");
 			}
 		} else if (comando == "Comenzar Torneo") {
-			Torneo.getInstance().avanzarFase();
+			if (Torneo.getInstance().tieneMinimoUnPokemon())
+				Torneo.getInstance().avanzarFase();
+			else
+				vistaAlta.mensajeAlerta("Todos los entrenadores tienen que tener minimo un pokemon");
 		} else if (comando == "Mostrar Pokemon")
 			this.vistaTorneo.mostrarPokemonHechizos();
 		else if (comando == "Agregar Batalla") {
@@ -142,25 +143,37 @@ public class Controlador implements ActionListener, Observer {
 			IEtapas etapa = (IEtapas) arg1;
 			if (arg1 == null)
 				vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
-			else if (etapa.getNombre() == "Alta")
-				vistaAlta = new VentanaAlta();
 			else {
-				if (this.vistaArena != null)
-					this.vistaArena.cerrarVentana();
-				if (etapa.getNombre() == "Desarrollo") {
-					if (vistaTorneo != null)
-						vistaTorneo.cerrarVentana();
-					if (arenas.isEmpty()) {
-						Iterator<Arena> it = Torneo.getInstance().getArenas().iterator();
-						while (it.hasNext()) {
-							Arena arena = it.next();
-							arenas.add(arena);
-							arena.addObserver(this);
-						}
+				try {
+					SerializeToXML.escribirXML();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				if (etapa.getNombre() == "Alta") {
+					if (vistaTorneo != null) {
+						vistaTorneo.premiacion(Torneo.getInstance().getParticipantesActuales().get(0));
+						vistaArena.cerrarVentana();
 					}
-					this.comenzarTorneo();
-				} else
-					vistaPremiacion = new VentanaPremiacion();
+					vistaAlta = new VentanaAlta();
+					vistaAlta.setActionListener(this);
+					vistaAlta.setEntrenadores(Torneo.getInstance().getEntrenadores());
+				} else {
+					if (this.vistaArena != null)
+						this.vistaArena.cerrarVentana();
+					if (etapa.getNombre() == "Desarrollo") {
+						if (vistaTorneo != null)
+							vistaTorneo.cerrarVentana();
+						if (arenas.isEmpty()) {
+							Iterator<Arena> it = Torneo.getInstance().getArenas().iterator();
+							while (it.hasNext()) {
+								Arena arena = it.next();
+								arenas.add(arena);
+								arena.addObserver(this);
+							}
+						}
+						this.comenzarTorneo();
+					}
+				}
 			}
 		} else if (arenas.contains(arg0)) {
 			Object vector[] = (Object[]) arg1;

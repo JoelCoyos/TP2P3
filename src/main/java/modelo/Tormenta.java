@@ -4,6 +4,9 @@ package modelo;
  *{@link Hechizo} de tipo tormenta<br>
  */
 public class Tormenta implements Hechizo {
+	
+	public Tormenta() {
+	}
 
 	@Override
 	public void hechizar(Hechizable hechizable) {
@@ -11,8 +14,9 @@ public class Tormenta implements Hechizo {
 	}
 
 	@Override
-	public String getNombre() {
+	public String toString() {
 		return "Tormenta";
 	}
+
 
 }

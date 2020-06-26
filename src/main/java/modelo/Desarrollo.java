@@ -4,10 +4,17 @@ import java.util.ArrayList;
 
 public class Desarrollo implements IEtapas {
 	
-	private int cantidadParticipantes;
+	private int cantidadParticipantes = Torneo.getInstance().getParticipantesActuales().size();
 	
 	public Desarrollo() {
-		this.cantidadParticipantes = Torneo.getInstance().getParticipantesActuales().size();
+	}
+
+	public int getCantidadParticipantes() {
+		return cantidadParticipantes;
+	}
+
+	public void setCantidadParticipantes(int cantidadParticipantes) {
+		this.cantidadParticipantes = cantidadParticipantes;
 	}
 
 	@Override
@@ -22,10 +29,12 @@ public class Desarrollo implements IEtapas {
 
 	@Override
 	public void avanzarFase() {
-		if (cantidadParticipantes == 1)
-			Torneo.getInstance().setEtapa(new Premiacion());
-		else
+		if (cantidadParticipantes == 2) {
+			Torneo.getInstance().setEtapa(new Alta());
+		}
+		else {
 			Torneo.getInstance().setEtapa(new Desarrollo());
+		}
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,14 +24,13 @@ import modelo.Hechizo;
 import modelo.Niebla;
 import modelo.Pokemon;
 import modelo.Tormenta;
-import modelo.Torneo;
 import modelo.Viento;
 
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
-import java.awt.FlowLayout;
 
+@SuppressWarnings("serial")
 public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener {
 
 	private JPanel contentPane;
@@ -363,6 +361,12 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 
 	@Override
 	public void cerrarVentana() {
+		this.dispose();
+	}
+
+	@Override
+	public void premiacion(Entrenador entrenador) {
+		JOptionPane.showMessageDialog(this,"El ganador del torneo fue " + entrenador.getNombre());
 		this.dispose();
 	}
 

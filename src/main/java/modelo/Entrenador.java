@@ -3,9 +3,6 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import excepciones.FaltanHechizosException;
-import excepciones.PokemonNoEncontradoException;
-
 /**
  *Clase que representa a un entrenador en un juego de estrategia por turnos<br>
  */
@@ -19,13 +16,10 @@ public class Entrenador implements Cloneable, Clasificable {
 	 * @param nombre: nombre del Entrenador<br>
 	 */
 	public Entrenador(String nombre) {
-		super();
 		this.nombre = nombre;
 	}
 	
-	public Entrenador()
-	{
-		
+	public Entrenador() {
 	}
 
 	/**
@@ -74,13 +68,10 @@ public class Entrenador implements Cloneable, Clasificable {
 	 * @throws FaltanHechizosException En el caso de que el entrenador ya no pueda usar mas hechizos se tirara esta excepcion
 	 * Pre: pokemon distinto de nulo
 	 */
-	public void hechizar(Hechizo hechizo, Pokemon pokemon) throws FaltanHechizosException {
+	public void hechizar(Hechizo hechizo, Pokemon pokemon) {
 		if (cantidadHechizos > 0) {
 			this.cantidadHechizos--;
 			hechizo.hechizar(pokemon);
-		} else {
-			throw new FaltanHechizosException("Un entrenador quizo invocar un hechizo sin tener alguno disponible",
-					this.nombre, hechizo.getNombre());
 		}
 
 	}
@@ -105,35 +96,6 @@ public class Entrenador implements Cloneable, Clasificable {
 			clonEntrenador.pokemones.add(pokeClonado);
 		}
 		return clonEntrenador;
-	}
-
-	/**
-	 * @param nro Numero del pokemon
-	 * @return El pokemon solicitado
-	 * @throws PokemonNoEncontradoException Se tirara esta expepcion cuando el numero de Pokemon no se encuentre
-	 */
-	protected Pokemon obtenerPokemon(int nro) throws PokemonNoEncontradoException {
-		Pokemon seleccionado = null;
-		if (nro >= 1 && nro <= pokemones.size())
-			seleccionado = pokemones.get(nro - 1);
-		else
-			throw new PokemonNoEncontradoException("El Pokemon no fue encontrado", nro, this.getNombre());
-		return seleccionado;
-	}
-
-	/**
-	 * @return Un String con todos los Pokemon
-	 */
-	public String listadoPokemon() {
-		int i = 0;
-		StringBuilder sb = new StringBuilder();
-		Iterator<Pokemon> it = pokemones.iterator();
-		while (it.hasNext()) {
-			sb.append(i + 1 + ")- " + it.next().toString());
-			sb.append("\n");
-			i++;
-		}
-		return sb.toString();
 	}
 
 	/**

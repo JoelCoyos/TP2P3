@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.Observable;
-import java.util.concurrent.Semaphore;
 
 public class Arena extends Observable {
 

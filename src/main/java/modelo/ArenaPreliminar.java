@@ -18,12 +18,12 @@ public class ArenaPreliminar implements iStateArena {
 			arena.notificaEstado(arena.getEntrenador1().getNombre() + " no usara ningun hechizo.");
 		}
 		else
-			arena.notificaEstado(arena.getEntrenador1().getNombre() + " utilizara el hechizo " + arena.getHechizo1().getNombre());
+			arena.notificaEstado(arena.getEntrenador1().getNombre() + " utilizara el hechizo " + arena.getHechizo1().toString());
 		if (arena.getHechizo2() == null) {
 			arena.notificaEstado(arena.getEntrenador2().getNombre() + " no usara ningun hechizo.\n");
 		}
 		else
-			arena.notificaEstado(arena.getEntrenador2().getNombre() + " utilizara el hechizo " + arena.getHechizo1().getNombre() + "\n");
+			arena.notificaEstado(arena.getEntrenador2().getNombre() + " utilizara el hechizo " + arena.getHechizo2().toString() + "\n");
 		
 		arena.setEstado(new ArenaBatalla(arena));
 		

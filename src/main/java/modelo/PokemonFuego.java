@@ -22,7 +22,6 @@ public class PokemonFuego extends Pokemon implements Cloneable {
 	}
 	
 	public PokemonFuego() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	protected void recuperarse() {
@@ -51,8 +50,6 @@ public class PokemonFuego extends Pokemon implements Cloneable {
 				this.fuerza *= 1.8;
 				this.vitalidad *= 1.8;
 			}
-					
-			System.out.println(this.getNombre() + " recarga su fuerza y vitalidad");
 		}
 		else
 			super.recargar();
@@ -67,7 +64,6 @@ public class PokemonFuego extends Pokemon implements Cloneable {
 	public void golpeFinal(Pokemon otroPokemon) {
 		otroPokemon.recibeDanio(this.fuerza * 1.25);
 		this.fuerza = 0;
-		System.out.println(this.getNombre() + " efectua un ataque final sobre " + otroPokemon.getNombre() + ". Su fuerza se reduce a 0.");
 	}
 
 	/**
@@ -120,7 +116,6 @@ public class PokemonFuego extends Pokemon implements Cloneable {
 		try {
 			respuesta=super.clone();
 		} catch (CloneNotSupportedException e) {
-			
 		}
 		return respuesta;
 	}

@@ -19,7 +19,6 @@ public class Enfrentamiento {
 	}
 	
 	public Enfrentamiento() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

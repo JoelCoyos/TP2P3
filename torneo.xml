@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="14.0.1" class="java.beans.XMLDecoder">
+<java version="1.8.0_251" class="java.beans.XMLDecoder">
  <object class="modelo.TorneoSerializable" id="TorneoSerializable0">
+  <void property="arenas">
+   <void method="add">
+    <object class="modelo.Arena"/>
+   </void>
+   <void method="add">
+    <object class="modelo.Arena"/>
+   </void>
+  </void>
   <void property="entrenadores">
    <void method="add">
     <object class="modelo.Entrenador" id="Entrenador0">
      <void property="nombre">
-      <string>Ash</string>
+      <string>Lu</string>
      </void>
      <void property="pokemones">
       <void method="add">
@@ -27,6 +35,15 @@
         </void>
        </object>
       </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="modelo.Entrenador" id="Entrenador1">
+     <void property="nombre">
+      <string>Loren</string>
+     </void>
+     <void property="pokemones">
       <void method="add">
        <object class="modelo.PokemonFuego">
         <void property="escudo">
@@ -38,11 +55,23 @@
         <void property="nombre">
          <string>Charizard</string>
         </void>
+        <void property="puedeRecargar">
+         <boolean>true</boolean>
+        </void>
         <void property="vitalidad">
          <double>530.0</double>
         </void>
        </object>
       </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="modelo.Entrenador" id="Entrenador2">
+     <void property="nombre">
+      <string>Chicha</string>
+     </void>
+     <void property="pokemones">
       <void method="add">
        <object class="modelo.PokemonHielo">
         <void property="escudo">
@@ -57,6 +86,9 @@
         <void property="puedeRecargar">
          <boolean>true</boolean>
         </void>
+        <void property="superRecarga">
+         <boolean>true</boolean>
+        </void>
         <void property="vitalidad">
          <double>500.0</double>
         </void>
@@ -66,46 +98,11 @@
     </object>
    </void>
    <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador1">
+    <object class="modelo.Entrenador" id="Entrenador3">
      <void property="nombre">
-      <string>Misty</string>
+      <string>Joel</string>
      </void>
      <void property="pokemones">
-      <void method="add">
-       <object class="modelo.PokemonAgua">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>120.0</double>
-        </void>
-        <void property="nombre">
-         <string>Lapras</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>500.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonElectrico">
-        <void property="escudo">
-         <double>75.0</double>
-        </void>
-        <void property="fuerza">
-         <double>140.0</double>
-        </void>
-        <void property="nombre">
-         <string>Zapdos</string>
-        </void>
-        <void property="vitalidad">
-         <double>450.0</double>
-        </void>
-       </object>
-      </void>
       <void method="add">
        <object class="modelo.PokemonTierra">
         <void property="escudo">
@@ -115,7 +112,7 @@
          <double>50.0</double>
         </void>
         <void property="nombre">
-         <string>Diglett</string>
+         <string>Kakuna</string>
         </void>
         <void property="puedeRecargar">
          <boolean>true</boolean>
@@ -129,62 +126,27 @@
     </object>
    </void>
    <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador2">
+    <object class="modelo.Entrenador" id="Entrenador4">
      <void property="nombre">
-      <string>Brock</string>
+      <string>Perro de Joel</string>
      </void>
      <void property="pokemones">
       <void method="add">
-       <object class="modelo.PokemonHielo">
+       <object class="modelo.PokemonTierra">
         <void property="escudo">
-         <double>120.0</double>
-        </void>
-        <void property="fuerza">
          <double>100.0</double>
         </void>
+        <void property="fuerza">
+         <double>50.0</double>
+        </void>
         <void property="nombre">
-         <string>Jynx</string>
+         <string>Kakuna</string>
         </void>
         <void property="puedeRecargar">
          <boolean>true</boolean>
         </void>
         <void property="vitalidad">
-         <double>500.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonFuego">
-        <void property="escudo">
-         <double>200.0</double>
-        </void>
-        <void property="fuerza">
-         <double>80.0</double>
-        </void>
-        <void property="nombre">
-         <string>Charizard</string>
-        </void>
-        <void property="vitalidad">
-         <double>530.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonFuego">
-        <void property="escudo">
-         <double>200.0</double>
-        </void>
-        <void property="fuerza">
-         <double>80.0</double>
-        </void>
-        <void property="nombre">
-         <string>Ponyta</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>530.0</double>
+         <double>700.0</double>
         </void>
        </object>
       </void>
@@ -192,46 +154,67 @@
     </object>
    </void>
    <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador3">
+    <object class="modelo.Entrenador" id="Entrenador5">
      <void property="nombre">
-      <string>Tracey</string>
+      <string>Ciro</string>
      </void>
      <void property="pokemones">
       <void method="add">
-       <object class="modelo.PokemonElectrico">
+       <object class="modelo.PokemonTierra">
         <void property="escudo">
-         <double>75.0</double>
+         <double>100.0</double>
         </void>
         <void property="fuerza">
-         <double>140.0</double>
+         <double>50.0</double>
         </void>
         <void property="nombre">
-         <string>Pikachu</string>
+         <string>Caterpie</string>
         </void>
         <void property="puedeRecargar">
          <boolean>true</boolean>
         </void>
         <void property="vitalidad">
-         <double>450.0</double>
+         <double>700.0</double>
         </void>
        </object>
       </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="modelo.Entrenador" id="Entrenador6">
+     <void property="nombre">
+      <string>Perla</string>
+     </void>
+     <void property="pokemones">
       <void method="add">
-       <object class="modelo.PokemonAgua">
+       <object class="modelo.PokemonTierra">
         <void property="escudo">
          <double>100.0</double>
         </void>
         <void property="fuerza">
-         <double>120.0</double>
+         <double>50.0</double>
         </void>
         <void property="nombre">
-         <string>Milotic</string>
+         <string>Graveler</string>
+        </void>
+        <void property="puedeRecargar">
+         <boolean>true</boolean>
         </void>
         <void property="vitalidad">
-         <double>500.0</double>
+         <double>700.0</double>
         </void>
        </object>
       </void>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="modelo.Entrenador" id="Entrenador7">
+     <void property="nombre">
+      <string>Oso</string>
+     </void>
+     <void property="pokemones">
       <void method="add">
        <object class="modelo.PokemonAgua">
         <void property="escudo">
@@ -254,261 +237,35 @@
      </void>
     </object>
    </void>
-   <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador4">
-     <void property="nombre">
-      <string>Aura</string>
-     </void>
-     <void property="pokemones">
-      <void method="add">
-       <object class="modelo.PokemonFuego">
-        <void property="escudo">
-         <double>200.0</double>
-        </void>
-        <void property="fuerza">
-         <double>80.0</double>
-        </void>
-        <void property="nombre">
-         <string>Chimchar</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>530.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonHielo">
-        <void property="escudo">
-         <double>120.0</double>
-        </void>
-        <void property="fuerza">
-         <double>100.0</double>
-        </void>
-        <void property="nombre">
-         <string>Dewgong</string>
-        </void>
-        <void property="vitalidad">
-         <double>500.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonAgua">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>120.0</double>
-        </void>
-        <void property="nombre">
-         <string>Slowpoke</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>500.0</double>
-        </void>
-       </object>
-      </void>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador5">
-     <void property="nombre">
-      <string>Max</string>
-     </void>
-     <void property="pokemones">
-      <void method="add">
-       <object class="modelo.PokemonFuego">
-        <void property="escudo">
-         <double>200.0</double>
-        </void>
-        <void property="fuerza">
-         <double>80.0</double>
-        </void>
-        <void property="nombre">
-         <string>Vulpix</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>530.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonTierra">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>50.0</double>
-        </void>
-        <void property="nombre">
-         <string>Sandshrew</string>
-        </void>
-        <void property="vitalidad">
-         <double>700.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonTierra">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>50.0</double>
-        </void>
-        <void property="nombre">
-         <string>Cubone</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>700.0</double>
-        </void>
-       </object>
-      </void>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador6">
-     <void property="nombre">
-      <string>Maya</string>
-     </void>
-     <void property="pokemones">
-      <void method="add">
-       <object class="modelo.PokemonTierra">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>50.0</double>
-        </void>
-        <void property="nombre">
-         <string>Cubone</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>700.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonAgua">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>120.0</double>
-        </void>
-        <void property="nombre">
-         <string>Greninja</string>
-        </void>
-        <void property="vitalidad">
-         <double>500.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonHielo">
-        <void property="escudo">
-         <double>120.0</double>
-        </void>
-        <void property="fuerza">
-         <double>100.0</double>
-        </void>
-        <void property="nombre">
-         <string>Cloyster</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>500.0</double>
-        </void>
-       </object>
-      </void>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="modelo.Entrenador" id="Entrenador7">
-     <void property="nombre">
-      <string>Ivy</string>
-     </void>
-     <void property="pokemones">
-      <void method="add">
-       <object class="modelo.PokemonElectrico">
-        <void property="escudo">
-         <double>75.0</double>
-        </void>
-        <void property="fuerza">
-         <double>140.0</double>
-        </void>
-        <void property="nombre">
-         <string>Pikachu</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>450.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonFuego">
-        <void property="escudo">
-         <double>200.0</double>
-        </void>
-        <void property="fuerza">
-         <double>80.0</double>
-        </void>
-        <void property="nombre">
-         <string>Slugma</string>
-        </void>
-        <void property="vitalidad">
-         <double>530.0</double>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="modelo.PokemonTierra">
-        <void property="escudo">
-         <double>100.0</double>
-        </void>
-        <void property="fuerza">
-         <double>50.0</double>
-        </void>
-        <void property="nombre">
-         <string>Diglett</string>
-        </void>
-        <void property="puedeRecargar">
-         <boolean>true</boolean>
-        </void>
-        <void property="vitalidad">
-         <double>700.0</double>
-        </void>
-       </object>
-      </void>
-     </void>
-    </object>
-   </void>
   </void>
   <void property="etapa">
-   <object class="modelo.Alta"/>
+   <object class="modelo.Desarrollo"/>
+  </void>
+  <void property="participantesActuales">
+   <void method="add">
+    <object idref="Entrenador0"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador1"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador2"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador3"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador4"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador5"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador6"/>
+   </void>
+   <void method="add">
+    <object idref="Entrenador7"/>
+   </void>
   </void>
  </object>
 </java>

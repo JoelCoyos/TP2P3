@@ -4,6 +4,9 @@ package modelo;
  *{@link Hechizo} de tipo niebla<br>
  */
 public class Niebla implements Hechizo {
+	
+	public Niebla() {
+	}
 
 	@Override
 	public void hechizar(Hechizable hechizable) {
@@ -11,7 +14,7 @@ public class Niebla implements Hechizo {
 	}
 
 	@Override
-	public String getNombre() {
+	public String toString() {
 		return "Niebla";
 	}
 	

@@ -6,28 +6,30 @@ package modelo;
  */
 
 public class PokemonElectrico extends Pokemon {
-	
+
 	/**
-	 * Constructor de dos paramentros que setea el nombre y determina si puede usar recarga<br>
+	 * Constructor de dos paramentros que setea el nombre y determina si puede usar
+	 * recarga<br>
 	 * Parametros inciales:<br>
 	 * Vitalidad: 450<br>
 	 * Escudo: 75<br>
 	 * Fuerza:140<br>
-	 * @param nombre: String que representa el nombre del Pokemon<br>
-	 * @param puedeRecargar: Boolean que determina si el Pokemon puede utilizar recarga en su secuencia de ataques<br>
+	 * 
+	 * @param nombre:        String que representa el nombre del Pokemon<br>
+	 * @param puedeRecargar: Boolean que determina si el Pokemon puede utilizar
+	 *                       recarga en su secuencia de ataques<br>
 	 */
 
 	public PokemonElectrico(String nombre, boolean puedeRecargar) {
 		super(nombre, 450, 75, 140, puedeRecargar);
 	}
-	
+
 	public PokemonElectrico() {
-		// TODO Auto-generated constructor stub
 	}
 
-	
 	/**
-	 *Al recibir un {@link Hechizo} de tipo {@link Niebla}, su fuerza se reducira un 10%<br>
+	 * Al recibir un {@link Hechizo} de tipo {@link Niebla}, su fuerza se reducira
+	 * un 10%<br>
 	 */
 	@Override
 	public void niebla() {
@@ -35,7 +37,8 @@ public class PokemonElectrico extends Pokemon {
 	}
 
 	/**
-	 *Al recibir un {@link Hechizo} de tipo {@link Viento}, su vitalidad se reducira un 5%<br>
+	 * Al recibir un {@link Hechizo} de tipo {@link Viento}, su vitalidad se
+	 * reducira un 5%<br>
 	 */
 	@Override
 	public void viento() {
@@ -43,7 +46,8 @@ public class PokemonElectrico extends Pokemon {
 	}
 
 	/**
-	 *Al recibir un {@link Hechizo} de tipo {@link Viento}, su fuerza se reducira un 1%<br>
+	 * Al recibir un {@link Hechizo} de tipo {@link Viento}, su fuerza se reducira
+	 * un 1%<br>
 	 */
 	@Override
 	public void tormenta() {
@@ -51,19 +55,18 @@ public class PokemonElectrico extends Pokemon {
 	}
 
 	/**
-	 *Golpe final:
-	 *Provoca al adversario un da�o igual a su fuerza mas un 50%<br>
+	 * Golpe final: Provoca al adversario un da�o igual a su fuerza mas un 50%<br>
 	 */
 	@Override
 	public void golpeFinal(Pokemon otroPokemon) {
 		otroPokemon.recibeDanio(this.fuerza * 1.5);
-		System.out.println(this.getNombre() + " efectua un ataque final sobre " + otroPokemon.getNombre());
 	}
 
 	/**
-	 *Al recibir da�o<br>
-	 *Si su escudo es mayor al da�o recibido mas un 60%, el escudo y la vitalidad recibe este da�o
-	 *A lo contrario, se le resta a la vitalidad el da�o recibido mas un 20%  sumado los puntos que tenga de escudo<br>
+	 * Al recibir da�o<br>
+	 * Si su escudo es mayor al da�o recibido mas un 60%, el escudo y la vitalidad
+	 * recibe este da�o A lo contrario, se le resta a la vitalidad el da�o recibido
+	 * mas un 20% sumado los puntos que tenga de escudo<br>
 	 *
 	 */
 	@Override
@@ -94,12 +97,12 @@ public class PokemonElectrico extends Pokemon {
 	public String toString() {
 		return "Electrico " + super.toString();
 	}
-	
+
 	/**
-	 *Recarga las estadisticas del Pokemon dependiendo de su categoria<br>
-	 *Categoria 1: recarga su fuerza un 20% y su vitalidad un 10%<br>
-	 *Categoria 2: recarga su fuerza un 70% y su vitalidad un 60%<br>
-	 *Categoria 3: recarga su fuerza un 90% y su vitalidad un 80%<br>
+	 * Recarga las estadisticas del Pokemon dependiendo de su categoria<br>
+	 * Categoria 1: recarga su fuerza un 20% y su vitalidad un 10%<br>
+	 * Categoria 2: recarga su fuerza un 70% y su vitalidad un 60%<br>
+	 * Categoria 3: recarga su fuerza un 90% y su vitalidad un 80%<br>
 	 */
 
 	public void recargar() {
@@ -115,7 +118,6 @@ public class PokemonElectrico extends Pokemon {
 				this.fuerza *= 1.9;
 				this.vitalidad *= 1.8;
 			}
-			System.out.println(this.getNombre() + " recarga su fuerza y escudo.");
 		} else
 			super.recargar();
 	}

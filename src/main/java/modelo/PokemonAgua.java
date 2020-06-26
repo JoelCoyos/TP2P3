@@ -5,30 +5,29 @@ package modelo;
  * Se puede clonar<br>
  */
 public class PokemonAgua extends Pokemon implements Cloneable {
-	
-	
 
 	/**
 	 * Parametros iniciales:<br>
 	 * Vitalidad: 500<br>
 	 * Escudo: 100<br>
 	 * Fuerza:120<br>
-	 * @param nombre: String que representa el nombre del Pokemon<br>
-	 * @param puedeRecargar: Boolean que determina si el Pokemon puede utilizar recarga en su secuencia de ataques<br>
+	 * 
+	 * @param nombre:        String que representa el nombre del Pokemon<br>
+	 * @param puedeRecargar: Boolean que determina si el Pokemon puede utilizar
+	 *                       recarga en su secuencia de ataques<br>
 	 */
 	public PokemonAgua(String nombre, boolean puedeRecargar) {
 		super(nombre, 500, 100, 120, puedeRecargar);
 	}
-	
+
 	public PokemonAgua() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 *Recarga las estadisticas del Pokemon dependiendo de su categoria<br>
-	 *Categoria 1: recarga su fuerza y su vitalidad un 10%<br>
-	 *Categoria 2: recarga su fuerza y su vitalidad un 60%<br>
-	 *Categoria 3: recarga su fuerza y su vitalidad un 80%<br>
+	 * Recarga las estadisticas del Pokemon dependiendo de su categoria<br>
+	 * Categoria 1: recarga su fuerza y su vitalidad un 10%<br>
+	 * Categoria 2: recarga su fuerza y su vitalidad un 60%<br>
+	 * Categoria 3: recarga su fuerza y su vitalidad un 80%<br>
 	 */
 	@Override
 	public void recargar() {
@@ -44,30 +43,25 @@ public class PokemonAgua extends Pokemon implements Cloneable {
 				this.fuerza *= 1.8;
 				this.vitalidad *= 1.8;
 			}
-
-			System.out.println(this.getNombre() + " recarga su fuerza y vitalidad");
 		} else
 			super.recargar();
 	}
-	
-	
 
 	/**
-	 *Golpe final del {@link Pokemon}<br>
-	 *Provoca al Pokemon adversario un da�o igual a su fuerza mas un 25% y luego la fuerza
-	 *se agota por completo<br>
+	 * Golpe final del {@link Pokemon}<br>
+	 * Provoca al Pokemon adversario un da�o igual a su fuerza mas un 25% y luego la
+	 * fuerza se agota por completo<br>
 	 */
 	@Override
 	public void golpeFinal(Pokemon otroPokemon) {
 		otroPokemon.recibeDanio(this.fuerza * 1.25);
 		this.fuerza *= 0.5;
-		System.out.println(this.getNombre() + " efectua un ataque final sobre " + otroPokemon.getNombre()
-				+ ". Su fuerza se reduce a la mitad.");
 	}
 
 	/**
-	 *Al recibir da�o, el escudo y la vitalidad absorben la mitad del da�o cada uno<br>
-	 *En el caso de no tener escudo, se resta el da�o a la vitalidad<br>
+	 * Al recibir da�o, el escudo y la vitalidad absorben la mitad del da�o cada
+	 * uno<br>
+	 * En el caso de no tener escudo, se resta el da�o a la vitalidad<br>
 	 */
 	@Override
 	public void recibeDanio(double cantidad) {
@@ -82,7 +76,8 @@ public class PokemonAgua extends Pokemon implements Cloneable {
 	}
 
 	/**
-	 *Al recibir un {@link Hechizo} {@link Niebla}, su vitalidad se reduce un 5%<br>
+	 * Al recibir un {@link Hechizo} {@link Niebla}, su vitalidad se reduce un
+	 * 5%<br>
 	 */
 	@Override
 	public void niebla() {
@@ -90,8 +85,9 @@ public class PokemonAgua extends Pokemon implements Cloneable {
 	}
 
 	/**
-	 *Al recibir un {@link Hechizo} de tipo {@link Viento}, si su escudo es mayor a 10
-	 *puntos, se le restara 10 a este. En caso contrario el escudo se agotara<br>
+	 * Al recibir un {@link Hechizo} de tipo {@link Viento}, si su escudo es mayor a
+	 * 10 puntos, se le restara 10 a este. En caso contrario el escudo se
+	 * agotara<br>
 	 */
 	@Override
 	public void viento() {
@@ -102,7 +98,8 @@ public class PokemonAgua extends Pokemon implements Cloneable {
 	}
 
 	/**
-	 *Al recibir un {@link Hechizo} de tipo {@link Tormenta}, su fuerza se reducira un 1%<br>
+	 * Al recibir un {@link Hechizo} de tipo {@link Tormenta}, su fuerza se reducira
+	 * un 1%<br>
 	 */
 	@Override
 	public void tormenta() {
@@ -115,7 +112,6 @@ public class PokemonAgua extends Pokemon implements Cloneable {
 		try {
 			respuesta = super.clone();
 		} catch (CloneNotSupportedException e) {
-
 		}
 		return respuesta;
 	}

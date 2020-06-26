@@ -1,20 +1,16 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
 
-import excepciones.EntrenadorRepetidoException;
-import excepciones.MaximaCapacidadEntrenadoresException;
 import excepciones.TipoNoEncontradoException;
 import modelo.Entrenador;
 import modelo.Pokemon;
 import modelo.PokemonFactory;
-import modelo.Torneo;
 
 import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
@@ -28,7 +24,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
@@ -36,6 +31,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+@SuppressWarnings("serial")
 public class VentanaAlta extends JFrame implements KeyListener, IVistaAlta, MouseListener, ListSelectionListener {
 
 	private JPanel contentPane;

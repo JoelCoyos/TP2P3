@@ -6,5 +6,5 @@ package modelo;
 public interface Hechizo  {
 	
 	public void hechizar(Hechizable hechizable);
-	public String getNombre();
+
 }

@@ -1,6 +1,5 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,13 +10,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.JScrollPane;
 import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import javax.swing.border.LineBorder;
 import java.awt.Insets;
 
+@SuppressWarnings("serial")
 public class VentanaArena extends JFrame implements IVistaArena {
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;

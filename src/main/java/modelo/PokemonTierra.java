@@ -18,11 +18,10 @@ public class PokemonTierra extends Pokemon implements Cloneable {
 	 */
 
 	public PokemonTierra(String nombre, boolean puedeRecargar) {
-		super(nombre, 700, 100, 50, puedeRecargar); // resistente, pero poca fuerza.
+		super(nombre, 700, 100, 50, puedeRecargar);
 	}
 	
 	public PokemonTierra() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -44,8 +43,6 @@ public class PokemonTierra extends Pokemon implements Cloneable {
 				this.fuerza *= 1.8;
 				this.vitalidad *= 1.9;
 			}
-
-			System.out.println(this.getNombre() + " recarga su vitalidad y escudo");
 		} else
 			super.recargar();
 	}
@@ -88,8 +85,6 @@ public class PokemonTierra extends Pokemon implements Cloneable {
 	public void golpeFinal(Pokemon otroPokemon) {
 		otroPokemon.recibeDanio(this.fuerza * 0.5 + this.vitalidad * 0.2); // ataque escala con la vitalidad
 		this.vitalidad *= 0.9;
-		System.out.println(this.getNombre() + " efectua un ataque final sobre " + otroPokemon.getNombre()
-				+ ". Su vitalidad se reduce ligeramente.");
 	}
 
 	@Override
@@ -98,7 +93,6 @@ public class PokemonTierra extends Pokemon implements Cloneable {
 		try {
 			respuesta = super.clone();
 		} catch (CloneNotSupportedException e) {
-
 		}
 		return respuesta;
 	}

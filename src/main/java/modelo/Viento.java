@@ -3,6 +3,9 @@ package modelo;
  *{@link Hechizo} de tipo Viento<br>
  */
 public class Viento implements Hechizo {
+	
+	public Viento() {
+	}
 
 	@Override
 	public void hechizar(Hechizable hechizable) {
@@ -10,7 +13,7 @@ public class Viento implements Hechizo {
 	}
 
 	@Override
-	public String getNombre() {
+	public String toString() {
 		return "Viento";
 	}
 

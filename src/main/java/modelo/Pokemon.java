@@ -1,27 +1,23 @@
 package modelo;
 
 /**
- *Clase que representa a un Pokemon dentro de un juego de estrategia por turnos<br>
+ * Clase que representa a un Pokemon dentro de un juego de estrategia por
+ * turnos<br>
  */
 public abstract class Pokemon implements Hechizable, Clasificable {
-	
-	
-	
-	
 
 	private String nombre;
 	private int exp = 0;
 	protected double escudo, vitalidad, fuerza;
 	private boolean puedeRecargar;
-	
-	
 
 	/**
-	 * @param nombre: Nombre del Pokemon<br>
-	 * @param vitalidad: Puntos de vitalidad<br>
-	 * @param escudo: Puntos de escudo. <br>
-	 * @param fuerza: Puntos de fuerza de ataque<br>
-	 * @param puedeRecargar: Boolean que determina si un Pokemon puede hacer una recarga en la secuencia de ataque<br>
+	 * @param nombre:        Nombre del Pokemon<br>
+	 * @param vitalidad:     Puntos de vitalidad<br>
+	 * @param escudo:        Puntos de escudo. <br>
+	 * @param fuerza:        Puntos de fuerza de ataque<br>
+	 * @param puedeRecargar: Boolean que determina si un Pokemon puede hacer una
+	 *                       recarga en la secuencia de ataque<br>
 	 */
 	public Pokemon(String nombre, double vitalidad, double escudo, double fuerza, boolean puedeRecargar) {
 		super();
@@ -31,22 +27,22 @@ public abstract class Pokemon implements Hechizable, Clasificable {
 		this.fuerza = fuerza;
 		this.puedeRecargar = puedeRecargar;
 	}
-	
+
 	public Pokemon() {
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
+
 	/**
 	 * Ejecuta la secuencia de ataque a un {@link Pokemon} adversario<br>
 	 * <b>Pre: </b> El parametro otroPokemon debe ser distinto de null<br>
+	 * 
 	 * @param otroPokemon: {@link Pokemon} al que se atacara<br>
 	 * 
 	 */
@@ -58,30 +54,30 @@ public abstract class Pokemon implements Hechizable, Clasificable {
 
 	/**
 	 * Ataca a un {@link Pokemon} con un da�o igual a su fuerza de ataque<br>
+	 * 
 	 * @param otroPokemon: Pokemon al que se aplicara el golpe incial<br>
-	 * Pre: otroPokemon distinto de nulo<br>
+	 *                     Pre: otroPokemon distinto de nulo<br>
 	 */
 	private void golpeInicial(Pokemon otroPokemon) {
 		otroPokemon.recibeDanio(fuerza);
 		fuerza *= 0.5;
-		System.out.println(this.getNombre() + " realiza un golpe inicial sobre " + otroPokemon.getNombre()
-				+ ". Luego su fuerza se reduce debido al cansancio.");
 	}
 
 	protected void recargar() {
-		System.out.println(this.nombre + " no posee recarga.");
 	}
 
 	/**
-	 * Ataca a un {@link Pokemon} adversario con el golpe final, que sera diferente para cada tipo de Pokemon<br>
+	 * Ataca a un {@link Pokemon} adversario con el golpe final, que sera diferente
+	 * para cada tipo de Pokemon<br>
+	 * 
 	 * @param otroPokemon: {@link Pokemon} al que se aplicara el golpe final<br>
-	 * Pre: otroPokemon distinto de nulo<br>
+	 *                     Pre: otroPokemon distinto de nulo<br>
 	 */
 	protected abstract void golpeFinal(Pokemon otroPokemon);
 
 	/**
 	 * @param cantidad da�o recibido<br>
-	 * Pre: cantidad mayor a 0<br>
+	 *                 Pre: cantidad mayor a 0<br>
 	 */
 	protected abstract void recibeDanio(double cantidad);
 
@@ -102,7 +98,8 @@ public abstract class Pokemon implements Hechizable, Clasificable {
 	}
 
 	/**
-	 *Dependiendo de la experiencia del {@link Pokemon},tendra una de las tres categorias existentes<br>
+	 * Dependiendo de la experiencia del {@link Pokemon},tendra una de las tres
+	 * categorias existentes<br>
 	 */
 	@Override
 	public int getCategoria() {
@@ -168,6 +165,5 @@ public abstract class Pokemon implements Hechizable, Clasificable {
 	public void setPuedeRecargar(boolean puedeRecargar) {
 		this.puedeRecargar = puedeRecargar;
 	}
-	
-	
+
 }

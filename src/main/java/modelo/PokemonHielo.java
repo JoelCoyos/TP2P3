@@ -25,7 +25,6 @@ public class PokemonHielo extends Pokemon {
 	}
 	
 	public PokemonHielo() {
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void recuperarse() {
@@ -83,7 +82,6 @@ public class PokemonHielo extends Pokemon {
 				
 			} else
 				this.fuerza = 460;
-			System.out.println(this.getNombre() + " utiliza gran recarga y aumenta su fuerza");
 		} else if (this.isPuedeRecargar()) {
 			if (categoria == 1) {
 				this.fuerza *= 1.1;
@@ -95,7 +93,6 @@ public class PokemonHielo extends Pokemon {
 				this.fuerza *= 1.8;
 				this.vitalidad *= 1.8;
 			}
-			System.out.println(this.getNombre() + " recarga su fuerza y vitalidad");
 		} else
 			super.recargar();
 	}
@@ -107,7 +104,6 @@ public class PokemonHielo extends Pokemon {
 	@Override
 	public void golpeFinal(Pokemon otroPokemon) {
 		otroPokemon.recibeDanio(this.fuerza * 0.9);
-		System.out.println(this.getNombre() + " efectua un ataque final sobre " + otroPokemon.getNombre());
 	}
 
 	/**

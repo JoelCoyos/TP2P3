@@ -7,10 +7,12 @@ public class TorneoSerializable {
 	private ArrayList<Entrenador> entrenadores = new ArrayList<Entrenador>();
 	private ArrayList<Entrenador> participantesActuales = new ArrayList<Entrenador>();
 	private ArrayList<Enfrentamiento> enfrentamientos = new ArrayList<Enfrentamiento>();
+	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
+	private ArrayList<Arena> arenas = new ArrayList<Arena>();
+	private ArrayList<Batalla> batallas = new ArrayList<Batalla>(); 
 	private IEtapas etapa;
 	
 	public TorneoSerializable() {
-
 	}
 
 	public ArrayList<Entrenador> getEntrenadores() {
@@ -43,6 +45,30 @@ public class TorneoSerializable {
 
 	public void setEtapa(IEtapas etapa) {
 		this.etapa = etapa;
+	}
+
+	public ArrayList<Hechizo> getHechizos() {
+		return hechizos;
+	}
+
+	public void setHechizos(ArrayList<Hechizo> hechizos) {
+		this.hechizos = hechizos;
+	}
+
+	public ArrayList<Arena> getArenas() {
+		return arenas;
+	}
+
+	public void setArenas(ArrayList<Arena> arenas) {
+		this.arenas = arenas;
+	}
+
+	public ArrayList<Batalla> getBatallas() {
+		return batallas;
+	}
+
+	public void setBatallas(ArrayList<Batalla> batallas) {
+		this.batallas = batallas;
 	}
 	
 	

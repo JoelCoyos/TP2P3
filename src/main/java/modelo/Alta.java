@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Alta implements IEtapas {
+	
+	public Alta() {
+	}
 
 	@Override
 	public void comenzarBatallas() {
@@ -16,13 +19,17 @@ public class Alta implements IEtapas {
 
 	@Override
 	public void avanzarFase() {
-		//Torneo.getInstance().inicializarArenas();
 		
 		ArrayList<Entrenador> participantes = new ArrayList<Entrenador>();
 		Iterator<Entrenador> it = Torneo.getInstance().getEntrenadores().iterator();
+		Entrenador entrenador;
 		
-		while (it.hasNext())
-			participantes.add(it.next());
+		while (it.hasNext()) {
+			entrenador = it.next();
+			participantes.add(entrenador);
+			entrenador.restaurarPokemones();
+			entrenador.setCantidadHechizos(entrenador.getCategoria());
+		}
 		
 		Torneo.getInstance().setParticipantesActuales(participantes);
 		Torneo.getInstance().setEtapa(new Desarrollo());
@@ -49,7 +56,7 @@ public class Alta implements IEtapas {
 			Iterator<Entrenador> it = Torneo.getInstance().getEntrenadores().iterator();
 			while (it.hasNext() && respuesta == true) {
 				Entrenador e = it.next();
-				if (e.cantidadPokemones() < 3)
+				if (e.cantidadPokemones() < 1)
 					respuesta = false;
 			}		
 			respuesta = true;
