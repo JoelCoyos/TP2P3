@@ -71,6 +71,9 @@ public class VentanaArena extends JFrame implements IVistaArena {
 		this.setVisible(true);
 	}
 
+	/**
+	 *Dependiendo del numeroPanel que se nos de, se agrega el String mensaje en la arena 1 o 2
+	 */
 	@Override
 	public void muestraMensaje(String mensaje, int numeroPanel) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -88,6 +91,9 @@ public class VentanaArena extends JFrame implements IVistaArena {
 
 	}
 
+	/**
+	 *Cierra esta ventana
+	 */
 	@Override
 	public void cerrarVentana() {
 		this.dispose();

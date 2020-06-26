@@ -10,8 +10,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import excepciones.TipoNoEncontradoException;
+import modelo.Alta;
 import modelo.Arena;
 import modelo.Batalla;
+import modelo.Desarrollo;
 import modelo.Entrenador;
 import modelo.IEtapas;
 import modelo.Pokemon;
@@ -37,8 +39,16 @@ public class Controlador implements ActionListener, Observer {
 	private IVistaArena vistaArena;
 
 	/**
+<<<<<<< HEAD
 	 * Constructor de la clase. Si existe un archivo XML para recuperar, lo hace. 
 	 * En base al estado actual se setea la ventana correspondiente
+=======
+	 * Lee el archivo torneo.xml y observa al Torneo.
+	 * Si no hay un archivo, el Torneo empieza sin ningun entrenador y se abre la {@link VentanaAlta}
+	 * Si el torneo del archivo estaba en la etapa {@link Alta}, abre la VentanaAlta, se agrega como action listener y le pasa los entrenadores del archivo
+	 * Si el torneo del archivo estaba en la etapa {@link Desarrollo}, se obtienen las arenas del Torneo, se las observa, y se comienza el Torneo
+	 * 
+>>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	public Controlador() {
 
@@ -63,7 +73,14 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Dicho método comienza el torneo. Abre las ventanas correspondientes.
+=======
+	 * Si hay alguna {@link VentanaAlta} abierta, la cierra
+	 * Se abre una {@link VentanaTorneo} , le agregamos el action listener y le damos los participantes actuales del torneo
+	 * 
+	 * <b>Pre: </b> participantes actuales del torneo distinto de null
+>>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	public void comenzarTorneo() {
 		if (vistaAlta != null)
@@ -92,7 +109,32 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Método que en base a acciones realizadas en las ventanas, ejecuta los métodos correspondientes
+=======
+	 * Action listener de aquellos boton que necesiten alguna informacion del Torneo, o que quieran modificarlos
+	 * 
+	 * Agregar Entrenador: Revisa si no se esta excediendo de entrenadores, si no lo esta, 
+	 * agrega el entrenador seleccionado en la ventana lista de la ventana 
+	 * y al Torneo, en caso contrario muestra mensaje de alerta 
+	 * <n>
+	 * Agregar Pokemon: Revisa si el pokemon seleccionado en la ventana tiene un tipo valido,
+	 * y si se selecciono una recarga valida. De ser asi lo agrega al Entrenador seleccionado
+	 * <n>
+	 * Comenzar Torneo: Revisa si todos los entrenadores tiene como minimo un entrenador, y
+	 * avanza de fase
+	 * <n>
+	 * Mostrar Pokemon: Despues de seleccionar un entrenador en la {@link VentanaTorneo}, se muestran
+	 * sus Pokemones y hechizos
+	 * <n>
+	 * Agregar Batalla: Toma los entrenadores, pokemones y hechizos de la {@link VentanaTorneo}, crea una
+	 * batalla y la agrega al Torneo y a lista de Batallas en la Ventana
+	 * <n>
+	 * Comenzar Batallas: Crea una nueva {@link VentanaArena} y desabilita el input de la {@link VentanaTorneo}
+	 * <n>
+	 * Avanzar Fase: Le pide al Torneo avanzar de fase
+	 * 
+>>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -135,7 +177,11 @@ public class Controlador implements ActionListener, Observer {
 			}
 		} else if (comando == "Comenzar Torneo") {
 			if (Torneo.getInstance().tieneMinimoUnPokemon())
+			{
+				vistaAlta.cerrarVentana();
 				Torneo.getInstance().avanzarFase();
+			}
+				
 			else
 				vistaAlta.mensajeAlerta("Todos los entrenadores tienen que tener minimo un pokemon");
 		} else if (comando == "Mostrar Pokemon")
@@ -161,14 +207,36 @@ public class Controlador implements ActionListener, Observer {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Método que recibe notificaciones desde el modelo para efectuar los cambios en las ventanas, como por ejemplo los cambios de fase.
+=======
+	 *Recibira las notificaciones de los observados
+	 *<n>
+	 *Si el Observable es el Torneo, nos enviara como objecto una {@link IEtapas}, que sera la siguiente etapa<n>
+	 *Si la etapa es null es porque todavia no se cumplen las condiciones necesarias para avanzar de fase<n>
+	 *Si la etapa es {@link Alta}, es porque acaba de terminar la final. Se mostrara el ganador del torneo, se cerrara la {@link VentanaTorneo}
+	 *y se abrira una nueva {@link VentanaAlta}<n>
+	 *Si la etapa es {@link Desarrollo}, se cerraran, si existen las {@link VentanaTorneo} y {@link VentanaArena} existentes. Si nuestra variable<n>
+	 *arenas esta vacia, tomamos las arenas del Torneo, las agregamos al arrayList y las observamos. Luego comenzaran las batallas<n>
+	 *<n>
+	 *Si el Obsevable es una Arena, revisamos si esta dentro de las arenas del controlador, si lo esta guardamos el numero de la arena, y mostramos
+	 *el String que nos paso como objeto en la {@link VentanaArena}
+	 *<n>
+	 *Si no es ninguno de estos Observable, arroja una Excepcion
+>>>>>>> c87858eae97913491af4cdf52da5e0f4c748300c
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0 == Torneo.getInstance()) {
 			IEtapas etapa = (IEtapas) arg1;
 			if (arg1 == null)
-				vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
+			{
+				if(vistaTorneo!=null)
+					vistaTorneo.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
+				else if(vistaAlta!=null)
+					vistaAlta.mensajeAlerta("No se cumplen las condiciones necesarias para comenzar");
+			}
+				
 			else {
 				try {
 					SerializeToXML.escribirXML();

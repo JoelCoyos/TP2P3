@@ -32,6 +32,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
+/**
+ * @author joelc
+ *
+ */
 @SuppressWarnings("serial")
 public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener, ListSelectionListener {
 
@@ -227,6 +231,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.setVisible(true);
 	}
 
+	/**
+	 *Muestra los entrenadores pasados como parametro en ambas listas
+	 */
 	@Override
 	public void mostrarEntrenadores(ArrayList<Entrenador> entrenadores) {
 		for (int i = 0; i < entrenadores.size(); i++) {
@@ -236,6 +243,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.listEntrenadores2.setModel(listModelEntrenadores);
 	}
 
+	/**
+	 * limpia la lista de pokemones y hechizos y muestra los pokemones de los entrenadores seleccionados y sus hechizos disponibles
+	 */
 	@Override
 	public void mostrarPokemonHechizos() {
 		if (this.listEntrenadores1.getSelectedValue() != null && this.listEntrenadores2.getSelectedValue() != null
@@ -270,6 +280,10 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		}
 	}
 
+	/**
+	 *Quita los entrenadores seleccionados de la lista y agrega a la lista de batallas un string con los nombres
+	 *de los entrenadores. Si la lista esta vacia, habilita el boton para comenzar las batallas
+	 */
 	@Override
 	public void agregarBatalla() {
 		String aux = this.textAreaBatallas.getText();
@@ -294,6 +308,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		}
 	}
 
+	/**
+	 *Desabilita todas las listas y habilita el boton para avanzar de fase
+	 */
 	@Override
 	public void comenzarBatallas() {
 		this.btnComenzarBatallas.setEnabled(false);
@@ -308,6 +325,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		this.btnAvanzarFase.setEnabled(true);
 	}
 
+	/**
+	 *Delegamos las acciones de los botones al action listener
+	 */
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnComenzarBatallas.addActionListener(actionListener);
@@ -342,6 +362,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
 
+	/**
+	 *Retorna una {@link Batalla} con los entrenadores, pokemones y hechizos seleccionados
+	 */
 	public Batalla getBatalla() {
 		Batalla batalla = null;
 		if (this.listPokemon1.getSelectedValue() != null && this.listPokemon2.getSelectedValue() != null
@@ -352,6 +375,9 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 		return batalla;
 	}
 
+	/**
+	 *En el textField de progreso, informa que una batalla a empezado
+	 */
 	public void progresoBatallas(Batalla batalla) {
 		String aux = "Comienza la batalla entre " + batalla.getEntrenador1().getNombre() + " y "
 				+ batalla.getEntrenador2().getNombre() + '\n';
@@ -363,17 +389,26 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 
 	}
 
+	/**
+	 *Cierra la ventana
+	 */
 	@Override
 	public void cerrarVentana() {
 		this.dispose();
 	}
 
+	/**
+	 * Abre una ventana de dialogo informando que el entrenador fue el ganador
+	 */
 	@Override
 	public void premiacion(Entrenador entrenador) {
 		JOptionPane.showMessageDialog(this,"El ganador del torneo fue " + entrenador.getNombre());
 		this.dispose();
 	}
 
+	/**
+	 *Cada vez que seleccionamos un entrenador se limpian las lista de pokemones y hechizos
+	 */
 	public void valueChanged(ListSelectionEvent e) {
 		this.listModelPokemon1.clear();
 		this.listModelPokemon2.clear();
