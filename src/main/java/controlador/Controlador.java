@@ -84,7 +84,7 @@ public class Controlador implements ActionListener, Observer {
 	 */
 	public void comenzarTorneo() {
 		if (vistaAlta != null)
-			vistaAlta.comenzarTorneo();
+			vistaAlta.cerrarVentana();
 		vistaTorneo = new VentanaTorneo();
 		vistaTorneo.setActionListener(this);
 		vistaTorneo.mostrarEntrenadores(Torneo.getInstance().getParticipantesActuales());

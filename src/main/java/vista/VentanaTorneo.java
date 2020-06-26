@@ -33,8 +33,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
 /**
- * @author joelc
- *
+ * Ventana en donde se mostraran los entrenadores, sus pokemons y sus hechizos disponibles.
+ * Luego se setearan las batallas a ejecutarse.
  */
 @SuppressWarnings("serial")
 public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener, ListSelectionListener {
@@ -87,7 +87,7 @@ public class VentanaTorneo extends JFrame implements IVistaTorneo, MouseListener
 	 */
 	public VentanaTorneo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 812, 467);
+		setBounds(100, 100, 1400, 500);
 		this.setResizable(false);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -17,7 +17,6 @@ public interface IVistaAlta {
 	String getTipoPokemon();
 	String getRecarga();
 	String getGranRecarga();
-	void comenzarTorneo();
 	void mostrarPokemon();
 	void setActionListener(ActionListener actionListener);
 	void reseteaCampos();

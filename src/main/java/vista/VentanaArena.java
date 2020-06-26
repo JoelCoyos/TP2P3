@@ -15,7 +15,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Insets;
 
 /**
- * Ventana que muestra el desarrollo 
+ * Ventana que muestra el desarrollo de las batallas
  */
 @SuppressWarnings("serial")
 public class VentanaArena extends JFrame implements IVistaArena {
